@@ -1,9 +1,20 @@
-class {  
+fileprivate class Piece {  
 		
-		/* on utilise des class, parce que les class gèrent les types par pointage et les structures gèrent par référence
-		 *  ainsi on pour utiliser nos fonctions en notation pointé 
-		 *  
-		 */	
+  // gestion d'erreur
+
+  var nom : String 
+  var position : Int?
+
+  enum GestionErrorPiece: Error {
+    case invalidKodama
+}
+
+	
+	/* on utilise des class, parce que les class gèrent les types par pointage et les structures gèrent par référence
+	*  ainsi on pour utiliser nos fonctions en notation pointé 
+	*  
+	* aucun mutating dans les class, swift ne les prend pas en compte
+    */	
 	
 	/**
   Une piece possede un nom et une position sur le plateau. Si la piece est dans
@@ -24,8 +35,8 @@ class {
   
   init(_ nom : String , _ position : Int ) {
 	
-	let nom : String
-	var position : ?Int      // vide si dans la reserve 
+	self.nom = nom
+	self.position = position      // vide si dans la reserve 
   	
   }
 
@@ -51,7 +62,7 @@ class {
                     ou "tanuki" ou "kodama" ou "kodama samurai".
   */
   
-  mutating func setNomPiece(_ nom : String) {
+  func setNomPiece(_ nom : String) {
   	self.nom = nom 
   }
 
@@ -76,6 +87,7 @@ class {
   */
   
   func estRoi() -> Bool {
+  	
   	if self.getNomPiece() == "koropokkuru" {
   		return true 
   	}
@@ -91,6 +103,7 @@ class {
    */
   
   func estKodama() -> Bool {
+  	
   	if self.getNomPiece() == "kodama" {
   		return true 
   	}
@@ -106,6 +119,7 @@ class {
   */
   
   func estKodamaSamurai() -> Bool {
+  	
   	if self.getNomPiece() == "kodama samurai" {
   		return true 
   	}
@@ -125,7 +139,9 @@ class {
       - le kodama doit etre dans la zone de promotion du joueur adverse.
       - la transformation est faisable uniquement apres le deplacement de la piece.
   */
-  mutating func transformerEnKodamaSamurai() throws
+  func transformerEnKodamaSamurai() throws {
+
+  }
 
   /**
     Modifie la piece en parametre en kodama. Renvoie une erreur si la piece en
@@ -137,9 +153,15 @@ class {
       - la piece a transormer doit etre un kodama samurai.
       - la transformation s'effectue apres la capture de la piece par l'adversaire.
   */
-  mutating func transformerEnKodama() throws
-
-
-
+  
+  func transformerEnKodama() throws -> Piece {
+	
+	guard self.estKodama() else {
+  		self.setNomPiece("kodama")
+  	}
+  	else throws {
+  		GestionErrorPiece.invalidKodama
+  	}
+  }
 
 }
