@@ -1,5 +1,4 @@
 /*
-
 Reserve => Liste de Piece
 CollectionPiece => Liste de Piece
 Partie => classe
