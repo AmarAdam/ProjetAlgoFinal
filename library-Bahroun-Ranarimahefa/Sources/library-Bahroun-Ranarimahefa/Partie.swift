@@ -12,13 +12,14 @@ fileprivate class Partie {
     var passivePlayer : Joueur //A revoir
     
     var idRand : Int
-    var nbTour : Int // meilleur idée
+    var nbTour : Int
 
     // Constructeur
     init(_ nom1: String, _ nom2: String, _ largeur: Int, _ longueur: Int) {
       self.xMax = largeur
       self.yMax = longueur
       self.idRand = Int.random(in : 1...2)
+      self.nbTour = 0
       if self.idRand == 1 {
           self.player1 = new Joueur(nom1)
           self.player2 = new Joueur(nom2)
@@ -88,7 +89,8 @@ fileprivate class Partie {
         let tempJoueur = getJoueurCourant()
         setJoueurCourant(getJoueurAdverse)
         setJoueurAdverse(tempJoueur)
-        return Self 
+        self.nbTour = 0
+        return Self
     }
 
     // Renvoie sous forme de string les choix possibles
@@ -117,56 +119,135 @@ fileprivate class Partie {
         return toString
     }
 
-    func toStringPiecesDispoDeplacement() -> String {}
+    func toStringPiecesDispoDeplacement() -> String {
 
-    func toStringPiecesDispoCapture() -> String {}
+    }
 
-    func toStringPiecesDispoParachutage() -> String {}
+    func toStringPiecesDispoCapture() -> String {
 
-    func selectionnerPiecePlateau(_ num: Int, _ choix: String) throws -> Piece
+    }
 
-    func selectionnerPieceReserve(_ num: Int, _ choix: String) throws -> Piece
+    func toStringPiecesDispoParachutage() -> String {
 
-    func toStringPossibiliteesDeplacement(_ piece: Piece)-> String
+    }
 
-    func toStringPossibiliteesCapture(_ piece: Piece)-> String
+    func selectionnerPiecePlateau(_ num: Int, _ choix: String) throws -> Piece {
+      
+    }
 
-    func toStringPossibiliteesParachuter(_ piece: Piece)-> String
+    func selectionnerPieceReserve(_ num: Int, _ choix: String) throws -> Piece {
 
-    func verifierChoix(_ c1: int, _ c2: String) -> Bool
+    }
 
-    func verifierCaseAutorisee(_ position: Int) -> Bool
+    func toStringPossibiliteesDeplacement(_ piece: Piece)-> String {
 
-    func caseVide(_ position: Int) throws -> Bool
+    }
 
-    func casePromotion(_ position : Int)  throws -> Bool
+    func toStringPossibiliteesCapture(_ piece: Piece)-> String {
 
-    func caseEnnemi(_ position: Int) throws-> Bool
+    }
 
-    func aPortee(_ position: Int, _ piece : Piece) throws -> Bool
+    func toStringPossibiliteesParachuter(_ piece: Piece)-> String {
 
-    func verifierFinDuJeu() -> Bool
+    }
 
-    func echecEtMat() -> Bool
+    func verifierChoix(_ c1: int, _ c2: String) -> Bool {
 
-    func possibiliteDeplacementRoi(_ piece: Piece) throws -> Bool
+      tabWord = c2.components(separatedBy(" "))
 
-    func etrePieceCapturable(piece: Piece) -> Bool
+      for word in tabWord {
+        if c1 == word {
+          return true
+        }
+      }
 
-    func piece1capturePiece2(_ piece1: Piece,_ piece2: Piece) -> Bool
+      return false
 
-    func envoyerReserve(_ piece: Piece, _ joueur: Joueur) throws
+    }
 
-    func capturer(_ piece: Piece, _ position: Int) throws
+    func verifierCaseAutorisee(_ position: Int) -> Bool {
+      return position <= (self.getLongueur(position) * self.getLargeur(position) - 1)
+    }
 
-    func parachuter(_ piece: Piece, _ position : Int) throws
+    func caseVide(_ position: Int) throws -> Bool {
 
-    func deplacer(_ piece: Piece, _ position: Int) throws
+    }
 
-    func pieceSurCase(_ position: Int) throws -> Piece
+    // J'ai préféré calculer celui ci même si le jeu n'est pas evolutif.
+    func casePromotion(_ position : Int)  throws -> Bool {
+    return  (   position >= 0
+            &&  position <= self.getLargeur(position) - 1 )
+            ||
+            (   position >= self.getLargeur(position)*(self.getLongueur(position)-1)
+            &&  position <= self.getLargeur(position)*self.getLongueur(position) )
+    }
 
-    func captureAutorisee(_ piece: Piece, _ position: Int) throws -> Bool
 
-    func deplacementAutorise(_ piece: Piece, _ position: Int) throws -> Bool
+    func caseEnnemi(_ position: Int) throws-> Bool {
+
+    }
+
+    // Partie Amjad
+    func aPortee(_ position: Int, _ piece : Piece) throws -> Bool {
+
+    }
+
+    func verifierFinDuJeu() -> Bool {
+
+    }
+
+    func echecEtMat() -> Bool {
+
+    }
+
+    func possibiliteDeplacementRoi(_ piece: Piece) throws -> Bool {
+
+    }
+
+    func etrePieceCapturable(piece: Piece) -> Bool {
+
+    }
+
+    func piece1capturePiece2(_ piece1: Piece,_ piece2: Piece) -> Bool {
+
+    }
+
+    func envoyerReserve(_ piece: Piece, _ joueur: Joueur) throws {
+
+    }
+
+    func capturer(_ piece: Piece, _ position: Int) throws {
+
+    }
+
+    func parachuter(_ piece: Piece, _ position : Int) throws {
+
+    }
+
+    func deplacer(_ piece: Piece, _ position: Int) throws {
+
+    }
+
+    func pieceSurCase(_ position: Int) throws -> Piece {
+
+    }
+
+    func captureAutorisee(_ piece: Piece, _ position: Int) throws -> Bool {
+
+    }
+
+    func deplacementAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
+
+    }
+
+    private func getPieceFromString(_ num: Int, _ choix: String) {
+      let tabChoice = choix.components(separatedBy("\n"))
+      for choice in tabChoice {
+        if choice.components(separatedBy:" - ")[0] == String(num) {
+          return choice.components(separatedBy:" - ")[1]
+        }
+      }
+      return ""
+    }
 
 }
