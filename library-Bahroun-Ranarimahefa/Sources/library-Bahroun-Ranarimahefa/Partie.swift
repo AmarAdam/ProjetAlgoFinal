@@ -58,7 +58,12 @@ fileprivate class Partie {
       return self
     }
 
-    func changerJoueur() -> Self {}
+    func changerJoueur() -> Self {
+        let tempJoueur = getJoueurCourant()
+        setJoueurCourant(getJoueurAdverse)
+        setJoueurAdverse(tempJoueur)
+        return Self 
+    }
 
     // Renvoie sous forme de string les choix possibles
     func toStringChoix() -> String {
