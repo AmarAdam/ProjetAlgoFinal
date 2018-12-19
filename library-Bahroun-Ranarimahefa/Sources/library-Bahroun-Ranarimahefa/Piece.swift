@@ -8,10 +8,8 @@ fileprivate class Piece {
 }
 
   init(_ nom : String , _ position : Int ) {
-
-	self.nom = nom
-	self.position = position      // vide si dans la reserve
-
+  	self.nom = nom
+  	self.position = position      // vide si dans la reserve
   }
 
   func getNomPiece() -> String {
@@ -27,47 +25,32 @@ fileprivate class Piece {
   }
 
   func estRoi() -> Bool {
-
-  	if self.getNomPiece() == "koropokkuru" {
-  		return true
-  	}
-  	else {
-  		return false
-  	}
+  	return self.getNomPiece() == "koropokkuru"
   }
 
   func estKodama() -> Bool {
-
-  	if self.getNomPiece() == "kodama" {
-  		return true
-  	}
-  	else {
-  		return false
-  	}
+  	return self.getNomPiece() == "kodama"
   }
 
   func estKodamaSamurai() -> Bool {
-
-  	if self.getNomPiece() == "kodama samurai" {
-  		return true
-  	}
-  	else {
-  		return false
-  	}
+  	return self.getNomPiece() == "kodama samurai"
   }
 
   func transformerEnKodamaSamurai() throws {
-
-  }
+    guard self.estKodama() else throws{
+      GestionErrorPiece.invalidKodama
+    }
+    self.setNomPiece("kodama samurai")
+  } 
 
   func transformerEnKodama() throws -> Piece {
+    guard self.estKodamaSamurai() else throws {
+      GestionErrorPiece.invalidKodama
+  	}
+    
+  	self.setNomPiece("kodama")
 
-	guard self.estKodama() else {
-  		self.setNomPiece("kodama")
-  	}
-  	else throws {
-  		GestionErrorPiece.invalidKodama
-  	}
   }
+
 
 }
