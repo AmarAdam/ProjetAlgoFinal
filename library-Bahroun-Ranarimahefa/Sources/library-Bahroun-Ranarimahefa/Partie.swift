@@ -193,11 +193,24 @@ fileprivate class Partie {
     }
 
     func verifierFinDuJeu() -> Bool {
-
+      //On récupère un booléen verifiant le cas ou le roi a passé la zone de promotion
+      var posKing = self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru")
+      var checkKing = (self.possibiliteDeplacementRoi() && self.casePromotion(posKing))
+      if self.echecEtMat() || checkKing {
+        return true
+      } else {
+        return false
+      }
     }
 
     func echecEtMat() -> Bool {
-
+      var captureRoiAdverse = self.etrePieceCapturable(getJoueurAdverse().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru"))
+      var deplacementRoiAdverse = self.possibiliteDeplacementRoi(getJoueurAdverse().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru"))
+      if !deplacementRoiAdverse && captureRoiAdverse { //voir si c'est suffisant ou non pour echec et mat
+        return true
+      } else {
+        return false
+      }
     }
 
     func possibiliteDeplacementRoi(_ piece: Piece) throws -> Bool {
