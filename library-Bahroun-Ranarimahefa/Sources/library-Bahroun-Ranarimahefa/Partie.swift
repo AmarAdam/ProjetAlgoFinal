@@ -8,8 +8,9 @@ fileprivate class Partie {
     // Est ce qu'on ferait pas un système de tour ?
     // On calculerait le joueur courant et le joueur adverse en fonction de :
     // idRand et du nombre de tours
-    // var currentPlayer : Joueur //A revoir
-    // var passivePlayer : Joueur //A revoir
+    var currentPlayer : Joueur //A revoir
+    var passivePlayer : Joueur //A revoir
+    
     var idRand : Int
     var nbTour : Int // meilleur idée
 
@@ -17,9 +18,34 @@ fileprivate class Partie {
     init(_ nom1: String, _ nom2: String, _ largeur: Int, _ longueur: Int) {
       self.xMax = largeur
       self.yMax = longueur
-      self.player1 = new Joueur(nom1)
-      self.player2 = new Joueur(nom2)
       self.idRand = Int.random(in : 1...2)
+      if self.idRand == 1 {
+          self.player1 = new Joueur(nom1)
+          self.player2 = new Joueur(nom2)
+      } else {
+          self.player1 = new Joueur(nom2)
+          self.player2 = new Joueur(nom1)
+      }
+      self.currentPlayer = self.player1
+      self.passivePlayer = self.player2
+  
+      // pour le Joueur 1  le tanuki est placé sur la position 0, 
+      //le koropokkuru est placé sur la position 1, 
+      //le kitsune est placé sur la position 2
+      //le kodama sur la position 4
+      getJoueur1().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("tanuki", 0))
+      getJoueur1().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("koropokkuru", 1))
+      getJoueur1().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("kitsune", 2))
+      getJoueur1().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("kodama", 4))
+        
+      // pour le Joueur 2  le tanuki est placé sur la position 11, 
+      //le koropokkuru est placé sur la position 10, 
+      //le kitsune est placé sur la position 9
+      //le kodama sur la position 7
+      getJoueur2().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("tanuki", 11))
+      getJoueur2().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("koropokkuru", 10))
+      getJoueur2().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("kitsune", 9))
+      getJoueur2().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("kodama", 7))
     }
 
     // getter xMax
@@ -120,19 +146,18 @@ fileprivate class Partie {
 
     func piece1capturePiece2(_ piece1: Piece,_ piece2: Piece) -> Bool
 
-    mutating func envoyerReserve(_ piece: Piece, _ joueur: Joueur) throws
+    func envoyerReserve(_ piece: Piece, _ joueur: Joueur) throws
 
-    mutating func capturer(_ piece: Piece, _ position: Int) throws
+    func capturer(_ piece: Piece, _ position: Int) throws
 
-    mutating func parachuter(_ piece: Piece, _ position : Int) throws
+    func parachuter(_ piece: Piece, _ position : Int) throws
 
-    mutating func deplacer(_ piece: Piece, _ position: Int) throws
+    func deplacer(_ piece: Piece, _ position: Int) throws
 
     func pieceSurCase(_ position: Int) throws -> Piece
 
     func captureAutorisee(_ piece: Piece, _ position: Int) throws -> Bool
 
     func deplacementAutorise(_ piece: Piece, _ position: Int) throws -> Bool
-
 
 }
