@@ -106,7 +106,16 @@ fileprivate class Partie {
       return availableChoice
     }
 
-    func toStringPlateau() -> String {}
+    func toStringPlateau() -> String {
+        var toString : String
+        let piecesJ1 = getJoueur1().getCollectionPieceJoueur().toStringCollectionPiece()
+        let piecesJ2 = getJoueur2().getCollectionPieceJoueur().toStringCollectionPiece()
+        toString +=  "Joueur 1 : "
+        toString += piecesJ1
+        toString += " Joueur 2 : "
+        toString += piecesJ2
+        return toString
+    }
 
     func toStringPiecesDispoDeplacement() -> String {}
 
