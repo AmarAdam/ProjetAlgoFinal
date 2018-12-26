@@ -10,9 +10,14 @@ fileprivate class Partie {
     // idRand et du nombre de tours
     var currentPlayer : Joueur //A revoir
     var passivePlayer : Joueur //A revoir
-    
+
     var idRand : Int
     var nbTour : Int
+
+    enum GestionErrorPartie : Error {
+    case invalidNomPiece
+    case caseHorsPlateau
+    }
 
     // Constructeur
     init(_ nom1: String, _ nom2: String, _ largeur: Int, _ longueur: Int) {
@@ -29,24 +34,24 @@ fileprivate class Partie {
       }
       self.currentPlayer = self.player1
       self.passivePlayer = self.player2
-  
-      // pour le Joueur 1  le tanuki est placé sur la position 0, 
-      //le koropokkuru est placé sur la position 1, 
+
+      // pour le Joueur 1  le tanuki est placé sur la position 0,
+      //le koropokkuru est placé sur la position 1,
       //le kitsune est placé sur la position 2
       //le kodama sur la position 4
-      getJoueur1().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("tanuki", 0))
-      getJoueur1().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("koropokkuru", 1))
-      getJoueur1().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("kitsune", 2))
-      getJoueur1().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("kodama", 4))
-        
-      // pour le Joueur 2  le tanuki est placé sur la position 11, 
-      //le koropokkuru est placé sur la position 10, 
+      self.getJoueur1().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("tanuki", 0))
+      self.getJoueur1().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("koropokkuru", 1))
+      self.getJoueur1().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("kitsune", 2))
+      self.getJoueur1().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("kodama", 4))
+
+      // pour le Joueur 2  le tanuki est placé sur la position 11,
+      //le koropokkuru est placé sur la position 10,
       //le kitsune est placé sur la position 9
       //le kodama sur la position 7
-      getJoueur2().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("tanuki", 11))
-      getJoueur2().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("koropokkuru", 10))
-      getJoueur2().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("kitsune", 9))
-      getJoueur2().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("kodama", 7))
+      self.getJoueur2().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("tanuki", 11))
+      self.getJoueur2().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("koropokkuru", 10))
+      self.getJoueur2().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("kitsune", 9))
+      self.getJoueur2().getCollectionPieceJoueur().ajouterCollectionPiece(Piece("kodama", 7))
     }
 
     // getter xMax
@@ -86,9 +91,9 @@ fileprivate class Partie {
     }
 
     func changerJoueur() -> Self {
-        let tempJoueur = getJoueurCourant()
-        setJoueurCourant(getJoueurAdverse)
-        setJoueurAdverse(tempJoueur)
+        let tempJoueur = self.getJoueurCourant()
+        self.setJoueurCourant(self.getJoueurAdverse)
+        self.setJoueurAdverse(tempJoueur)
         self.nbTour = 0
         return Self
     }
@@ -132,7 +137,7 @@ fileprivate class Partie {
     }
 
     func selectionnerPiecePlateau(_ num: Int, _ choix: String) throws -> Piece {
-      
+
     }
 
     func selectionnerPieceReserve(_ num: Int, _ choix: String) throws -> Piece {
@@ -188,9 +193,142 @@ fileprivate class Partie {
     }
 
     // Partie Amjad
-    func aPortee(_ position: Int, _ piece : Piece) throws -> Bool {
 
-    }
+/*---------------------------------------*/
+/*---------------Schéma------------------*/
+/*---------------------------------------*/
+/*
+      Joueur 1
+
+      [11]   [10]   [9]
+      [8]   [7]   [6]
+      [5]   [4]   [3]
+      [2]   [1]   [0]
+Position initiale : Kodama = 4, kitsune = 2, koropokkuru = 1, tanuki = 0
+
+      Joueur 2
+
+      [0]   [1]   [2]
+      [3]   [4]   [5]
+      [6]   [7]   [8]
+      [9]   [10]   [11]
+Position initiale : Kodama = 7, kitsune = 9, koropokkuru = 10, tanuki = 11
+*/
+
+
+    func aPortee(_ position: Int, _ piece : Piece) throws -> Bool {
+      //Pour cette fonction, on fera une verification au cas par cas
+      //Pre : La position entrée est contenue dans le plateau
+
+      guard let pos = position where pos>=0 && pos <=11 else { //On verifie que la case choisie est bien sur le plateau
+          show("Hors de portee")
+      }
+
+      let estJoueur1 : Bool = (self.getJoueurCourant==self.getJoueur1)
+      if estJoueur1 { // Joueur 1
+        let gauche = piece.getPosition()==2 || piece.getPosition()==5 || piece.getPosition()==8 || piece.getPosition()==11
+        let centre = piece.getPosition()==1 || piece.getPosition()==4 || piece.getPosition()==7 || piece.getPosition()==10
+        let droite = piece.getPosition()==0 || piece.getPosition()==3 || piece.getPosition()==6 || piece.getPosition()==9
+
+        switch piece.getNomPiece() {
+        case "kodama":
+          return (pos==piece.getPosition()+3) //ok
+        case "kodama samurai":
+          if droite {
+            return (pos==piece.getPosition()-3 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3 || pos==piece.getPosition()+4)
+          } else if centre {
+            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+1 || pos==piece.getPosition()+2 || pos==piece.getPosition()+3 || pos==piece.getPosition()+4)
+          } else if gauche {
+            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+2 || pos==piece.getPosition()+3)
+          } else {
+            return false
+          } //ok
+        case "tanuki":
+          if droite {
+            return (pos==piece.getPosition()-3 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3)
+          } else if centre {
+            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3)
+          } else if gauche {
+            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+3)
+          } else {
+            return false
+          } //ok
+        case "kitsune":
+          if droite {
+            return (pos==piece.getPosition()-2 || pos==piece.getPosition()+4)
+          } else if centre {
+            return (pos==piece.getPosition()-4 || pos==piece.getPosition()-2 || pos==piece.getPosition()+2 || pos==piece.getPosition()+4)
+          } else if gauche {
+            return (pos==piece.getPosition()-4 || pos==piece.getPosition()+2)
+          } else {
+            return false
+          } //ok
+        case "koropokkuru":
+          if droite {
+            return (pos==piece.getPosition()-3 || pos==piece.getPosition()-2 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3 || pos==piece.getPosition()+4)
+          } else if centre {
+            return (pos==piece.getPosition()-4 || pos==piece.getPosition()-3 || pos==piece.getPosition()-2 || pos==piece.getPosition()-1 || pos==piece.getPosition()+1 || pos==piece.getPosition()+2 || pos==piece.getPosition()+3 || pos==piece.getPosition()+4)
+          } else if gauche {
+            return (pos==piece.getPosition()-3 || pos==piece.getPosition()+2 || pos==piece.getPosition()-1 || pos==piece.getPosition()+3 || pos==piece.getPosition()-4)
+          } else {
+            return false
+          } //ok
+        default:
+          return false
+        }
+      }else { // Joueur2
+        let droite = piece.getPosition()==2 || piece.getPosition()==5 || piece.getPosition()==8 || piece.getPosition()==11
+        let centre = piece.getPosition()==1 || piece.getPosition()==4 || piece.getPosition()==7 || piece.getPosition()==10
+        let gauche = piece.getPosition()==0 || piece.getPosition()==3 || piece.getPosition()==6 || piece.getPosition()==9
+
+        switch piece.getNomPiece() {
+        case "kodama": //ok
+          return (pos==piece.getPosition()-3)
+        case "kodama samurai": //ok
+          if droite {
+            return (pos==piece.getPosition()-4 || pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+3)
+          } else if centre {
+            return ( pos==piece.getPosition()-4 || pos==piece.getPosition()-3 || pos==piece.getPosition()-2 || pos==piece.getPosition()-1 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3)
+          } else if gauche {
+            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()-2 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3)
+          } else {
+            return false
+          }
+        case "tanuki": //ok
+          if droite {
+            return (pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+3)
+          } else if centre {
+            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3)
+          } else if gauche {
+            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3)
+          } else {
+            return false
+          }
+        case "kitsune": //ok
+          if droite {
+            return (pos==piece.getPosition()+2 || pos==piece.getPosition()-4)
+          } else if centre {
+            return (pos==piece.getPosition()-4 || pos==piece.getPosition()-2 || pos==piece.getPosition()+2 || pos==piece.getPosition()+4)
+          } else if gauche {
+            return (pos==piece.getPosition()+4 || pos==piece.getPosition()-2)
+          } else {
+            return false
+          }
+        case "koropokkuru":
+          if gauche {
+            return (pos==piece.getPosition()-3 || pos==piece.getPosition()-2 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3 || pos==piece.getPosition()+4)
+          } else if centre {
+            return (pos==piece.getPosition()-4 || pos==piece.getPosition()-3 || pos==piece.getPosition()-2 || pos==piece.getPosition()-1 || pos==piece.getPosition()+1 || pos==piece.getPosition()+2 || pos==piece.getPosition()+3 || pos==piece.getPosition()+4)
+          } else if droite {
+            return (pos==piece.getPosition()-3 || pos==piece.getPosition()+2 || pos==piece.getPosition()-1 || pos==piece.getPosition()+3 || pos==piece.getPosition()-4)
+          } else {
+            return false
+          } //ok
+        default:
+          return false
+        }
+      }
+    } //Done
 
     func verifierFinDuJeu() -> Bool {
       //On récupère un booléen verifiant le cas ou le roi a passé la zone de promotion
@@ -201,7 +339,7 @@ fileprivate class Partie {
       } else {
         return false
       }
-    }
+    } //Done
 
     func echecEtMat() -> Bool {
       var captureRoiAdverse = self.etrePieceCapturable(getJoueurAdverse().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru"))
@@ -211,7 +349,7 @@ fileprivate class Partie {
       } else {
         return false
       }
-    }
+    } //Done
 
     func possibiliteDeplacementRoi(_ piece: Piece) throws -> Bool {
 
