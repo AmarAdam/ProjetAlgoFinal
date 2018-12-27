@@ -194,7 +194,7 @@ fileprivate class Partie {
 
     // Partie Amjad
 
-    //Done
+    //True si la position est à portée de la piece
     func aPortee(_ position: Int, _ piece : Piece) throws -> Bool {
       //Pour cette fonction, on fera une verification au cas par cas
       //Pre : La position entrée est contenue dans le plateau
@@ -308,7 +308,7 @@ fileprivate class Partie {
         }
       }
     }
-    //Done
+    //True si l'un des deux joueurs a perdu
     func verifierFinDuJeu() -> Bool {
       //On récupère un booléen verifiant le cas ou le roi a passé la zone de promotion
       var posKing = self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru")
@@ -319,7 +319,7 @@ fileprivate class Partie {
         return false
       }
     }
-    //Done
+    //True si l'un des deux joueurs a été mis en échec et mat
     func echecEtMat() -> Bool {
       let captureRoiAdverse = self.etrePieceCapturable(getJoueurAdverse().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru"))
       let deplacementRoiAdverse = self.possibiliteDeplacementRoi(getJoueurAdverse().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru"))
@@ -329,11 +329,22 @@ fileprivate class Partie {
         return false
       }
     }
-    //Todo
+    //True si le roi peut se déplacer (et uniquement se déplacer)
     func possibiliteDeplacementRoi(_ piece: Piece) throws -> Bool {
-
+      guard let roi = piece where roi.estRoi() else {
+          show("la piece en paramètre n'est pas un roi")
+      }
+      let res : Bool = false
+      let i = 0
+      while (i<=11 || res) {
+        if (self.aPortee(i, roi) && self.caseVide(i)) {
+          res = true
+        }
+        i += 1
+      }
+      return res
     }
-    //Done
+    //True si la piece peut être capturée
     func etrePieceCapturable(piece: Piece) -> Bool {
       let result = false
       let collectionAdverse = passivePlayer.getCollectionPieceJoueur()
@@ -344,7 +355,7 @@ fileprivate class Partie {
       }
       return result
     }
-    //Done
+    //True si la piece1 peut capturer la piece2
     func piece1capturePiece2(_ piece1: Piece,_ piece2: Piece) -> Bool {
       let nom1 = piece1.getNomPiece()
       let position1 = piece1.getPosition()
@@ -376,7 +387,7 @@ fileprivate class Partie {
       }
       joueur.getReserve().ajouterReserve(piece)
     }
-    //Capture Roi ?
+    //Fonction de capture d'une piece sur la case "position"
     func capturer(_ piece: Piece, _ position: Int) throws {
       guard let positionValid = position //position valide, case appartient à l'ennemi
       where positionValid>=0 && positionValid <=11 && self.caseEnnemi(position)
@@ -398,7 +409,13 @@ fileprivate class Partie {
         self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
         pieceValid.setPosition(pieceCapturee.getPosition())
       case "koropokkuru":
-        //Cas ou le roi est capturé
+        print("le roi a ete capture !\nle joueur adverse a perdu !\n")
+        //On agit comme si on avait fait une capture simple
+        //On vérifiera dans la fin du jeu si le koropokkuru est dans la reserve
+        self.pieceSurCase(positionValid).setPosition(nil)
+        self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee)
+        self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee)
+        //Puis on fait rien d'autre, on fera les tests nécessaire dans la fin du jeu
       default:
         self.pieceSurCase(positionValid).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
         self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
@@ -406,31 +423,66 @@ fileprivate class Partie {
         piece.setPosition(pieceCapturee.getPosition())
       }
     }
-    //Todo
+    //Fonction de parachutage d'une piece sur la case "position"
     func parachuter(_ piece: Piece, _ position : Int) throws {
-
+      guard let positionValid = position where self.caseVide(positionValid) && positionValid<=11 && positionValid >=0 else {
+        show("position non valide")
+      }
+      guard let pieceValid = piece where self.getJoueurCourant().getReserve().EstDansReserve(pieceValid.getNomPiece()) && pieceValid.getPosition()==nil else {
+        show("reserve ne contient pas cette piece")
+      }
+      self.getJoueurCourant().getReserve().enleverReserve(pieceValid)
+      pieceValid.setPosition(position) //attention, cette fonction n'existe pas.....
+      self.getJoueurCourant().getCollectionPieceJoueur().ajouterCollectionPiece(pieceValid)
+      //(On a pas besoin de traiter le cas du kodama, on le parachute normalement, sans appeler la fonction de promotion)
     }
-    //Todo
+    //Fonction de déplacement d'une piece à une case "position"
     func deplacer(_ piece: Piece, _ position: Int) throws {
+      guard positionValid = position where self.caseVide(positionValid) && positionValid<=11 && positionValid>=0 else {
+          show("position invalide")
+      }
+      if self.deplacementAutorise(piece, positionValid) {
+          piece.setPosition(positionValid)
+          if pieceValid.estKodama && casePromotion(positionValid) {
+              pieceValid.transformerEnKodamaSamurai()
+          }
+      }
 
     }
-    //Todo
+    //Renvoie la piece presente sur la case en parametre
     func pieceSurCase(_ position: Int) throws -> Piece {
       guard let positionValid=position
       where !self.caseVide(positionValid) else {
           show("position invalide")
       }
-
+      let collectionJoueur = self.getJoueurCourant().getCollectionPieceJoueur()
+      let collectionAdverse = self.getJoueurAdverse().getCollectionPieceJoueur()
+      let res : Piece
+      for collectionPieceJ in collectionJoueur {
+        if collectionPieceJ.getPosition() == positionValid {
+          res = collectionPieceJ
+        }
+      }
+      for collectionPieceA in collectionAdverse {
+        if collectionPieceA.getPosition() == positionValid {
+          res = collectionPieceA
+        }
+      }
+      return res
     }
+
     //Todo
     func captureAutorisee(_ piece: Piece, _ position: Int) throws -> Bool {
 
     }
-    //Todo
+    //Verifie que le deplacement de la piece est autorisee sur la case en parametre
     func deplacementAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
-
+      guard let positionValid = position where positionValid<=11 && positionValid>=0 && self.caseVide(positionValid) else {
+          show("position non valide")
+      }
+      return self.aPortee(positionValid, piece)
     }
-    //Todo
+    //Fonction d'interface : permet d'afficher differents choix possibles
     private func getPieceFromString(_ num: Int, _ choix: String) {
       let tabChoice = choix.components(separatedBy("\n"))
       for choice in tabChoice {
