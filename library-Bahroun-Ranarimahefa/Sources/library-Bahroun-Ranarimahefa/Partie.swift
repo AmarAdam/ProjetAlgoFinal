@@ -400,27 +400,31 @@ fileprivate class Partie {
           show("mauvaise piece passee en parametre")
       }
 
-      let pieceCapturee = self.pieceSurCase(positionValid)
-      switch pieceCapturee.getNomPiece() {
-      case "kodama samurai":
-        self.pieceSurCase(positionValid).transformerEnKodama()
-        self.pieceSurCase(positionValid).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
-        self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
-        self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
-        pieceValid.setPosition(pieceCapturee.getPosition())
-      case "koropokkuru":
-        print("le roi a ete capture !\nle joueur adverse a perdu !\n")
-        //On agit comme si on avait fait une capture simple
-        //On vérifiera dans la fin du jeu si le koropokkuru est dans la reserve
-        self.pieceSurCase(positionValid).setPosition(nil)
-        self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee)
-        self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee)
-        //Puis on fait rien d'autre, on fera les tests nécessaire dans la fin du jeu
-      default:
-        self.pieceSurCase(positionValid).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
-        self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
-        self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
-        piece.setPosition(pieceCapturee.getPosition())
+      if self.captureAutorisee(pieceValid, positionValid) {
+        let pieceCapturee = self.pieceSurCase(positionValid)
+        switch pieceCapturee.getNomPiece() {
+        case "kodama samurai":
+          self.pieceSurCase(positionValid).transformerEnKodama()
+          self.pieceSurCase(positionValid).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
+          self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
+          self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
+          pieceValid.setPosition(pieceCapturee.getPosition())
+        case "koropokkuru":
+          print("le roi a ete capture !\nle joueur adverse a perdu !\n")
+          //On agit comme si on avait fait une capture simple
+          //On vérifiera dans la fin du jeu si le koropokkuru est dans la reserve
+          self.pieceSurCase(positionValid).setPosition(nil)
+          self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee)
+          self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee)
+          //Puis on fait rien d'autre, on fera les tests nécessaire dans la fin du jeu
+        default:
+          self.pieceSurCase(positionValid).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
+          self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
+          self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
+          piece.setPosition(pieceCapturee.getPosition())
+        }
+      } else {
+        print("capture impossible")
       }
     }
     //Fonction de parachutage d'une piece sur la case "position"
@@ -470,9 +474,13 @@ fileprivate class Partie {
       }
       return res
     }
-
-    //Todo
+    //Verifie que la capture est possible
+    //le roi peut etre capturé (c'est un choix, on verifiera s'il a été capturé dans une fonction testant la fin du jeu)
     func captureAutorisee(_ piece: Piece, _ position: Int) throws -> Bool {
+      guard let positionValid = position where positionValid<=11 && positionValid>=0 && !self.caseVide(positionValid) else {
+          show("position non valide")
+          return self.aPortee(positionValid, piece)
+      }
 
     }
     //Verifie que le deplacement de la piece est autorisee sur la case en parametre
