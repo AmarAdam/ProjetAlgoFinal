@@ -137,23 +137,46 @@ fileprivate class Partie {
     }
 
     func selectionnerPiecePlateau(_ num: Int, _ choix: String) throws -> Piece {
-      // TODO
+      let name = getPieceNameFromString(choix)
+      return self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece(name)
     }
 
     func selectionnerPieceReserve(_ num: Int, _ choix: String) throws -> Piece {
-      // TODO
+      let name = getPieceNameFromString(choix)
+      return self.getJoueurCourant().getReserve().getPieceReserve(name)
     }
 
     func toStringPossibiliteesDeplacement(_ piece: Piece)-> String {
-      // TODO
+      var stringPossible = ""
+      for position in getAllPosition() {
+        if deplacementAutorise(piece, position) {
+          stringPossible += String(position)
+          stringPossible += " "
+        }
+      }
+      return stringPossible
     }
 
     func toStringPossibiliteesCapture(_ piece: Piece)-> String {
-      // TODO
+      var stringPossible = ""
+      for position in getAllPosition() {
+        if captureAutorisee(piece, position) {
+          stringPossible += String(position)
+          stringPossible += " "
+        }
+      }
+      return stringPossible
     }
 
     func toStringPossibiliteesParachuter(_ piece: Piece)-> String {
-      // TODO
+      var stringPossible = ""
+      for position in getAllPosition() {
+        if parachutageAutorise(piece, position) {
+          stringPossible += String(position)
+          stringPossible += " "
+        }
+      }
+      return stringPossible
     }
 
     func verifierChoix(_ c1: int, _ c2: String) -> Bool {
@@ -167,7 +190,6 @@ fileprivate class Partie {
       }
       // Si le mot n'est pas trouvé, il renvoie false
       return false
-
     }
 
     func verifierCaseAutorisee(_ position: Int) -> Bool {
@@ -518,8 +540,29 @@ fileprivate class Partie {
       }
       return self.aPortee(positionValid, piece)
     }
-    //Fonction d'interface : permet d'afficher differents choix possibles
-    private func getPieceFromString(_ num: Int, _ choix: String) {
+
+
+
+    /////////////////////
+    // Ajout du groupe :
+
+
+    // Il manque la fonction parachutage autorisé
+    // Verifie que le parachutage est autorisé
+    // Le parachutage est autorisé si :
+    //  - Aucune piece alliée ou ennemi n'est positionné sur la case donnée en paramètre
+    //  - La position est existante sur le plateau
+    func parachutageAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
+      if position >= 0 && position < self.xMax*self.yMax {
+        if caseVide(position) {
+          return true
+        }
+      }
+      return false
+    }
+
+    // Fonction d'interface : permet d'afficher differents choix possibles
+    private func getPieceNameFromString(_ num: Int, _ choix: String) -> String? {
       let tabChoice = choix.components(separatedBy("\n"))
       for choice in tabChoice {
         if choice.components(separatedBy:" - ")[0] == String(num) {
@@ -527,5 +570,14 @@ fileprivate class Partie {
         }
       }
       return ""
+    }
+
+    // renvoie un tableau contenant toute les positions du plateau sous forme de tableau
+    private func getAllPosition() -> [Int] {
+      var positions = []
+      let nbCase = (self.xMax*self.yMax) -1
+      for i in 0 ... nbCase {
+        position.append(Int)
+      }
     }
 }
