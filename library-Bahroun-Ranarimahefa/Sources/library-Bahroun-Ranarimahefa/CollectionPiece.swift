@@ -24,6 +24,11 @@ fileprivate class CollectionPiece {
          // need -> Piece?
      }
 
+     // ajout sinon impossible de travailler dessus
+     private func getCollectionPiece() throws -> Piece {
+         return self.collection
+     }
+
      func EstDansCollectionPiece(_ nom: String, _ position: Int) -> Bool {
          for piece in self.collection {
              if piece.getNomPiece() == nom {

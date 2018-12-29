@@ -102,7 +102,7 @@ fileprivate class Partie {
     func toStringChoix() -> String {
       var availableChoice : String
       if self.toStringPiecesDispoDeplacement() != "" {
-        availableChoice += "1 : Déplacer"
+        availableChoice += "1 : Déplacer \n"
       }
       if self.toStringPiecesDispoCapture() != "" {
         availableChoice += "2 : Capturer \n"
@@ -125,71 +125,99 @@ fileprivate class Partie {
     }
 
     func toStringPiecesDispoDeplacement() -> String {
-
+      // TODO
     }
 
     func toStringPiecesDispoCapture() -> String {
-
+      // TODO
     }
 
     func toStringPiecesDispoParachutage() -> String {
-
+      // TODO
     }
 
     func selectionnerPiecePlateau(_ num: Int, _ choix: String) throws -> Piece {
-
+      // TODO
     }
 
     func selectionnerPieceReserve(_ num: Int, _ choix: String) throws -> Piece {
-
+      // TODO
     }
 
     func toStringPossibiliteesDeplacement(_ piece: Piece)-> String {
-
+      // TODO
     }
 
     func toStringPossibiliteesCapture(_ piece: Piece)-> String {
-
+      // TODO
     }
 
     func toStringPossibiliteesParachuter(_ piece: Piece)-> String {
-
+      // TODO
     }
 
     func verifierChoix(_ c1: int, _ c2: String) -> Bool {
-
+      // Sépare tout les mots de la String et les stoque dans un tableau
       tabWord = c2.components(separatedBy(" "))
-
+      // Compare chaque mot du tableau tout juste créé avec le mot recherché
       for word in tabWord {
         if c1 == word {
           return true
         }
       }
-
+      // Si le mot n'est pas trouvé, il renvoie false
       return false
 
     }
 
     func verifierCaseAutorisee(_ position: Int) -> Bool {
-      return position <= (self.getLongueur(position) * self.getLargeur(position) - 1)
+      // La position doit être supérieur ou égal à 0
+      var cond1 position >= 0
+      // La position doit être inferieur à la position maximum possible
+      var cond2 position <= (self.getLongueur(position) * self.getLargeur(position) - 1)
+      // Resultat : True si les 2 conditions respectés
+      return cond1 && cond2
     }
 
     func caseVide(_ position: Int) throws -> Bool {
-
+      // Verification des pieces du joueur actif
+      for piece in self.getJoueurCourant().getCollectionPieceJoueur().getCollectionPiece() {
+        if piece.getPosition() == position {
+          return false
+        }
+      }
+      // Verification des pieces du joueur passif
+      for piece in self.getJoueurAdverse().getCollectionPieceJoueur().getCollectionPiece() {
+        if piece.getPosition() == position {
+          return false
+        }
+      }
+      // Si la position n'est pas trouvé, la case est vide
+      return true
     }
 
     // J'ai préféré calculer celui ci même si le jeu n'est pas evolutif.
     func casePromotion(_ position : Int)  throws -> Bool {
-    return  (   position >= 0
-            &&  position <= self.getLargeur(position) - 1 )
-            ||
-            (   position >= self.getLargeur(position)*(self.getLongueur(position)-1)
-            &&  position <= self.getLargeur(position)*self.getLongueur(position) )
+      // ligne J1
+      var cond1 = (position >= 0)
+      var cond2 = (position <= self.getLargeur(position) - 1)
+      // Ligne J2
+      var cond3 = (position >= self.getLargeur(position)*(self.getLongueur(position) - 1)
+      var cond4 = (position <= self.getLargeur(position)*self.getLongueur(position))
+      // Resultat
+      return  cond1 && cond2 || cond3 && cond4
     }
 
 
     func caseEnnemi(_ position: Int) throws-> Bool {
-
+      // Verification des pieces du joueur ennemi
+      for piece in self.getJoueurAdverse().getCollectionPieceJoueur().getCollectionPiece() {
+        if piece.getPosition() == position {
+          return true
+        }
+      }
+      // Si la position n'est pas trouvé, la case es soit vide, soit apparetenant au joueur courant
+      return false
     }
 
     // Partie Amjad
@@ -500,5 +528,4 @@ fileprivate class Partie {
       }
       return ""
     }
-
 }
