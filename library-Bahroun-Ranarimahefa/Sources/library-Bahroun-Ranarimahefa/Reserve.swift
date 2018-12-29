@@ -7,6 +7,24 @@ fileprivate class Reserve {
       self.reserve = nil
     }
 
+    public struct ItReserve : ReserveProtocol{
+
+        typealias ItReserve = ReserveProtocol 
+
+        private let reserve : Reserve
+        private var courant : Int = 0
+
+        fileprivate init(_r : Reserve){
+            self.Reserve = r 
+        }
+
+        public func next() -> Piece? {
+            guard self.courant < self.reserve.count else { return nil }
+            let val = self.courant
+            self.courant = self.courant + 1
+            return self.collection[val]
+        }
+    } 
 
     func creerReserve() -> Reserve {
         return nil
