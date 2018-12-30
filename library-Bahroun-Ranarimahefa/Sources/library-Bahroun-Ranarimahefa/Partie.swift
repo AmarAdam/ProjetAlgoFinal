@@ -125,15 +125,52 @@ fileprivate class Partie {
     }
 
     func toStringPiecesDispoDeplacement() -> String {
-      // TODO
+      let toString : String
+      let collection = self.getJoueurCourant().getCollectionPiece()
+      let it = 0
+      let itLine = 1
+      for collectionPiece in collection {
+        toString += itLine+" - "+collectionPiece.getNomPiece()+" : "
+          while it<=11 {
+              if (self.caseVide(it) && self.aPortee(it, collectionPiece){
+                toString+= it+" ,"
+              }
+              it+=1
+          }
+          toString += "\n"
+          itLine+=1
+      }
+      return toString
     }
 
     func toStringPiecesDispoCapture() -> String {
-      // TODO
+      let toString : String
+      let collection = self.getJoueurCourant().getCollectionPiece()
+      let it = 0
+      let itLine = 1
+      for collectionPiece in collection {
+        toString += itLine+" - "+collectionPiece.getNomPiece()+" : "
+          while it<=11 {
+              if (self.caseEnnemi(it) && self.aPortee(it, collectionPiece){
+                toString+= it+" ,"
+              }
+              it+=1
+          }
+          toString += "\n"
+          itLine+=1
+      }
+      return toString
     }
 
     func toStringPiecesDispoParachutage() -> String {
-      // TODO
+      let toString : String
+      let reserve = self.getJoueurCourant().getReserve()
+      let itLine = 1
+      for reservePiece in reserve {
+        toString += itLine+" - "+reservePiece.getNomPiece()+"\n"
+        itLine+=1
+      }
+      return toString
     }
 
     func selectionnerPiecePlateau(_ num: Int, _ choix: String) throws -> Piece {
