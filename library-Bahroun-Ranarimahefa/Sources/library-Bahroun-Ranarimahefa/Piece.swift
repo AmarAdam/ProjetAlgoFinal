@@ -24,6 +24,11 @@ fileprivate class Piece {
   	return self.position
   }
 
+  //ajout de cette fonction, sinon impossible de traiter le type Partie
+  func setPosition(_ position: Int) {
+      self.position = position
+  }
+
   func estRoi() -> Bool {
   	return self.getNomPiece() == "koropokkuru"
   }
@@ -41,13 +46,13 @@ fileprivate class Piece {
       GestionErrorPiece.invalidKodama
     }
     self.setNomPiece("kodama samurai")
-  } 
+  }
 
   func transformerEnKodama() throws -> Piece {
     guard self.estKodamaSamurai() else throws {
       GestionErrorPiece.invalidKodama
   	}
-    
+
   	self.setNomPiece("kodama")
 
   }
