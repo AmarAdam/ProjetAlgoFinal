@@ -1,8 +1,8 @@
-import YokaiNoMoriTypes
+import Foundation
 
 //Classe Joueur
 //Done
-fileprivate class Joueur {
+public class Joueur {
     var namePlayer : String
     var collectionPiece : CollectionPiece
     var reserve : Reserve
