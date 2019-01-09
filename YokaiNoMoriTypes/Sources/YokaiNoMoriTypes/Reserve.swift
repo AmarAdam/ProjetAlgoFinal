@@ -1,6 +1,6 @@
-import YokaiNoMoriTypes
+import Foundation
 
-fileprivate class Reserve : ReserveProtocol{
+public class Reserve : ReserveProtocol{
     var reserve : TReserve?
 
     init(){
