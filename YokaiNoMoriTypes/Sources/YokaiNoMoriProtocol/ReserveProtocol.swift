@@ -6,7 +6,8 @@
 import Foundation
 
 protocol ReserveProtocol : Sequence {
-  associatedtype Piece : PieceProtocol
+    
+    associatedtype Piece : PieceProtocol
     associatedtype ItReserve : IteratorProtocol
 
 	/**

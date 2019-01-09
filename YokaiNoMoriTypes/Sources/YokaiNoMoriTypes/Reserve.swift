@@ -1,30 +1,37 @@
 import YokaiNoMoriTypes
 
-fileprivate class Reserve {
-    var reserve : TReserve?
-
-    init(){
-      self.reserve = nil
-    }
-
-    public struct ItReserve : ReserveProtocol{
+public struct ItReserve : IteratorProtocol{
 
         typealias ItReserve = ReserveProtocol 
 
         private let reserve : Reserve
         private var courant : Int = 0
-
-        fileprivate init(_r : Reserve){
-            self.Reserve = r 
+        private let collection : [Piece] 
+        
+        fileprivate init(_r : reserve){
+            self.reserve = r 
+            self.collection = self.reserve.getPieces()  // à créer fonction getPieces afin de récupérer les pieces de la reserve
         }
 
-        public func next() -> Piece? {
-            guard self.courant < self.reserve.count else { return nil }
+            public func next() -> Piece? {
+            
+            guard self.courant < self.reserve.count 
+
+            else { return nil }
+            
             let val = self.courant
             self.courant = self.courant + 1
+            
             return self.collection[val]
         }
     } 
+
+fileprivate class Reserve : ReserveProtocol{
+    var reserve : TReserve?
+
+    init(){
+      self.reserve = nil
+    }
 
     func creerReserve() -> Reserve {
         return nil
@@ -76,10 +83,9 @@ fileprivate class Reserve {
         return self.reserve.count
     }
 
-    func makeItReserve() -> ItReserve {
-        // TODO
+    func makeIterator() -> ItReserve {
+        return ItReserve(self)
     }
-
 }
 
 fileprivate class TReserve {
