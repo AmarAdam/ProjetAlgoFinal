@@ -1,0 +1,100 @@
+client:
+  name: swift-build
+tools: {}
+targets:
+  "main": ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-Ranarimahefa","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.swiftmodule","<executable-Bahroun-Ranarimahefa.exe>","<executable-Bahroun-Ranarimahefa.module>"]
+  "test": ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-Ranarimahefa","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-RanarimahefaPackageTests.xctest","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.swiftmodule","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.swiftmodule","<executable-Bahroun-Ranarimahefa.exe>","<executable-Bahroun-Ranarimahefa.module>","<executable-Bahroun-RanarimahefaPackageTests.test>","<executable-Bahroun-RanarimahefaTests.module>"]
+  "executable-Bahroun-Ranarimahefa.exe": ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-Ranarimahefa","<executable-Bahroun-Ranarimahefa.exe>"]
+  "executable-Bahroun-Ranarimahefa.module": ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.swiftmodule","<executable-Bahroun-Ranarimahefa.module>"]
+  "executable-Bahroun-RanarimahefaPackageTests.module": ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaPackageTests.swiftmodule","<executable-Bahroun-RanarimahefaPackageTests.module>"]
+  "executable-Bahroun-RanarimahefaPackageTests.test": ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-RanarimahefaPackageTests.xctest","<executable-Bahroun-RanarimahefaPackageTests.test>"]
+  "executable-Bahroun-RanarimahefaTests.module": ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.swiftmodule","<executable-Bahroun-RanarimahefaTests.module>"]
+default: "main"
+commands: 
+  "<C.executable-Bahroun-Ranarimahefa.exe>":
+    tool: phony
+    inputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-Ranarimahefa"]
+    outputs: ["<executable-Bahroun-Ranarimahefa.exe>"]
+
+  "<C.executable-Bahroun-Ranarimahefa.module>":
+    tool: phony
+    inputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.swiftmodule"]
+    outputs: ["<executable-Bahroun-Ranarimahefa.module>"]
+
+  "<C.executable-Bahroun-RanarimahefaPackageTests.module>":
+    tool: phony
+    inputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaPackageTests.swiftmodule"]
+    outputs: ["<executable-Bahroun-RanarimahefaPackageTests.module>"]
+
+  "<C.executable-Bahroun-RanarimahefaPackageTests.test>":
+    tool: phony
+    inputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-RanarimahefaPackageTests.xctest"]
+    outputs: ["<executable-Bahroun-RanarimahefaPackageTests.test>"]
+
+  "<C.executable-Bahroun-RanarimahefaTests.module>":
+    tool: phony
+    inputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.swiftmodule"]
+    outputs: ["<executable-Bahroun-RanarimahefaTests.module>"]
+
+  "C.executable-Bahroun-Ranarimahefa.exe":
+    tool: shell
+    description: "Linking ./.build/x86_64-unknown-linux/debug/executable-Bahroun-Ranarimahefa"
+    inputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.build/main.swift.o"]
+    outputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-Ranarimahefa"]
+    args: ["/home/adam/.local/share/umake/swift/swift-lang/usr/bin/swiftc","-target","x86_64-unknown-linux","-sdk","/","-g","-L","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug","-o","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-Ranarimahefa","-module-name","executable-Bahroun-Ranarimahefa","-emit-executable","-Xlinker","-rpath=$ORIGIN","@/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-Ranarimahefa.product/Objects.LinkFileList"]
+
+  "C.executable-Bahroun-Ranarimahefa.module":
+    tool: swift-compiler
+    executable: "/home/adam/.local/share/umake/swift/swift-lang/usr/bin/swiftc"
+    module-name: "executable_Bahroun_Ranarimahefa"
+    module-output-path: "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.swiftmodule"
+    inputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/Sources/executable-Bahroun-Ranarimahefa/main.swift"]
+    outputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.build/main.swift.o","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.swiftmodule"]
+    import-paths: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug"]
+    temps-path: "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.build"
+    objects: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.build/main.swift.o"]
+    other-args: ["-swift-version","4.2","-enable-batch-mode","-target","x86_64-unknown-linux","-sdk","/","-Onone","-g","-enable-testing","-j4","-DSWIFT_PACKAGE","-DDEBUG","-module-cache-path","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/ModuleCache","-Xfrontend","-color-diagnostics"]
+    sources: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/Sources/executable-Bahroun-Ranarimahefa/main.swift"]
+    is-library: false
+    enable-whole-module-optimization: false
+    num-threads: "4"
+
+  "C.executable-Bahroun-RanarimahefaPackageTests.module":
+    tool: swift-compiler
+    executable: "/home/adam/.local/share/umake/swift/swift-lang/usr/bin/swiftc"
+    module-name: "executable_Bahroun_RanarimahefaPackageTests"
+    module-output-path: "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaPackageTests.swiftmodule"
+    inputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.swiftmodule","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/Tests/LinuxMain.swift"]
+    outputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaPackageTests.build/LinuxMain.swift.o","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaPackageTests.swiftmodule"]
+    import-paths: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug"]
+    temps-path: "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaPackageTests.build"
+    objects: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaPackageTests.build/LinuxMain.swift.o"]
+    other-args: ["-swift-version","4.2","-enable-batch-mode","-target","x86_64-unknown-linux","-sdk","/","-Onone","-g","-enable-testing","-j4","-DSWIFT_PACKAGE","-DDEBUG","-module-cache-path","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/ModuleCache","-Xfrontend","-color-diagnostics"]
+    sources: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/Tests/LinuxMain.swift"]
+    is-library: false
+    enable-whole-module-optimization: false
+    num-threads: "4"
+
+  "C.executable-Bahroun-RanarimahefaPackageTests.test":
+    tool: shell
+    description: "Linking ./.build/x86_64-unknown-linux/debug/executable-Bahroun-RanarimahefaPackageTests.xctest"
+    inputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaPackageTests.build/LinuxMain.swift.o","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.build/XCTestManifests.swift.o","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.build/executable_Bahroun_RanarimahefaTests.swift.o"]
+    outputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-RanarimahefaPackageTests.xctest"]
+    args: ["/home/adam/.local/share/umake/swift/swift-lang/usr/bin/swiftc","-target","x86_64-unknown-linux","-sdk","/","-g","-L","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug","-o","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-RanarimahefaPackageTests.xctest","-module-name","executable-Bahroun-RanarimahefaPackageTests","-emit-executable","-Xlinker","-rpath=$ORIGIN","@/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable-Bahroun-RanarimahefaPackageTests.product/Objects.LinkFileList"]
+
+  "C.executable-Bahroun-RanarimahefaTests.module":
+    tool: swift-compiler
+    executable: "/home/adam/.local/share/umake/swift/swift-lang/usr/bin/swiftc"
+    module-name: "executable_Bahroun_RanarimahefaTests"
+    module-output-path: "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.swiftmodule"
+    inputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.swiftmodule","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/Tests/executable-Bahroun-RanarimahefaTests/XCTestManifests.swift","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/Tests/executable-Bahroun-RanarimahefaTests/executable_Bahroun_RanarimahefaTests.swift"]
+    outputs: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.build/XCTestManifests.swift.o","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.build/executable_Bahroun_RanarimahefaTests.swift.o","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.swiftmodule"]
+    import-paths: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug"]
+    temps-path: "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.build"
+    objects: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.build/XCTestManifests.swift.o","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_RanarimahefaTests.build/executable_Bahroun_RanarimahefaTests.swift.o"]
+    other-args: ["-swift-version","4.2","-enable-batch-mode","-target","x86_64-unknown-linux","-sdk","/","-Onone","-g","-enable-testing","-j4","-DSWIFT_PACKAGE","-DDEBUG","-module-cache-path","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/ModuleCache","-Xfrontend","-color-diagnostics"]
+    sources: ["/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/Tests/executable-Bahroun-RanarimahefaTests/XCTestManifests.swift","/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/Tests/executable-Bahroun-RanarimahefaTests/executable_Bahroun_RanarimahefaTests.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "4"
+

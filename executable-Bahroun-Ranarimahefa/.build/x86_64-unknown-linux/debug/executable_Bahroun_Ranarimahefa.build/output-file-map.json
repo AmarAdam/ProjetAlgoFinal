@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.build/master.swiftdeps"
+  },
+  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/Sources/executable-Bahroun-Ranarimahefa/main.swift": {
+    "dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.build/main.d",
+    "object": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.build/main.swift.o",
+    "swiftmodule": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.build/main~partial.swiftmodule",
+    "swift-dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/executable-Bahroun-Ranarimahefa/.build/x86_64-unknown-linux/debug/executable_Bahroun_Ranarimahefa.build/main.swiftdeps"
+  }
+}
