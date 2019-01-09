@@ -1,8 +1,8 @@
-import YokaiNoMoriTypes
+import Foundation
 
 // Classe partie
 
-fileprivate class Partie {
+public class Partie {
     var xMax : Int //largeur
     var yMax : Int //longueur
     var player1 : Joueur
@@ -28,11 +28,11 @@ fileprivate class Partie {
       self.idRand = Int.random(in : 1...2)
       self.nbTour = 0
       if self.idRand == 1 {
-          self.player1 = new Joueur(nom1)
-          self.player2 = new Joueur(nom2)
+          self.player1 = Joueur(nom1)
+          self.player2 = Joueur(nom2)
       } else {
-          self.player1 = new Joueur(nom2)
-          self.player2 = new Joueur(nom1)
+          self.player1 = Joueur(nom2)
+          self.player2 = Joueur(nom1)
       }
       self.currentPlayer = self.player1
       self.passivePlayer = self.player2
@@ -134,8 +134,9 @@ fileprivate class Partie {
       for collectionPiece in collection {
         toString += itLine+" - "+collectionPiece.getNomPiece()+" : "
           while it<=11 {
-              if (self.caseVide(it) && self.aPortee(it, collectionPiece){
-                toString+= it+" ,"
+              if (self.caseVide(it) && self.aPortee(it, collectionPiece)){
+                toString = toString + it
+                toString = toString + " ,"
               }
               it+=1
           }
@@ -153,7 +154,7 @@ fileprivate class Partie {
       for collectionPiece in collection {
         toString += itLine+" - "+collectionPiece.getNomPiece()+" : "
           while it<=11 {
-              if (self.caseEnnemi(it) && self.aPortee(it, collectionPiece){
+              if (self.caseEnnemi(it) && self.aPortee(it, collectionPiece)){
                 toString+= it+" ,"
               }
               it+=1
@@ -233,23 +234,23 @@ fileprivate class Partie {
 
     func verifierCaseAutorisee(_ position: Int) -> Bool {
       // La position doit être supérieur ou égal à 0
-      var cond1 position >= 0
+      let cond1 : Bool = (position >= 0)
       // La position doit être inferieur à la position maximum possible
-      var cond2 position <= (self.getLongueur(position) * self.getLargeur(position) - 1)
+      let cond2 : Bool = (position <= (self.getLongueur(position) * self.getLargeur(position) - 1))
       // Resultat : True si les 2 conditions respectés
-      return cond1 && cond2
+      return (cond1 && cond2)
     }
 
     func caseVide(_ position: Int) throws -> Bool {
       // Verification des pieces du joueur actif
       for piece in self.getJoueurCourant().getCollectionPieceJoueur().getCollectionPiece() {
-        if piece.getPosition() == position {
+        if (piece.getPosition() == position) {
           return false
         }
       }
       // Verification des pieces du joueur passif
       for piece in self.getJoueurAdverse().getCollectionPieceJoueur().getCollectionPiece() {
-        if piece.getPosition() == position {
+        if (piece.getPosition() == position) {
           return false
         }
       }
@@ -260,13 +261,15 @@ fileprivate class Partie {
     // J'ai préféré calculer celui ci même si le jeu n'est pas evolutif.
     func casePromotion(_ position : Int)  throws -> Bool {
       // ligne J1
-      var cond1 = (position >= 0)
-      var cond2 = (position <= self.getLargeur(position) - 1)
+      let cond1 = (position >= 0)
+      let cond2 = (position <= self.getLargeur(position) - 1)
       // Ligne J2
-      var cond3 = (position >= self.getLargeur(position)*(self.getLongueur(position) - 1)
-      var cond4 = (position <= self.getLargeur(position)*self.getLongueur(position))
+      let cond3 = (position >= self.getLargeur(position)*(self.getLongueur(position) - 1))
+      let cond4 = (position <= self.getLargeur(position)*self.getLongueur(position))
       // Resultat
-      return  cond1 && cond2 || cond3 && cond4
+      let cond5 : Bool = (cond1 && cond2)
+      let cond6 : Bool = (cond3 && cond4)
+      return  (cond5 || cond6)
     }
 
 
@@ -288,9 +291,10 @@ fileprivate class Partie {
       //Pour cette fonction, on fera une verification au cas par cas
       //Pre : La position entrée est contenue dans le plateau
 
-      guard let pos = position where pos>=0 && pos <=11 else { //On verifie que la case choisie est bien sur le plateau
+      guard position where (position >= 0) && (position <= 11) else { //On verifie que la case choisie est bien sur le plateau
           show("Hors de portee")
       }
+      let pos = position
 
       let estJoueur1 : Bool = (self.getJoueurCourant==self.getJoueur1)
       if estJoueur1 { // Joueur 1
@@ -400,8 +404,8 @@ fileprivate class Partie {
     //True si l'un des deux joueurs a perdu
     func verifierFinDuJeu() -> Bool {
       //On récupère un booléen verifiant le cas ou le roi a passé la zone de promotion
-      var posKing = self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru")
-      var checkKing = (self.possibiliteDeplacementRoi() && self.casePromotion(posKing))
+      let posKing = self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru")
+      let checkKing = (self.possibiliteDeplacementRoi() && self.casePromotion(posKing))
       if self.echecEtMat() || checkKing {
         return true
       } else {
@@ -420,9 +424,10 @@ fileprivate class Partie {
     }
     //True si le roi peut se déplacer (et uniquement se déplacer)
     func possibiliteDeplacementRoi(_ piece: Piece) throws -> Bool {
-      guard let roi = piece where roi.estRoi() else {
+      guard piece where roi.estRoi() else {
           show("la piece en paramètre n'est pas un roi")
       }
+      let roi = piece
       let res : Bool = false
       let i = 0
       while (i<=11 || res) {
@@ -467,11 +472,13 @@ fileprivate class Partie {
     }
     //Done (throws/catch a reprendre)
     func envoyerReserve(_ piece: Piece, _ joueur: Joueur) throws {
-      guard let pos = piece.getPosition() where pos==nil else{
+      let pos = piece.getPosition()
+      guard pos where pos==nil else{
         show("position de piece non vide")
       }
       //try catch ?? A verifier
-      guard let name = piece.getNomPiece() where name!="kodama samurai" else{
+      let name = piece.getNomPiece()
+      guard name where name!="kodama samurai" else{
         show("la piece est un kodama samurai")
       }
       joueur.getReserve().ajouterReserve(piece)
