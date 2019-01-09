@@ -1,6 +1,6 @@
-import YokaiNoMoriTypes
+import Foundation
 
-fileprivate class CollectionPiece {
+public class CollectionPiece {
 
     typealias ItCollectionPiece = IteratorProtocol
     var collection = [Piece]
