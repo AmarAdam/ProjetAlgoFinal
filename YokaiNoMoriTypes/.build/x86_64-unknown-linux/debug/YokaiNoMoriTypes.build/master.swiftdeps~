@@ -1,9 +1,0 @@
-version: "Swift version 4.2.1 (swift-4.2.1-RELEASE)"
-options: "b4a4a3280e70be743a9c499449df07ea"
-build_time: [1547024183, 723637938]
-inputs:
-  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriTypes/CollectionPiece.swift": !dirty [1547021162, 0]
-  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriTypes/Joueur.swift": !dirty [1547021168, 0]
-  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriTypes/Partie.swift": !dirty [1547021171, 0]
-  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriTypes/Piece.swift": !dirty [1547021166, 0]
-  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriTypes/Reserve.swift": !dirty [1547021166, 0]
