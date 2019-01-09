@@ -1,3 +1,5 @@
+import YokaiNoMoriTypes
+
 fileprivate class Piece {
 
   var nom : String

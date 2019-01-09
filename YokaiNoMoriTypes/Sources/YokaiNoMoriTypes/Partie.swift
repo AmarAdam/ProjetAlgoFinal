@@ -1,3 +1,5 @@
+import YokaiNoMoriTypes
+
 // Classe partie
 
 fileprivate class Partie {

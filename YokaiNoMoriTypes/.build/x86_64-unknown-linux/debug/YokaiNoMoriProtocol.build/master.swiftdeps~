@@ -1,0 +1,9 @@
+version: "Swift version 4.2.1 (swift-4.2.1-RELEASE)"
+options: "65ece256bbf63e97f61a57492e5817b6"
+build_time: [1547020765, 652520598]
+inputs:
+  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriProtocol/CollectionPieceProtocol.swift": [1547019099, 0]
+  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriProtocol/JoueurProtocol.swift": [1547019099, 0]
+  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriProtocol/PartieProtocol.swift": !dirty [1547019099, 0]
+  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriProtocol/PieceProtocol.swift": [1547019099, 0]
+  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriProtocol/ReserveProtocol.swift": [1547019099, 0]

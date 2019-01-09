@@ -1,0 +1,50 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+provides-nominal:
+provides-member:
+depends-top-level:
+- !private "+"
+- !private "<"
+- "AssignmentPrecedence"
+- "Bool"
+- !private "BooleanLiteralType"
+- "CollectionPiece"
+- "FloatLiteralType"
+- "Int"
+- "IntegerLiteralType"
+- "IteratorProtocol"
+- "Piece"
+- "String"
+- !private "c"
+depends-member:
+- ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "CollectionPiece"]
+- ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "Element"]
+- ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "Int"]
+- ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "ItCollectionPiece"]
+- ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "IteratorProtocol"]
+- ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "Piece"]
+- ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "_Default_Element"]
+- !private ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "c"]
+- !private ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "collection"]
+- !private ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "courant"]
+- ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "deinit"]
+- !private ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "init"]
+- ["16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V", "next"]
+- !private ["St", "CollectionPiece"]
+- ["St", "Element"]
+- ["St", "Piece"]
+- ["St", ""]
+- ["St", "_Default_Element"]
+- !private ["St", "c"]
+- !private ["St", "collection"]
+- !private ["St", "courant"]
+- ["St", "next"]
+depends-nominal:
+- "16YokaiNoMoriTypes15CollectionPiece33_606D6DC2E866F4579947EA6DFDDEFF27LLC02IteF0V"
+- "St"
+depends-dynamic-lookup:
+depends-external:
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Swift.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/glibc.modulemap"
+interface-hash: "ba997bd2dd491159e87bc6c57a8ef6e0"

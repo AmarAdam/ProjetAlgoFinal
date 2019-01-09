@@ -1,3 +1,5 @@
+import YokaiNoMoriTypes
+
 //Classe Joueur
 //Done
 fileprivate class Joueur {

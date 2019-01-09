@@ -1,4 +1,4 @@
-import Piece
+import YokaiNoMoriTypes
 
 fileprivate class Reserve {
     var reserve : TReserve?

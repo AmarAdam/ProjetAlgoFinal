@@ -1,3 +1,5 @@
+import YokaiNoMoriTypes
+
 fileprivate class CollectionPiece {
 
     typealias ItCollectionPiece = IteratorProtocol

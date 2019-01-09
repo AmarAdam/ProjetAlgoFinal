@@ -247,7 +247,7 @@ protocol PartieProtocol {
 
    - Exemple: verifierChoix(1,"1 - koropokkuru \n2- tanuki") renvoie vrai.
   */
-  func verifierChoix(_ c1: int, _ c2: String) -> Bool
+  func verifierChoix(_ c1: Int, _ c2: String) -> Bool
 
   /** ----------------------------- Fonctions pour la gestion des positions ----------------------------*/
 
