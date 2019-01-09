@@ -7,10 +7,6 @@ public class Reserve : ReserveProtocol{
       self.reserve = nil
     }
 
-    func creerReserve() -> Reserve {
-        return nil
-    }
-
     func ajouterReserve(_ piece: Piece) throws -> Self {
         self.reserve.append(piece)
     }
@@ -62,7 +58,7 @@ public class Reserve : ReserveProtocol{
     }
 }
 
-fileprivate class TReserve {
+public class TReserve {
     var piece : Piece
     var next : TReserve
     init(){
@@ -70,9 +66,36 @@ fileprivate class TReserve {
       self.next = nil
     }
 }
-typealias Reserve = TReserve | Reserve | nil
 
-fileprivate class ItReserve {
+typealias Reserve = (TReserve | Reserve | nil)
+
+public class ItReserve {
     var current : Piece
     var next : Reserve
+}
+
+public struct ItReserve : IteratorProtocol{
+
+    typealias ItReserve = ReserveProtocol
+
+    private let reserve : Reserve
+    private var courant : Int = 0
+    private let collection : [Piece]
+
+    fileprivate init(_r : reserve){
+        self.reserve = r
+        self.collection = self.reserve.getPieces()  // à créer fonction getPieces afin de récupérer les pieces de la reserve
+    }
+
+        public func next() -> Piece? {
+
+        guard self.courant < self.reserve.count
+
+        else { return nil }
+
+        let val = self.courant
+        self.courant = self.courant + 1
+
+        return self.collection[val]
+    }
 }
