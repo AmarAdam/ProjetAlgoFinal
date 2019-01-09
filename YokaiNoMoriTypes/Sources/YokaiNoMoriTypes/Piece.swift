@@ -5,10 +5,6 @@ public class Piece {
   var nom : String
   var position : Int?
 
-  enum GestionErrorPiece: Error {
-    case invalidKodama
-}
-
   init(_ nom : String , _ position : Int ) {
   	self.nom = nom
   	self.position = position      // vide si dans la reserve
@@ -44,15 +40,15 @@ public class Piece {
   }
 
   func transformerEnKodamaSamurai() throws {
-    guard self.estKodama() else throws{
-      GestionErrorPiece.invalidKodama
+    guard self.estKodama() else {
+      print("piece non valide")
     }
     self.setNomPiece("kodama samurai")
   }
 
   func transformerEnKodama() throws -> Piece {
-    guard self.estKodamaSamurai() else throws {
-      GestionErrorPiece.invalidKodama
+    guard self.estKodamaSamurai() else {
+      print("piece non valide")
   	}
 
   	self.setNomPiece("kodama")
