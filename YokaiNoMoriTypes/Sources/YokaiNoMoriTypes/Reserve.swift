@@ -1,37 +1,47 @@
 import Foundation
 
 public class Reserve : ReserveProtocol{
-    var reserve : TReserve?
+    var pieces : [Piece]
+    var itReserve : ItReserve
 
     init(){
-      self.reserve = nil
+      self.pieces = []
     }
 
     func ajouterReserve(_ piece: Piece) throws -> Self {
-        self.reserve.append(piece)
+        self.pieces.append(piece)
     }
 
-    func enleverReserve(piece: Piece) throws -> Self {
-        self.reserve.remove(piece)
+
+    func enleverReserve(toRem: Piece) throws -> Self {
+        var i = 0
+        var iRem = -1
+        for (piece in pieces) {
+            if (piece.getNomPiece() == toRem.getNomPiece()) {
+                iRem = i
+            }
+            i++
+        }
+        if (iRem != -1) {
+            self.pieces.remove(at : i)
+        }
     }
 
     func reserveVide() -> Bool {
-      self.return self.reserve.count == 0
+        return self.pieces.isEmpty
     }
 
     func toStringreserve() -> String {
         var toString : String
-        for piece in self.reserve {
+        for piece in self.pieces {
             toString += piece.getNomPiece()
-            toString += " en "
-            toString += piece.getPosition()
             toString += ", "
         }
         return toString
     }
 
     func getPieceReserve(_ nom: String) throws -> Piece {
-        for piece in self.reserve {
+        for piece in self.pieces {
             if piece.getNomPiece() == nom {
                 return piece
             }
@@ -40,8 +50,15 @@ public class Reserve : ReserveProtocol{
         // need -> Piece?
     }
 
+
+    // Ajouté par notre groupe
+    func getPiecesReserve() -> [Piece] {
+        return self.pieces
+    }
+    // Fin d'ajout
+
     func estDansReserve(_ nom: String) throws -> Bool {
-        for piece in self.reserve {
+        for piece in self.pieces {
             if piece.getNomPiece() == nom {
                 return true
             }
@@ -50,7 +67,7 @@ public class Reserve : ReserveProtocol{
     }
 
     func nbPieceReserve() -> Int {
-        return self.reserve.count
+        return self.pieces.count
     }
 
     func makeIterator() -> ItReserve {
@@ -58,44 +75,29 @@ public class Reserve : ReserveProtocol{
     }
 }
 
-public class TReserve {
-    var piece : Piece
-    var next : TReserve
-    init(){
-      self.piece = nil
-      self.next = nil
-    }
-}
-
-typealias Reserve = (TReserve | Reserve | nil)
-
-public class ItReserve {
-    var current : Piece
-    var next : Reserve
-}
 
 public struct ItReserve : IteratorProtocol{
-
-    typealias ItReserve = ReserveProtocol
 
     private let reserve : Reserve
     private var courant : Int = 0
     private let collection : [Piece]
 
-    fileprivate init(_r : reserve){
+    fileprivate init(_ r : Reserve){
         self.reserve = r
-        self.collection = self.reserve.getPieces()  // à créer fonction getPieces afin de récupérer les pieces de la reserve
+        self.collection = self.reserve.getPiecesReserve()
     }
 
-        public func next() -> Piece? {
+    mutating public func next() -> Piece? {
 
-        guard self.courant < self.reserve.count
-
-        else { return nil }
+        guard self.courant < self.collection.count else { return nil }
 
         let val = self.courant
-        self.courant = self.courant + 1
+        self.courant += 1
 
         return self.collection[val]
+    }
+
+    mutating public func reinitialiser() {
+        self.courant = 0
     }
 }
