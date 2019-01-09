@@ -290,58 +290,59 @@ public class Partie {
     func aPortee(_ position: Int, _ piece : Piece) throws -> Bool {
       //Pour cette fonction, on fera une verification au cas par cas
       //Pre : La position entrée est contenue dans le plateau
+      var posPiece : Int = piece.getPosition() ?? -1
 
-      guard position where (position >= 0) && (position <= 11) else { //On verifie que la case choisie est bien sur le plateau
+      guard pos where (pos >= 0) && (pos <= 11) else { //On verifie que la case choisie est bien sur le plateau
           show("Hors de portee")
       }
       let pos = position
 
       let estJoueur1 : Bool = (self.getJoueurCourant==self.getJoueur1)
-      if estJoueur1 { // Joueur 1
-        let gauche = piece.getPosition()==2 || piece.getPosition()==5 || piece.getPosition()==8 || piece.getPosition()==11
-        let centre = piece.getPosition()==1 || piece.getPosition()==4 || piece.getPosition()==7 || piece.getPosition()==10
-        let droite = piece.getPosition()==0 || piece.getPosition()==3 || piece.getPosition()==6 || piece.getPosition()==9
+      if let piece.getPosition() && estJoueur1 { // Joueur 1
+        let gauche = posPiece==2 || posPiece==5 || posPiece==8 || posPiece==11
+        let centre = posPiece==1 || posPiece==4 || posPiece==7 || posPiece==10
+        let droite = posPiece==0 || posPiece==3 || posPiece==6 || posPiece==9
 
         switch piece.getNomPiece() {
         case "kodama":
-          return (pos==piece.getPosition()+3) //ok
+          return (pos==posPiece+3) //ok
         case "kodama samurai":
           if droite {
-            return (pos==piece.getPosition()-3 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3 || pos==piece.getPosition()+4)
+            return (pos==posPiece-3 || pos==posPiece+1 || pos==posPiece+3 || pos==posPiece+4)
           } else if centre {
-            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+1 || pos==piece.getPosition()+2 || pos==piece.getPosition()+3 || pos==piece.getPosition()+4)
+            return ( pos==posPiece-3 || pos==posPiece-1 || pos==posPiece+1 || pos==posPiece+2 || pos==posPiece+3 || pos==posPiece+4)
           } else if gauche {
-            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+2 || pos==piece.getPosition()+3)
+            return ( pos==posPiece-3 || pos==posPiece-1 || pos==posPiece+2 || pos==posPiece+3)
           } else {
             return false
           } //ok
         case "tanuki":
           if droite {
-            return (pos==piece.getPosition()-3 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3)
+            return (pos==posPiece-3 || pos==posPiece+1 || pos==posPiece+3)
           } else if centre {
-            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3)
+            return ( pos==posPiece-3 || pos==posPiece-1 || pos==posPiece+1 || pos==posPiece+3)
           } else if gauche {
-            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+3)
+            return ( pos==posPiece-3 || pos==posPiece-1 || pos==posPiece+3)
           } else {
             return false
           } //ok
         case "kitsune":
           if droite {
-            return (pos==piece.getPosition()-2 || pos==piece.getPosition()+4)
+            return (pos==posPiece-2 || pos==posPiece+4)
           } else if centre {
-            return (pos==piece.getPosition()-4 || pos==piece.getPosition()-2 || pos==piece.getPosition()+2 || pos==piece.getPosition()+4)
+            return (pos==posPiece-4 || pos==posPiece-2 || pos==posPiece+2 || pos==posPiece+4)
           } else if gauche {
-            return (pos==piece.getPosition()-4 || pos==piece.getPosition()+2)
+            return (pos==posPiece-4 || pos==posPiece+2)
           } else {
             return false
           } //ok
         case "koropokkuru":
           if droite {
-            return (pos==piece.getPosition()-3 || pos==piece.getPosition()-2 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3 || pos==piece.getPosition()+4)
+            return (pos==posPiece-3 || pos==posPiece-2 || pos==posPiece+1 || pos==posPiece+3 || pos==posPiece+4)
           } else if centre {
-            return (pos==piece.getPosition()-4 || pos==piece.getPosition()-3 || pos==piece.getPosition()-2 || pos==piece.getPosition()-1 || pos==piece.getPosition()+1 || pos==piece.getPosition()+2 || pos==piece.getPosition()+3 || pos==piece.getPosition()+4)
+            return (pos==posPiece-4 || pos==posPiece-3 || pos==posPiece-2 || pos==posPiece-1 || pos==posPiece+1 || pos==posPiece+2 || pos==posPiece+3 || pos==posPiece+4)
           } else if gauche {
-            return (pos==piece.getPosition()-3 || pos==piece.getPosition()+2 || pos==piece.getPosition()-1 || pos==piece.getPosition()+3 || pos==piece.getPosition()-4)
+            return (pos==posPiece-3 || pos==posPiece+2 || pos==posPiece-1 || pos==posPiece+3 || pos==posPiece-4)
           } else {
             return false
           } //ok
@@ -349,50 +350,50 @@ public class Partie {
           return false
         }
       }else { // Joueur2
-        let droite = piece.getPosition()==2 || piece.getPosition()==5 || piece.getPosition()==8 || piece.getPosition()==11
-        let centre = piece.getPosition()==1 || piece.getPosition()==4 || piece.getPosition()==7 || piece.getPosition()==10
-        let gauche = piece.getPosition()==0 || piece.getPosition()==3 || piece.getPosition()==6 || piece.getPosition()==9
+        let droite = posPiece==2 || posPiece==5 || posPiece==8 || posPiece==11
+        let centre = posPiece==1 || posPiece==4 || posPiece==7 || posPiece==10
+        let gauche = posPiece==0 || posPiece==3 || posPiece==6 || posPiece==9
 
         switch piece.getNomPiece() {
         case "kodama": //ok
-          return (pos==piece.getPosition()-3)
+          return (pos==posPiece-3)
         case "kodama samurai": //ok
           if droite {
-            return (pos==piece.getPosition()-4 || pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+3)
+            return (pos==posPiece-4 || pos==posPiece-3 || pos==posPiece-1 || pos==posPiece+3)
           } else if centre {
-            return ( pos==piece.getPosition()-4 || pos==piece.getPosition()-3 || pos==piece.getPosition()-2 || pos==piece.getPosition()-1 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3)
+            return ( pos==posPiece-4 || pos==posPiece-3 || pos==posPiece-2 || pos==posPiece-1 || pos==posPiece+1 || pos==posPiece+3)
           } else if gauche {
-            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()-2 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3)
+            return ( pos==posPiece-3 || pos==posPiece-2 || pos==posPiece+1 || pos==posPiece+3)
           } else {
             return false
           }
         case "tanuki": //ok
           if droite {
-            return (pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+3)
+            return (pos==posPiece-3 || pos==posPiece-1 || pos==posPiece+3)
           } else if centre {
-            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()-1 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3)
+            return ( pos==posPiece-3 || pos==posPiece-1 || pos==posPiece+1 || pos==posPiece+3)
           } else if gauche {
-            return ( pos==piece.getPosition()-3 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3)
+            return ( pos==posPiece-3 || pos==posPiece+1 || pos==posPiece+3)
           } else {
             return false
           }
         case "kitsune": //ok
           if droite {
-            return (pos==piece.getPosition()+2 || pos==piece.getPosition()-4)
+            return (pos==posPiece+2 || pos==posPiece-4)
           } else if centre {
-            return (pos==piece.getPosition()-4 || pos==piece.getPosition()-2 || pos==piece.getPosition()+2 || pos==piece.getPosition()+4)
+            return (pos==posPiece-4 || pos==posPiece-2 || pos==posPiece+2 || pos==posPiece+4)
           } else if gauche {
-            return (pos==piece.getPosition()+4 || pos==piece.getPosition()-2)
+            return (pos==posPiece+4 || pos==posPiece-2)
           } else {
             return false
           }
         case "koropokkuru":
           if gauche {
-            return (pos==piece.getPosition()-3 || pos==piece.getPosition()-2 || pos==piece.getPosition()+1 || pos==piece.getPosition()+3 || pos==piece.getPosition()+4)
+            return (pos==posPiece-3 || pos==posPiece-2 || pos==posPiece+1 || pos==posPiece+3 || pos==posPiece+4)
           } else if centre {
-            return (pos==piece.getPosition()-4 || pos==piece.getPosition()-3 || pos==piece.getPosition()-2 || pos==piece.getPosition()-1 || pos==piece.getPosition()+1 || pos==piece.getPosition()+2 || pos==piece.getPosition()+3 || pos==piece.getPosition()+4)
+            return (pos==posPiece-4 || pos==posPiece-3 || pos==posPiece-2 || pos==posPiece-1 || pos==posPiece+1 || pos==posPiece+2 || pos==posPiece+3 || pos==posPiece+4)
           } else if droite {
-            return (pos==piece.getPosition()-3 || pos==piece.getPosition()+2 || pos==piece.getPosition()-1 || pos==piece.getPosition()+3 || pos==piece.getPosition()-4)
+            return (pos==posPiece-3 || pos==posPiece+2 || pos==posPiece-1 || pos==posPiece+3 || pos==posPiece-4)
           } else {
             return false
           } //ok
@@ -452,10 +453,10 @@ public class Partie {
     //True si la piece1 peut capturer la piece2
     func piece1capturePiece2(_ piece1: Piece,_ piece2: Piece) -> Bool {
       let nom1 = piece1.getNomPiece()
-      let position1 = piece1.getPosition()
+      let position1 = piece1.getPosition() ?? -1 //position à -1 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
 
       let nom2 = piece2.getNomPiece()
-      let position2 = piece2.getPosition()
+      let position2 = piece2.getPosition() ?? -1 //position à -1 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
 
       let preTest3 = self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom1, position1)
                   && self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom2, position2)
@@ -552,7 +553,7 @@ public class Partie {
     //Renvoie la piece presente sur la case en parametre
     func pieceSurCase(_ position: Int) throws -> Piece {
       guard let positionValid=position
-      where !self.caseVide(positionValid) else {
+      where self.caseVide(positionValid) && positionValid!=-1 else {
           show("position invalide")
       }
       let collectionJoueur = self.getJoueurCourant().getCollectionPieceJoueur()
@@ -599,6 +600,10 @@ public class Partie {
     //  - Aucune piece alliée ou ennemi n'est positionné sur la case donnée en paramètre
     //  - La position est existante sur le plateau
     func parachutageAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
+      guard position where (position != -1) else {
+        print("position invalide")
+        return
+      }
       if position >= 0 && position < self.xMax*self.yMax {
         if caseVide(position) {
           return true

@@ -18,6 +18,7 @@ public class CollectionPiece {
          self.collection.remove(piece)
      }
 
+     /*
      Renvoie la piece identifie par son nom et sa position sur le plateau de jeu
      est contenue contenue dans la collection de pieces.
      Renvoie une erreur si la piece n'est pas dans la collection ou que la position
@@ -26,6 +27,7 @@ public class CollectionPiece {
      - Precondition:
        - La piece a retirer appartient a la collection de piece.
        - la position entree est une position du plateau de jeu.
+       */
 
      func getPieceCollectionPiece(_ nom: String,_ position: Int) throws -> Piece {
        /*
@@ -44,7 +46,7 @@ public class CollectionPiece {
      }
 
      // ajout sinon impossible de travailler dessus
-     private func getCollectionPiece() throws -> Piece {
+     func getCollectionPiece() throws -> Piece {
          return self.collection
      }
 
@@ -88,7 +90,7 @@ public struct ItCollectionPiece : IteratorProtocol{
     private var courant : Int = 0
     private let pieces : [Piece]
 
-    fileprivate init(_c : CollectionPiece){
+    init(_ c : CollectionPiece){
         self.CollectionPiece = c
         self.pieces = self.CollectionPiece.collection
     }
