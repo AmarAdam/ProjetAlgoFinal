@@ -1,6 +1,6 @@
-import YokaiNoMoriTypes
+import Foundation
 
-fileprivate class Piece {
+public class Piece {
 
   var nom : String
   var position : Int?
