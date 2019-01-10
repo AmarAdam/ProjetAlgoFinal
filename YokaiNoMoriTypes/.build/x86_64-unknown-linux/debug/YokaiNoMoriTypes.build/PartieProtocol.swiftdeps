@@ -1,0 +1,70 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "PartieProtocol"
+provides-nominal:
+- "16YokaiNoMoriTypes14PartieProtocolP"
+provides-member:
+- ["16YokaiNoMoriTypes14PartieProtocolP", ""]
+depends-top-level:
+- "Bool"
+- "Int"
+- "JoueurProtocol"
+- "PartieProtocol"
+- "PieceProtocol"
+- "String"
+depends-member:
+- ["16YokaiNoMoriTypes14PartieProtocolP", "Bool"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "Int"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "Joueur"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "JoueurProtocol"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "Piece"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "PieceProtocol"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "String"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "aPortee"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "captureAutorisee"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "capturer"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "caseEnnemi"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "casePromotion"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "caseVide"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "changerJoueur"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "deplacementAutorise"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "deplacer"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "echecEtMat"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "envoyerReserve"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "etrePieceCapturable"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "getJoueur1"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "getJoueurAdverse"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "getJoueurCourant"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "getLargeur"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "getLongueur"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "init"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "parachuter"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "piece1capturePiece2"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "pieceSurCase"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "possibiliteDeplacementRoi"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "selectionnerPiecePlateau"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "selectionnerPieceReserve"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "setJoueurAdverse"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "setJoueurCourant"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "toStringChoix"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "toStringPiecesDispoCapture"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "toStringPiecesDispoDeplacement"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "toStringPiecesDispoParachutage"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "toStringPlateau"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "toStringPossibiliteesCapture"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "toStringPossibiliteesDeplacement"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "toStringPossibiliteesParachuter"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "verifierCaseAutorisee"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "verifierChoix"]
+- ["16YokaiNoMoriTypes14PartieProtocolP", "verifierFinDuJeu"]
+depends-nominal:
+- "16YokaiNoMoriTypes14PartieProtocolP"
+depends-dynamic-lookup:
+depends-external:
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Glibc.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Dispatch.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Foundation.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Swift.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/glibc.modulemap"
+interface-hash: "39154526c9dc9cd26e8f996f5298f501"

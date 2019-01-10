@@ -1,0 +1,52 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "ReserveProtocol"
+provides-nominal:
+- "19YokaiNoMoriProtocol07ReserveD0P"
+provides-member:
+- ["19YokaiNoMoriProtocol07ReserveD0P", ""]
+depends-top-level:
+- "Bool"
+- "Int"
+- "IteratorProtocol"
+- "PieceProtocol"
+- "ReserveProtocol"
+- "Sequence"
+- "String"
+depends-member:
+- ["19YokaiNoMoriProtocol07ReserveD0P", "Bool"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "EstDansReserve"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "Int"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "ItReserve"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "IteratorProtocol"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "Piece"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "PieceProtocol"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "String"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "ajouterReserve"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "enleverReserve"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "getPieceReserve"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "init"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "makeItReserve"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "nbPieceReserve"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "reserveVide"]
+- ["19YokaiNoMoriProtocol07ReserveD0P", "toStringReserve"]
+- ["ST", "Bool"]
+- ["ST", "Int"]
+- ["ST", "ItReserve"]
+- ["ST", "IteratorProtocol"]
+- ["ST", "Piece"]
+- ["ST", "PieceProtocol"]
+- ["ST", "String"]
+- ["ST", ""]
+depends-nominal:
+- "19YokaiNoMoriProtocol07ReserveD0P"
+- "ST"
+depends-dynamic-lookup:
+depends-external:
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Glibc.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Dispatch.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Foundation.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Swift.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/glibc.modulemap"
+interface-hash: "779de533cce5205ca3882af2a3d7e1a9"

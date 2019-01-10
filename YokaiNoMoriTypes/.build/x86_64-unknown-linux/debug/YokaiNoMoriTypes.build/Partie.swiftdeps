@@ -1,0 +1,431 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "Partie"
+provides-nominal:
+- "16YokaiNoMoriTypes6PartieC"
+- "16YokaiNoMoriTypes6PartieC012GestionErrorE0O"
+provides-member:
+- ["16YokaiNoMoriTypes6PartieC", ""]
+- ["16YokaiNoMoriTypes6PartieC012GestionErrorE0O", ""]
+depends-top-level:
+- !private "!"
+- !private "!="
+- !private "&&"
+- !private "*"
+- !private "+"
+- !private "+="
+- !private "-"
+- !private "..."
+- !private "<"
+- !private "<="
+- !private "="
+- !private "=-"
+- "=="
+- !private ">="
+- !private "??"
+- !private "Array"
+- "AssignmentPrecedence"
+- "Bool"
+- !private "BooleanLiteralType"
+- "Error"
+- !private "FloatLiteralType"
+- "Int"
+- !private "IntegerLiteralType"
+- "Joueur"
+- "Partie"
+- "Piece"
+- !private "Self"
+- "String"
+- !private "StringLiteralType"
+- !private "UnicodeScalarType"
+- !private "getJoueur2"
+- "getPieceNameFromString"
+- "int"
+- !private "pieceValid"
+- !private "position"
+- !private "positionValid"
+- !private "print"
+- !private "separatedBy"
+- !private "tabWord"
+- !private "||"
+- !private "~="
+depends-member:
+- ["SK", "boolValue"]
+- !private ["SK", "components"]
+- !private ["SK", "init"]
+- !private ["SK", "init"]
+- ["Sz", "boolValue"]
+- !private ["Sz", "random"]
+- !private ["Sb", "_getBuiltinLogicValue"]
+- !private ["s7CVarArgP", "_getBuiltinLogicValue"]
+- ["s7CVarArgP", "boolValue"]
+- !private ["s7CVarArgP", "random"]
+- ["Sl", "boolValue"]
+- !private ["Sl", "components"]
+- !private ["Sl", "init"]
+- !private ["Sl", "init"]
+- !private ["16YokaiNoMoriTypes15CollectionPieceC", "EstDansCollectionPiece"]
+- !private ["16YokaiNoMoriTypes15CollectionPieceC", "ajouterCollectionPiece"]
+- !private ["16YokaiNoMoriTypes15CollectionPieceC", "getCollectionPiece"]
+- !private ["16YokaiNoMoriTypes15CollectionPieceC", "getPieceCollectionPiece"]
+- !private ["16YokaiNoMoriTypes15CollectionPieceC", "retirerCollectionPiece"]
+- !private ["16YokaiNoMoriTypes15CollectionPieceC", "toStringCollectionPiece"]
+- ["SL", "boolValue"]
+- !private ["SL", "components"]
+- !private ["SL", "init"]
+- !private ["SL", "init"]
+- !private ["SL", "random"]
+- ["s28CustomDebugStringConvertibleP", "boolValue"]
+- !private ["s28CustomDebugStringConvertibleP", "components"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s29CustomPlaygroundQuickLookableP", "_getBuiltinLogicValue"]
+- ["s29CustomPlaygroundQuickLookableP", "boolValue"]
+- !private ["s29CustomPlaygroundQuickLookableP", "components"]
+- !private ["s29CustomPlaygroundQuickLookableP", "init"]
+- !private ["s29CustomPlaygroundQuickLookableP", "init"]
+- !private ["s29CustomPlaygroundQuickLookableP", "random"]
+- !private ["s17CustomReflectableP", "_getBuiltinLogicValue"]
+- ["s17CustomReflectableP", "boolValue"]
+- !private ["s17CustomReflectableP", "components"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "random"]
+- !private ["s23CustomStringConvertibleP", "_getBuiltinLogicValue"]
+- ["s23CustomStringConvertibleP", "boolValue"]
+- !private ["s23CustomStringConvertibleP", "components"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "random"]
+- !private ["Se", "_getBuiltinLogicValue"]
+- ["Se", "boolValue"]
+- !private ["Se", "components"]
+- !private ["Se", "init"]
+- !private ["Se", "init"]
+- !private ["Se", "random"]
+- !private ["SE", "_getBuiltinLogicValue"]
+- ["SE", "boolValue"]
+- !private ["SE", "components"]
+- !private ["SE", "init"]
+- !private ["SE", "init"]
+- !private ["SE", "random"]
+- ["SQ", ""]
+- ["SQ", "_code"]
+- ["SQ", "_domain"]
+- !private ["SQ", "_getBuiltinLogicValue"]
+- ["SQ", "_userInfo"]
+- ["SQ", "boolValue"]
+- !private ["SQ", "components"]
+- ["SQ", "hash"]
+- ["SQ", "hashValue"]
+- !private ["SQ", "init"]
+- !private ["SQ", "init"]
+- !private ["SQ", "random"]
+- ["s5ErrorP", ""]
+- ["s5ErrorP", "_code"]
+- ["s5ErrorP", "_domain"]
+- ["s5ErrorP", "_userInfo"]
+- ["s5ErrorP", "hash"]
+- ["s5ErrorP", "hashValue"]
+- !private ["s27ExpressibleByBooleanLiteralP", "_getBuiltinLogicValue"]
+- ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "boolValue"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "components"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
+- ["s27ExpressibleByIntegerLiteralP", "boolValue"]
+- !private ["s27ExpressibleByIntegerLiteralP", "random"]
+- ["s26ExpressibleByStringLiteralP", "boolValue"]
+- !private ["s26ExpressibleByStringLiteralP", "components"]
+- !private ["s26ExpressibleByStringLiteralP", "init"]
+- !private ["s26ExpressibleByStringLiteralP", "init"]
+- ["s33ExpressibleByUnicodeScalarLiteralP", "boolValue"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "components"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
+- ["s17FixedWidthIntegerP", "boolValue"]
+- !private ["s17FixedWidthIntegerP", "random"]
+- ["16YokaiNoMoriTypes6PartieC012GestionErrorE0O", "__derived_enum_equals"]
+- ["16YokaiNoMoriTypes6PartieC012GestionErrorE0O", "_code"]
+- ["16YokaiNoMoriTypes6PartieC012GestionErrorE0O", "_domain"]
+- ["16YokaiNoMoriTypes6PartieC012GestionErrorE0O", "_userInfo"]
+- ["16YokaiNoMoriTypes6PartieC012GestionErrorE0O", "caseHorsPlateau"]
+- ["16YokaiNoMoriTypes6PartieC012GestionErrorE0O", "deinit"]
+- ["16YokaiNoMoriTypes6PartieC012GestionErrorE0O", "hash"]
+- ["16YokaiNoMoriTypes6PartieC012GestionErrorE0O", "hashValue"]
+- ["16YokaiNoMoriTypes6PartieC012GestionErrorE0O", "invalidNomPiece"]
+- ["SH", ""]
+- ["SH", "_code"]
+- ["SH", "_domain"]
+- !private ["SH", "_getBuiltinLogicValue"]
+- ["SH", "_userInfo"]
+- ["SH", "boolValue"]
+- !private ["SH", "components"]
+- ["SH", "hash"]
+- ["SH", "hashValue"]
+- !private ["SH", "init"]
+- !private ["SH", "init"]
+- !private ["SH", "random"]
+- !private ["s6HasherV", "combine"]
+- ["Si", "boolValue"]
+- !private ["Si", "random"]
+- !private ["16YokaiNoMoriTypes9ItReserveV", "deinit"]
+- !private ["16YokaiNoMoriTypes6JoueurC", "getCollectionPiece"]
+- !private ["16YokaiNoMoriTypes6JoueurC", "getCollectionPieceJoueur"]
+- !private ["16YokaiNoMoriTypes6JoueurC", "getReserve"]
+- !private ["16YokaiNoMoriTypes6JoueurC", "init"]
+- !private ["16YokaiNoMoriTypes6JoueurC", "reserveVide"]
+- !private ["s25LosslessStringConvertibleP", "_getBuiltinLogicValue"]
+- ["s25LosslessStringConvertibleP", "boolValue"]
+- !private ["s25LosslessStringConvertibleP", "components"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["s25LosslessStringConvertibleP", "random"]
+- ["s10MirrorPathP", "boolValue"]
+- !private ["s10MirrorPathP", "components"]
+- !private ["s10MirrorPathP", "init"]
+- !private ["s10MirrorPathP", "init"]
+- !private ["s10MirrorPathP", "random"]
+- !private ["10Foundation8NSCodingP", "components"]
+- !private ["10Foundation9NSCopyingP", "components"]
+- !private ["10Foundation16NSMutableCopyingP", "components"]
+- !private ["10Foundation8NSObjectC", "components"]
+- !private ["10Foundation16NSObjectProtocolP", "components"]
+- !private ["10Foundation14NSSecureCodingP", "components"]
+- !private ["10Foundation8NSStringC", "components"]
+- ["Sj", "boolValue"]
+- !private ["Sj", "random"]
+- ["16YokaiNoMoriTypes6PartieC", "Bool"]
+- ["16YokaiNoMoriTypes6PartieC", "Error"]
+- ["16YokaiNoMoriTypes6PartieC", "GestionErrorPartie"]
+- ["16YokaiNoMoriTypes6PartieC", "Int"]
+- ["16YokaiNoMoriTypes6PartieC", "Joueur"]
+- ["16YokaiNoMoriTypes6PartieC", "Piece"]
+- !private ["16YokaiNoMoriTypes6PartieC", "Self"]
+- ["16YokaiNoMoriTypes6PartieC", "String"]
+- ["16YokaiNoMoriTypes6PartieC", "aPortee"]
+- ["16YokaiNoMoriTypes6PartieC", "captureAutorisee"]
+- ["16YokaiNoMoriTypes6PartieC", "capturer"]
+- ["16YokaiNoMoriTypes6PartieC", "caseEnnemi"]
+- ["16YokaiNoMoriTypes6PartieC", "casePromotion"]
+- ["16YokaiNoMoriTypes6PartieC", "caseVide"]
+- ["16YokaiNoMoriTypes6PartieC", "changerJoueur"]
+- ["16YokaiNoMoriTypes6PartieC", "currentPlayer"]
+- ["16YokaiNoMoriTypes6PartieC", "deplacementAutorise"]
+- ["16YokaiNoMoriTypes6PartieC", "deplacer"]
+- ["16YokaiNoMoriTypes6PartieC", "echecEtMat"]
+- ["16YokaiNoMoriTypes6PartieC", "envoyerReserve"]
+- ["16YokaiNoMoriTypes6PartieC", "etrePieceCapturable"]
+- !private ["16YokaiNoMoriTypes6PartieC", "getAllPosition"]
+- ["16YokaiNoMoriTypes6PartieC", "getJoueur1"]
+- !private ["16YokaiNoMoriTypes6PartieC", "getJoueur2"]
+- ["16YokaiNoMoriTypes6PartieC", "getJoueurAdverse"]
+- ["16YokaiNoMoriTypes6PartieC", "getJoueurCourant"]
+- ["16YokaiNoMoriTypes6PartieC", "getLargeur"]
+- ["16YokaiNoMoriTypes6PartieC", "getLongueur"]
+- ["16YokaiNoMoriTypes6PartieC", "getPieceNameFromString"]
+- ["16YokaiNoMoriTypes6PartieC", "idRand"]
+- ["16YokaiNoMoriTypes6PartieC", "init"]
+- ["16YokaiNoMoriTypes6PartieC", "int"]
+- ["16YokaiNoMoriTypes6PartieC", "nbTour"]
+- ["16YokaiNoMoriTypes6PartieC", "parachutageAutorise"]
+- ["16YokaiNoMoriTypes6PartieC", "parachuter"]
+- ["16YokaiNoMoriTypes6PartieC", "passivePlayer"]
+- ["16YokaiNoMoriTypes6PartieC", "piece1capturePiece2"]
+- ["16YokaiNoMoriTypes6PartieC", "pieceSurCase"]
+- !private ["16YokaiNoMoriTypes6PartieC", "pieceValid"]
+- ["16YokaiNoMoriTypes6PartieC", "player1"]
+- ["16YokaiNoMoriTypes6PartieC", "player2"]
+- !private ["16YokaiNoMoriTypes6PartieC", "position"]
+- !private ["16YokaiNoMoriTypes6PartieC", "positionValid"]
+- ["16YokaiNoMoriTypes6PartieC", "possibiliteDeplacementRoi"]
+- !private ["16YokaiNoMoriTypes6PartieC", "print"]
+- ["16YokaiNoMoriTypes6PartieC", "selectionnerPiecePlateau"]
+- ["16YokaiNoMoriTypes6PartieC", "selectionnerPieceReserve"]
+- !private ["16YokaiNoMoriTypes6PartieC", "separatedBy"]
+- ["16YokaiNoMoriTypes6PartieC", "setJoueurAdverse"]
+- ["16YokaiNoMoriTypes6PartieC", "setJoueurCourant"]
+- !private ["16YokaiNoMoriTypes6PartieC", "tabWord"]
+- ["16YokaiNoMoriTypes6PartieC", "toStringChoix"]
+- ["16YokaiNoMoriTypes6PartieC", "toStringPiecesDispoCapture"]
+- ["16YokaiNoMoriTypes6PartieC", "toStringPiecesDispoDeplacement"]
+- ["16YokaiNoMoriTypes6PartieC", "toStringPiecesDispoParachutage"]
+- ["16YokaiNoMoriTypes6PartieC", "toStringPlateau"]
+- ["16YokaiNoMoriTypes6PartieC", "toStringPossibiliteesCapture"]
+- ["16YokaiNoMoriTypes6PartieC", "toStringPossibiliteesDeplacement"]
+- ["16YokaiNoMoriTypes6PartieC", "toStringPossibiliteesParachuter"]
+- ["16YokaiNoMoriTypes6PartieC", "verifierCaseAutorisee"]
+- ["16YokaiNoMoriTypes6PartieC", "verifierFinDuJeu"]
+- ["16YokaiNoMoriTypes6PartieC", "xMax"]
+- ["16YokaiNoMoriTypes6PartieC", "yMax"]
+- !private ["16YokaiNoMoriTypes5PieceC", "getNomPiece"]
+- !private ["16YokaiNoMoriTypes5PieceC", "getPosition"]
+- !private ["16YokaiNoMoriTypes5PieceC", "init"]
+- !private ["16YokaiNoMoriTypes5PieceC", "setPosition"]
+- ["Sm", "boolValue"]
+- !private ["Sm", "components"]
+- !private ["Sm", "init"]
+- !private ["Sm", "init"]
+- !private ["16YokaiNoMoriTypes7ReserveC", "EstDansReserve"]
+- !private ["16YokaiNoMoriTypes7ReserveC", "ajouterReserve"]
+- !private ["16YokaiNoMoriTypes7ReserveC", "deinit"]
+- !private ["16YokaiNoMoriTypes7ReserveC", "enleverReserve"]
+- !private ["16YokaiNoMoriTypes7ReserveC", "getPieceReserve"]
+- !private ["16YokaiNoMoriTypes15ReserveProtocolP", "EstDansReserve"]
+- !private ["16YokaiNoMoriTypes15ReserveProtocolP", "ajouterReserve"]
+- !private ["16YokaiNoMoriTypes15ReserveProtocolP", "enleverReserve"]
+- !private ["16YokaiNoMoriTypes15ReserveProtocolP", "getPieceReserve"]
+- !private ["ST", "EstDansReserve"]
+- !private ["ST", "ajouterReserve"]
+- ["ST", "boolValue"]
+- !private ["ST", "components"]
+- !private ["ST", "enleverReserve"]
+- !private ["ST", "getPieceReserve"]
+- !private ["ST", "init"]
+- !private ["ST", "init"]
+- ["SZ", "boolValue"]
+- !private ["SZ", "random"]
+- ["s13SignedNumericP", "boolValue"]
+- !private ["s13SignedNumericP", "random"]
+- ["Sx", "boolValue"]
+- !private ["Sx", "random"]
+- ["SS", "boolValue"]
+- !private ["SS", "components"]
+- !private ["SS", "init"]
+- !private ["SS", "init"]
+- ["Sy", "boolValue"]
+- !private ["Sy", "components"]
+- !private ["Sy", "init"]
+- !private ["Sy", "init"]
+- ["s16TextOutputStreamP", "boolValue"]
+- !private ["s16TextOutputStreamP", "components"]
+- !private ["s16TextOutputStreamP", "init"]
+- !private ["s16TextOutputStreamP", "init"]
+- ["s20TextOutputStreamableP", "boolValue"]
+- !private ["s20TextOutputStreamableP", "components"]
+- !private ["s20TextOutputStreamableP", "init"]
+- !private ["s20TextOutputStreamableP", "init"]
+- ["s18_BitwiseOperationsP", "boolValue"]
+- !private ["s18_BitwiseOperationsP", "random"]
+- !private ["10Foundation13_CFBridgeableP", "_getBuiltinLogicValue"]
+- ["10Foundation13_CFBridgeableP", "boolValue"]
+- !private ["10Foundation13_CFBridgeableP", "components"]
+- !private ["10Foundation13_CFBridgeableP", "init"]
+- !private ["10Foundation13_CFBridgeableP", "init"]
+- !private ["s35_ExpressibleByBuiltinBooleanLiteralP", "_getBuiltinLogicValue"]
+- ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "boolValue"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "components"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
+- ["s35_ExpressibleByBuiltinIntegerLiteralP", "boolValue"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "random"]
+- ["s34_ExpressibleByBuiltinStringLiteralP", "boolValue"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "components"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "boolValue"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "components"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "init"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "init"]
+- ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "boolValue"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "components"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
+- ["s33_ExpressibleByStringInterpolationP", "boolValue"]
+- !private ["s33_ExpressibleByStringInterpolationP", "components"]
+- !private ["s33_ExpressibleByStringInterpolationP", "init"]
+- !private ["s33_ExpressibleByStringInterpolationP", "init"]
+- ["s35_HasCustomAnyHashableRepresentationP", "boolValue"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "random"]
+- ["10Foundation13_NSBridgeableP", "boolValue"]
+- !private ["10Foundation13_NSBridgeableP", "components"]
+- !private ["10Foundation13_NSBridgeableP", "init"]
+- !private ["10Foundation13_NSBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "_getBuiltinLogicValue"]
+- ["s21_ObjectiveCBridgeableP", "boolValue"]
+- !private ["s21_ObjectiveCBridgeableP", "components"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "random"]
+- !private ["10Foundation17_StructBridgeableP", "components"]
+- !private ["10Foundation21_StructTypeBridgeableP", "components"]
+- !private ["10Foundation16_SwiftBridgeableP", "components"]
+- ["s16_SwiftStringViewP", "boolValue"]
+- !private ["s16_SwiftStringViewP", "components"]
+- !private ["s16_SwiftStringViewP", "init"]
+- !private ["s16_SwiftStringViewP", "init"]
+depends-nominal:
+- "SK"
+- "Sz"
+- !private "Sb"
+- "s7CVarArgP"
+- "Sl"
+- !private "16YokaiNoMoriTypes15CollectionPieceC"
+- "SL"
+- "s28CustomDebugStringConvertibleP"
+- "s29CustomPlaygroundQuickLookableP"
+- "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- "Se"
+- "SE"
+- "SQ"
+- "s5ErrorP"
+- !private "s27ExpressibleByBooleanLiteralP"
+- "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- "s27ExpressibleByIntegerLiteralP"
+- "s26ExpressibleByStringLiteralP"
+- "s33ExpressibleByUnicodeScalarLiteralP"
+- "s17FixedWidthIntegerP"
+- "16YokaiNoMoriTypes6PartieC012GestionErrorE0O"
+- "SH"
+- !private "s6HasherV"
+- "Si"
+- !private "16YokaiNoMoriTypes9ItReserveV"
+- !private "16YokaiNoMoriTypes6JoueurC"
+- "s25LosslessStringConvertibleP"
+- "s10MirrorPathP"
+- !private "10Foundation8NSCodingP"
+- !private "10Foundation9NSCopyingP"
+- !private "10Foundation16NSMutableCopyingP"
+- !private "10Foundation8NSObjectC"
+- !private "10Foundation16NSObjectProtocolP"
+- !private "10Foundation14NSSecureCodingP"
+- !private "10Foundation8NSStringC"
+- "Sj"
+- "16YokaiNoMoriTypes6PartieC"
+- !private "16YokaiNoMoriTypes5PieceC"
+- "Sm"
+- !private "16YokaiNoMoriTypes7ReserveC"
+- !private "16YokaiNoMoriTypes15ReserveProtocolP"
+- "ST"
+- "SZ"
+- "s13SignedNumericP"
+- "Sx"
+- "SS"
+- "Sy"
+- "s16TextOutputStreamP"
+- "s20TextOutputStreamableP"
+- "s18_BitwiseOperationsP"
+- "10Foundation13_CFBridgeableP"
+- !private "s35_ExpressibleByBuiltinBooleanLiteralP"
+- "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- "s35_ExpressibleByBuiltinIntegerLiteralP"
+- "s34_ExpressibleByBuiltinStringLiteralP"
+- "s39_ExpressibleByBuiltinUTF16StringLiteralP"
+- "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- "s33_ExpressibleByStringInterpolationP"
+- "s35_HasCustomAnyHashableRepresentationP"
+- "10Foundation13_NSBridgeableP"
+- "s21_ObjectiveCBridgeableP"
+- !private "10Foundation17_StructBridgeableP"
+- !private "10Foundation21_StructTypeBridgeableP"
+- !private "10Foundation16_SwiftBridgeableP"
+- "s16_SwiftStringViewP"
+depends-dynamic-lookup:
+depends-external:
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Glibc.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Dispatch.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Foundation.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Swift.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/glibc.modulemap"
+interface-hash: "343fbb3569928ae65ebdec8bdaae38c0"

@@ -54,7 +54,7 @@ public class Piece {
   	}
 
   	self.setNomPiece("kodama")
-
+    return self
   }
 
 

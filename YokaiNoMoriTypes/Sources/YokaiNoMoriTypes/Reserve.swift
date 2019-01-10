@@ -16,7 +16,7 @@ public class Reserve : ReserveProtocol{
     func enleverReserve(toRem: Piece) throws -> Self {
         var i = 0
         var iRem = -1
-        for (piece in pieces) {
+        for (piece, pieces) {
             if (piece.getNomPiece() == toRem.getNomPiece()) {
                 iRem = i
             }
@@ -31,7 +31,7 @@ public class Reserve : ReserveProtocol{
         return self.pieces.isEmpty
     }
 
-    func toStringreserve() -> String {
+    func toStringReserve() -> String {
         var toString : String
         for piece in self.pieces {
             toString += piece.getNomPiece()
@@ -57,7 +57,7 @@ public class Reserve : ReserveProtocol{
     }
     // Fin d'ajout
 
-    func estDansReserve(_ nom: String) throws -> Bool {
+    func EstDansReserve(_ nom: String) throws -> Bool {
         for piece in self.pieces {
             if piece.getNomPiece() == nom {
                 return true
@@ -70,7 +70,7 @@ public class Reserve : ReserveProtocol{
         return self.pieces.count
     }
 
-    func makeIterator() -> ItReserve {
+    public func makeIterator() -> ItReserve {
         return ItReserve(self)
     }
 }

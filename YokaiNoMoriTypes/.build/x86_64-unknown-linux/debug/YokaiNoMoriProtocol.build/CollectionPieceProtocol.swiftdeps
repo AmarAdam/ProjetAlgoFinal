@@ -1,0 +1,51 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "CollectionPieceProtocol"
+provides-nominal:
+- "19YokaiNoMoriProtocol015CollectionPieceD0P"
+provides-member:
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", ""]
+depends-top-level:
+- "Bool"
+- "CollectionPieceProtocol"
+- "Int"
+- "IteratorProtocol"
+- "PieceProtocol"
+- "Sequence"
+- "String"
+depends-member:
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "Bool"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "EstDansCollectionPiece"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "Int"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "ItCollectionPiece"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "IteratorProtocol"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "Piece"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "PieceProtocol"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "String"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "ajouterCollectionPiece"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "getPieceCollectionPiece"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "init"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "makeItCollectionPiece"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "nbPieceCollectionPiece"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "retirerCollectionPiece"]
+- ["19YokaiNoMoriProtocol015CollectionPieceD0P", "toStringCollectionPiece"]
+- ["ST", "Bool"]
+- ["ST", "Int"]
+- ["ST", "ItCollectionPiece"]
+- ["ST", "IteratorProtocol"]
+- ["ST", "Piece"]
+- ["ST", "PieceProtocol"]
+- ["ST", "String"]
+- ["ST", ""]
+depends-nominal:
+- "19YokaiNoMoriProtocol015CollectionPieceD0P"
+- "ST"
+depends-dynamic-lookup:
+depends-external:
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Glibc.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Dispatch.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Foundation.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Swift.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/glibc.modulemap"
+interface-hash: "93ff85a1372e918f470e623ee4f07f32"

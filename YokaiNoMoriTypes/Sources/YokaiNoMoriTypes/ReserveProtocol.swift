@@ -92,6 +92,18 @@ protocol ReserveProtocol : Sequence {
     cree un iterateur sur les pieces de la reserve pour les parcourir 
     makeItReserve : Reserve -> ItReserve
  */
-  func makeItReserve() -> ItReserve
+
+  func getPiecesReserve() -> [Piece]
+  // renvoi le tableau de piece 
+
+  func makeIterator() -> ItReserve
+  // renvoi l'iterateur
+
+  func reinitialiser() 
+  // remet le courant de l'iterateur à 0 
+  
+  /** 
+    ajouté par notre groupe
+  */
 
 }

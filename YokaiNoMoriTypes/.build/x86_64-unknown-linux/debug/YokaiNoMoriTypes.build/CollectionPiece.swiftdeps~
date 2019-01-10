@@ -1,0 +1,186 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "CollectionPiece"
+- "ItCollectionPiece"
+provides-nominal:
+- "16YokaiNoMoriTypes15CollectionPieceC"
+- "16YokaiNoMoriTypes17ItCollectionPieceV"
+provides-member:
+- ["16YokaiNoMoriTypes15CollectionPieceC", ""]
+- ["16YokaiNoMoriTypes17ItCollectionPieceV", ""]
+depends-top-level:
+- !private "+"
+- !private "<"
+- "AssignmentPrecedence"
+- "Bool"
+- !private "BooleanLiteralType"
+- "CollectionPiece"
+- "CollectionPieceProtocol"
+- "FloatLiteralType"
+- "Int"
+- "IntegerLiteralType"
+- "ItCollectionPiece"
+- "IteratorProtocol"
+- "Piece"
+- "String"
+- !private "new"
+depends-member:
+- !private ["Sa", "append"]
+- !private ["Sa", "count"]
+- ["Sa", "init"]
+- !private ["Sa", "remove"]
+- !private ["s13ArrayProtocolP", "append"]
+- !private ["s13ArrayProtocolP", "count"]
+- ["s13ArrayProtocolP", "init"]
+- !private ["s13ArrayProtocolP", "remove"]
+- !private ["SK", "append"]
+- !private ["SK", "count"]
+- ["SK", "init"]
+- !private ["SK", "remove"]
+- !private ["Sl", "append"]
+- !private ["Sl", "count"]
+- ["Sl", "init"]
+- !private ["Sl", "remove"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "Bool"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "EstDansCollectionPiece"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "Int"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "ItCollectionPiece"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "IteratorProtocol"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "Piece"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "String"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "ajouterCollectionPiece"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "collection"]
+- !private ["16YokaiNoMoriTypes15CollectionPieceC", "count"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "getCollectionPiece"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "getPieceCollectionPiece"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "init"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "makeItCollectionPiece"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "nbPieceCollectionPiece"]
+- !private ["16YokaiNoMoriTypes15CollectionPieceC", "new"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "retirerCollectionPiece"]
+- !private ["16YokaiNoMoriTypes15CollectionPieceC", "subscript"]
+- ["16YokaiNoMoriTypes15CollectionPieceC", "toStringCollectionPiece"]
+- !private ["s28CustomDebugStringConvertibleP", "append"]
+- !private ["s28CustomDebugStringConvertibleP", "count"]
+- ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "remove"]
+- !private ["s17CustomReflectableP", "append"]
+- !private ["s17CustomReflectableP", "count"]
+- ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "remove"]
+- !private ["s23CustomStringConvertibleP", "append"]
+- !private ["s23CustomStringConvertibleP", "count"]
+- ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "remove"]
+- !private ["Se", "append"]
+- !private ["Se", "count"]
+- ["Se", "init"]
+- !private ["Se", "remove"]
+- !private ["SE", "append"]
+- !private ["SE", "count"]
+- ["SE", "init"]
+- !private ["SE", "remove"]
+- !private ["SQ", "append"]
+- !private ["SQ", "count"]
+- ["SQ", "init"]
+- !private ["SQ", "remove"]
+- !private ["s25ExpressibleByArrayLiteralP", "append"]
+- !private ["s25ExpressibleByArrayLiteralP", "count"]
+- ["s25ExpressibleByArrayLiteralP", "init"]
+- !private ["s25ExpressibleByArrayLiteralP", "remove"]
+- !private ["SH", "append"]
+- !private ["SH", "count"]
+- ["SH", "init"]
+- !private ["SH", "remove"]
+- ["16YokaiNoMoriTypes17ItCollectionPieceV", "CollectionPiece"]
+- ["16YokaiNoMoriTypes17ItCollectionPieceV", "CollectionPieceProtocol"]
+- ["16YokaiNoMoriTypes17ItCollectionPieceV", "Element"]
+- ["16YokaiNoMoriTypes17ItCollectionPieceV", "Int"]
+- ["16YokaiNoMoriTypes17ItCollectionPieceV", "ItCollectionPiece"]
+- ["16YokaiNoMoriTypes17ItCollectionPieceV", "Piece"]
+- ["16YokaiNoMoriTypes17ItCollectionPieceV", "_Default_Element"]
+- !private ["16YokaiNoMoriTypes17ItCollectionPieceV", "collection"]
+- !private ["16YokaiNoMoriTypes17ItCollectionPieceV", "courant"]
+- ["16YokaiNoMoriTypes17ItCollectionPieceV", "deinit"]
+- ["16YokaiNoMoriTypes17ItCollectionPieceV", "init"]
+- ["16YokaiNoMoriTypes17ItCollectionPieceV", "next"]
+- !private ["16YokaiNoMoriTypes17ItCollectionPieceV", "pieces"]
+- !private ["St", "CollectionPiece"]
+- ["St", "Element"]
+- ["St", ""]
+- ["St", "_Default_Element"]
+- !private ["St", "collection"]
+- !private ["St", "courant"]
+- ["St", "init"]
+- ["St", "next"]
+- !private ["St", "pieces"]
+- !private ["SM", "append"]
+- !private ["SM", "count"]
+- ["SM", "init"]
+- !private ["SM", "remove"]
+- !private ["Sk", "append"]
+- !private ["Sk", "count"]
+- ["Sk", "init"]
+- !private ["Sk", "remove"]
+- !private ["Sm", "append"]
+- !private ["Sm", "count"]
+- ["Sm", "init"]
+- !private ["Sm", "remove"]
+- !private ["ST", "append"]
+- !private ["ST", "count"]
+- ["ST", "init"]
+- !private ["ST", "remove"]
+- !private ["10Foundation13_CFBridgeableP", "append"]
+- !private ["10Foundation13_CFBridgeableP", "count"]
+- ["10Foundation13_CFBridgeableP", "init"]
+- !private ["10Foundation13_CFBridgeableP", "remove"]
+- !private ["s24_DestructorSafeContainerP", "append"]
+- !private ["s24_DestructorSafeContainerP", "count"]
+- ["s24_DestructorSafeContainerP", "init"]
+- !private ["s24_DestructorSafeContainerP", "remove"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "append"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "count"]
+- ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "remove"]
+- !private ["10Foundation13_NSBridgeableP", "append"]
+- !private ["10Foundation13_NSBridgeableP", "count"]
+- ["10Foundation13_NSBridgeableP", "init"]
+- !private ["10Foundation13_NSBridgeableP", "remove"]
+- !private ["s21_ObjectiveCBridgeableP", "append"]
+- !private ["s21_ObjectiveCBridgeableP", "count"]
+- ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "remove"]
+depends-nominal:
+- "Sa"
+- "s13ArrayProtocolP"
+- "SK"
+- "Sl"
+- "16YokaiNoMoriTypes15CollectionPieceC"
+- "s28CustomDebugStringConvertibleP"
+- "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- "Se"
+- "SE"
+- "SQ"
+- "s25ExpressibleByArrayLiteralP"
+- "SH"
+- "16YokaiNoMoriTypes17ItCollectionPieceV"
+- "St"
+- "SM"
+- "Sk"
+- "Sm"
+- "ST"
+- "10Foundation13_CFBridgeableP"
+- "s24_DestructorSafeContainerP"
+- "s35_HasCustomAnyHashableRepresentationP"
+- "10Foundation13_NSBridgeableP"
+- "s21_ObjectiveCBridgeableP"
+depends-dynamic-lookup:
+depends-external:
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Glibc.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Dispatch.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Foundation.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/Swift.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/home/adam/.local/share/umake/swift/swift-lang/usr/lib/swift/linux/x86_64/glibc.modulemap"
+interface-hash: "7dde71678b668143bcc6abd895e19532"

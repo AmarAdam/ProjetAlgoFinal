@@ -1,0 +1,35 @@
+{
+  "": {
+    "swift-dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/master.swiftdeps"
+  },
+  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriProtocol/CollectionPieceProtocol.swift": {
+    "dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/CollectionPieceProtocol.d",
+    "object": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/CollectionPieceProtocol.swift.o",
+    "swiftmodule": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/CollectionPieceProtocol~partial.swiftmodule",
+    "swift-dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/CollectionPieceProtocol.swiftdeps"
+  },
+  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriProtocol/JoueurProtocol.swift": {
+    "dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/JoueurProtocol.d",
+    "object": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/JoueurProtocol.swift.o",
+    "swiftmodule": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/JoueurProtocol~partial.swiftmodule",
+    "swift-dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/JoueurProtocol.swiftdeps"
+  },
+  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriProtocol/PartieProtocol.swift": {
+    "dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/PartieProtocol.d",
+    "object": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/PartieProtocol.swift.o",
+    "swiftmodule": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/PartieProtocol~partial.swiftmodule",
+    "swift-dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/PartieProtocol.swiftdeps"
+  },
+  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriProtocol/PieceProtocol.swift": {
+    "dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/PieceProtocol.d",
+    "object": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/PieceProtocol.swift.o",
+    "swiftmodule": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/PieceProtocol~partial.swiftmodule",
+    "swift-dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/PieceProtocol.swiftdeps"
+  },
+  "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/Sources/YokaiNoMoriProtocol/ReserveProtocol.swift": {
+    "dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/ReserveProtocol.d",
+    "object": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/ReserveProtocol.swift.o",
+    "swiftmodule": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/ReserveProtocol~partial.swiftmodule",
+    "swift-dependencies": "/home/adam/Bureau/GitProjetAlgoFinal/ProjetAlgoFinal/YokaiNoMoriTypes/.build/x86_64-unknown-linux/debug/YokaiNoMoriProtocol.build/ReserveProtocol.swiftdeps"
+  }
+}
