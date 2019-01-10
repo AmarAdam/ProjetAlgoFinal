@@ -42,6 +42,7 @@ public class Piece {
   func transformerEnKodamaSamurai() throws {
     guard self.estKodama() else {
       print("piece non valide")
+      return
     }
     self.setNomPiece("kodama samurai")
   }
@@ -49,6 +50,7 @@ public class Piece {
   func transformerEnKodama() throws -> Piece {
     guard self.estKodamaSamurai() else {
       print("piece non valide")
+      return
   	}
 
   	self.setNomPiece("kodama")

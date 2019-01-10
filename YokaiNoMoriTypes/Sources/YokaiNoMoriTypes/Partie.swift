@@ -290,10 +290,11 @@ public class Partie {
     func aPortee(_ position: Int, _ piece : Piece) throws -> Bool {
       //Pour cette fonction, on fera une verification au cas par cas
       //Pre : La position entrée est contenue dans le plateau
-      var posPiece : Int = piece.getPosition() ?? -1
+      var posPiece : Int = piece.getPosition() ?? -10
 
       guard pos where (pos >= 0) && (pos <= 11) else { //On verifie que la case choisie est bien sur le plateau
-          show("Hors de portee")
+          print("Hors de portee")
+          return
       }
       let pos = position
 
@@ -426,7 +427,8 @@ public class Partie {
     //True si le roi peut se déplacer (et uniquement se déplacer)
     func possibiliteDeplacementRoi(_ piece: Piece) throws -> Bool {
       guard piece where roi.estRoi() else {
-          show("la piece en paramètre n'est pas un roi")
+          print("la piece en paramètre n'est pas un roi")
+          return
       }
       let roi = piece
       let res : Bool = false
@@ -453,19 +455,19 @@ public class Partie {
     //True si la piece1 peut capturer la piece2
     func piece1capturePiece2(_ piece1: Piece,_ piece2: Piece) -> Bool {
       let nom1 = piece1.getNomPiece()
-      let position1 = piece1.getPosition() ?? -1 //position à -1 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
+      let position1 = piece1.getPosition() ?? -10 //position à -10 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
 
       let nom2 = piece2.getNomPiece()
-      let position2 = piece2.getPosition() ?? -1 //position à -1 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
+      let position2 = piece2.getPosition() ?? -10 //position à -10 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
 
       let preTest3 = self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom1, position1)
                   && self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom2, position2)
 
-      if self.caseVide(position1) || self.caseVide(position2) { //une des 2 cases est vide
+      if (self.caseVide(position1) || self.caseVide(position2)) { //une des 2 cases est vide
         return false
-      } else if self.caseEnnemi(position1) && self.caseEnnemi(position2) { //les 2 pieces appartiennent à l'adversaire
+      } else if (self.caseEnnemi(position1) && self.caseEnnemi(position2)) { //les 2 pieces appartiennent à l'adversaire
         return false
-      } else if preTest3 {
+      } else if (preTest3) {
         return false
       } else {
         return self.aPortee(piece1, position2)
@@ -475,12 +477,14 @@ public class Partie {
     func envoyerReserve(_ piece: Piece, _ joueur: Joueur) throws {
       let pos = piece.getPosition()
       guard pos where pos==nil else{
-        show("position de piece non vide")
+        print("position de piece non vide")
+        return
       }
       //try catch ?? A verifier
       let name = piece.getNomPiece()
       guard name where name!="kodama samurai" else{
-        show("la piece est un kodama samurai")
+        print("la piece est un kodama samurai")
+        return
       }
       joueur.getReserve().ajouterReserve(piece)
     }
@@ -489,12 +493,14 @@ public class Partie {
       guard let positionValid = position //position valide, case appartient à l'ennemi
       where positionValid>=0 && positionValid <=11 && self.caseEnnemi(position)
       else {
-          show("position invalide")
+          print("position invalide")
+          return
       }
       guard let pieceValid = piece //piece est bien présente dans la collection du joueur courant
       where pieceValid==self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(piece.getNomPiece(),piece.getPosition())
       else {
-          show("mauvaise piece passee en parametre")
+          print("mauvaise piece passee en parametre")
+          return
       }
 
       if self.captureAutorisee(pieceValid, positionValid) {
@@ -527,10 +533,12 @@ public class Partie {
     //Fonction de parachutage d'une piece sur la case "position"
     func parachuter(_ piece: Piece, _ position : Int) throws {
       guard let positionValid = position where self.caseVide(positionValid) && positionValid<=11 && positionValid >=0 else {
-        show("position non valide")
+        print("position non valide")
+        return
       }
       guard let pieceValid = piece where self.getJoueurCourant().getReserve().EstDansReserve(pieceValid.getNomPiece()) && pieceValid.getPosition()==nil else {
-        show("reserve ne contient pas cette piece")
+        print("reserve ne contient pas cette piece")
+        return
       }
       self.getJoueurCourant().getReserve().enleverReserve(pieceValid)
       pieceValid.setPosition(position) //attention, cette fonction n'existe pas.....
@@ -540,7 +548,8 @@ public class Partie {
     //Fonction de déplacement d'une piece à une case "position"
     func deplacer(_ piece: Piece, _ position: Int) throws {
       guard positionValid = position where self.caseVide(positionValid) && positionValid<=11 && positionValid>=0 else {
-          show("position invalide")
+          print("position invalide")
+          return
       }
       if self.deplacementAutorise(piece, positionValid) {
           piece.setPosition(positionValid)
@@ -553,8 +562,9 @@ public class Partie {
     //Renvoie la piece presente sur la case en parametre
     func pieceSurCase(_ position: Int) throws -> Piece {
       guard let positionValid=position
-      where self.caseVide(positionValid) && positionValid!=-1 else {
-          show("position invalide")
+      where self.caseVide(positionValid) && positionValid!=-10 else {
+          print("position invalide")
+          return
       }
       let collectionJoueur = self.getJoueurCourant().getCollectionPieceJoueur()
       let collectionAdverse = self.getJoueurAdverse().getCollectionPieceJoueur()
@@ -575,15 +585,16 @@ public class Partie {
     //le roi peut etre capturé (c'est un choix, on verifiera s'il a été capturé dans une fonction testant la fin du jeu)
     func captureAutorisee(_ piece: Piece, _ position: Int) throws -> Bool {
       guard let positionValid = position where positionValid<=11 && positionValid>=0 && !self.caseVide(positionValid) else {
-          show("position non valide")
-          return self.aPortee(positionValid, piece)
+          print("")("position non valide")
+          return
       }
-
+      return self.aPortee(positionValid, piece)
     }
     //Verifie que le deplacement de la piece est autorisee sur la case en parametre
     func deplacementAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
       guard let positionValid = position where positionValid<=11 && positionValid>=0 && self.caseVide(positionValid) else {
-          show("position non valide")
+          print("position non valide")
+          return
       }
       return self.aPortee(positionValid, piece)
     }
@@ -600,7 +611,7 @@ public class Partie {
     //  - Aucune piece alliée ou ennemi n'est positionné sur la case donnée en paramètre
     //  - La position est existante sur le plateau
     func parachutageAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
-      guard position where (position != -1) else {
+      guard position where (position != -10) else {
         print("position invalide")
         return
       }
