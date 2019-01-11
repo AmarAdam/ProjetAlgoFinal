@@ -16,7 +16,7 @@ public class Reserve : ReserveProtocol{
     func enleverReserve(toRem: Piece) throws -> Self {
         var i = 0
         var iRem = -1
-        for (piece, pieces) {
+        for Piece in self {        // mauvaise utilisation du for 
             if (piece.getNomPiece() == toRem.getNomPiece()) {
                 iRem = i
             }

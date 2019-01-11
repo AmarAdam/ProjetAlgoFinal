@@ -177,12 +177,12 @@ public class Partie {
     }
 
     func selectionnerPiecePlateau(_ num: Int, _ choix: String) throws -> Piece {
-      let name = getPieceNameFromString(choix)
+      let name = getPieceNameFromString(num,choix)
       return self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece(name)
     }
 
     func selectionnerPieceReserve(_ num: Int, _ choix: String) throws -> Piece {
-      let name = getPieceNameFromString(choix)
+      let name = getPieceNameFromString(num, choix)
       return self.getJoueurCourant().getReserve().getPieceReserve(name)
     }
 
@@ -291,6 +291,8 @@ public class Partie {
       //Pour cette fonction, on fera une verification au cas par cas
       //Pre : La position entrée est contenue dans le plateau
       var posPiece : Int = piece.getPosition() ?? -10
+
+      let pos = position
 
       guard pos where (pos >= 0) && (pos <= 11) else { //On verifie que la case choisie est bien sur le plateau
           print("Hors de portee")

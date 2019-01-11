@@ -3,7 +3,8 @@ import Foundation
 public class CollectionPiece {
 
     typealias ItCollectionPiece = IteratorProtocol
-    var collection = [Piece]
+    
+    var collection = [](Piece)
 
     init() {
         // No action
@@ -77,7 +78,7 @@ public class CollectionPiece {
      }
 
      func makeItCollectionPiece() -> ItCollectionPiece {
-         return new ItCollectionPiece(self)
+         return ItCollectionPiece(self)
      }
 
 }
