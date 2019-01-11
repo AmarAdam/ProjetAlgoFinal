@@ -189,7 +189,7 @@ public class Partie {
     func toStringPossibiliteesDeplacement(_ piece: Piece)-> String {
       var stringPossible = ""
       for position in getAllPosition() {
-        if deplacementAutorise(piece, position) {
+        try deplacementAutorise(piece, position) {
           stringPossible += String(position)
           stringPossible += " "
         }
@@ -200,7 +200,7 @@ public class Partie {
     func toStringPossibiliteesCapture(_ piece: Piece)-> String {
       var stringPossible = ""
       for position in getAllPosition() {
-        if captureAutorisee(piece, position) {
+        try captureAutorisee(piece, position) {
           stringPossible += String(position)
           stringPossible += " "
         }
@@ -211,7 +211,7 @@ public class Partie {
     func toStringPossibiliteesParachuter(_ piece: Piece)-> String {
       var stringPossible = ""
       for position in getAllPosition() {
-        if parachutageAutorise(piece, position) {
+        try parachutageAutorise(piece, position) {
           stringPossible += String(position)
           stringPossible += " "
         }
@@ -243,7 +243,7 @@ public class Partie {
 
     func caseVide(_ position: Int) throws -> Bool {
       // Verification des pieces du joueur actif
-      for piece in self.getJoueurCourant().getCollectionPieceJoueur().getCollectionPiece() {
+      for piece in try self.getJoueurCourant().getCollectionPieceJoueur().getCollectionPiece() {
         if (piece.getPosition() == position) {
           return false
         }
@@ -275,7 +275,7 @@ public class Partie {
 
     func caseEnnemi(_ position: Int) throws-> Bool {
       // Verification des pieces du joueur ennemi
-      for piece in self.getJoueurAdverse().getCollectionPieceJoueur().getCollectionPiece() {
+      for piece in try self.getJoueurAdverse().getCollectionPieceJoueur().getCollectionPiece() {
         if piece.getPosition() == position {
           return true
         }
@@ -298,7 +298,7 @@ public class Partie {
       }
       let pos = position
 
-      let estJoueur1 : Bool = (self.getJoueurCourant==self.getJoueur1)
+      let estJoueur1 : Bool = (self.getJoueurCourant().getNomJoueur() == self.getJoueur1().getNomJoueur())
       if let piece.getPosition() && estJoueur1 { // Joueur 1
         let gauche = posPiece==2 || posPiece==5 || posPiece==8 || posPiece==11
         let centre = posPiece==1 || posPiece==4 || posPiece==7 || posPiece==10
@@ -434,7 +434,7 @@ public class Partie {
       let res : Bool = false
       let i = 0
       while (i<=11 || res) {
-        if (self.aPortee(i, roi) && self.caseVide(i)) {
+        try (self.aPortee(i, roi) && try self.caseVide(i)) {
           res = true
         }
         i += 1
@@ -463,9 +463,9 @@ public class Partie {
       let preTest3 = self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom1, position1)
                   && self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom2, position2)
 
-      if (self.caseVide(position1) || self.caseVide(position2)) { //une des 2 cases est vide
+      try (self.caseVide(position1) || try self.caseVide(position2)) { //une des 2 cases est vide
         return false
-      } else if (self.caseEnnemi(position1) && self.caseEnnemi(position2)) { //les 2 pieces appartiennent à l'adversaire
+      } else try (self.caseEnnemi(position1) && try self.caseEnnemi(position2)) { //les 2 pieces appartiennent à l'adversaire
         return false
       } else if (preTest3) {
         return false
@@ -486,7 +486,7 @@ public class Partie {
         print("la piece est un kodama samurai")
         return
       }
-      joueur.getReserve().ajouterReserve(piece)
+      try joueur.getReserve().ajouterReserve(piece)
     }
     //Fonction de capture d'une piece sur la case "position"
     func capturer(_ piece: Piece, _ position: Int) throws {
@@ -585,8 +585,8 @@ public class Partie {
     //le roi peut etre capturé (c'est un choix, on verifiera s'il a été capturé dans une fonction testant la fin du jeu)
     func captureAutorisee(_ piece: Piece, _ position: Int) throws -> Bool {
       guard let positionValid = position where positionValid<=11 && positionValid>=0 && !self.caseVide(positionValid) else {
-          print("")("position non valide")
-          return
+          print("position non valide")
+          return false
       }
       return self.aPortee(positionValid, piece)
     }
@@ -594,7 +594,7 @@ public class Partie {
     func deplacementAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
       guard let positionValid = position where positionValid<=11 && positionValid>=0 && self.caseVide(positionValid) else {
           print("position non valide")
-          return
+          return false
       }
       return self.aPortee(positionValid, piece)
     }
@@ -613,10 +613,10 @@ public class Partie {
     func parachutageAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
       guard position where (position != -10) else {
         print("position invalide")
-        return
+        return false
       }
       if position >= 0 && position < self.xMax*self.yMax {
-        if caseVide(position) {
+        try caseVide(position) {
           return true
         }
       }
@@ -636,10 +636,11 @@ public class Partie {
 
     // renvoie un tableau contenant toute les positions du plateau sous forme de tableau
     private func getAllPosition() -> [Int] {
-      var positions = []
+      var positions : [Int]
       let nbCase = (self.xMax*self.yMax) -1
       for i in 0 ... nbCase {
-        position.append(Int)
+        positions.append(i)
       }
+      return positions
     }
 }
