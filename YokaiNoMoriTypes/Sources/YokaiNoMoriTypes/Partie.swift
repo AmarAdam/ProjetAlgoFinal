@@ -455,96 +455,95 @@ public class Partie {
     }
     //True si la piece1 peut capturer la piece2
     func piece1capturePiece2(_ piece1: Piece,_ piece2: Piece) -> Bool {
-      let nom1 = piece1.getNomPiece()
-      let position1 = piece1.getPosition() ?? -10 //position à -10 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
+        let nom1 = piece1.getNomPiece()
+        let position1 = piece1.getPosition() ?? -10 // Position à -10 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
 
-      let nom2 = piece2.getNomPiece()
-      let position2 = piece2.getPosition() ?? -10 //position à -10 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
+        let nom2 = piece2.getNomPiece()
+        let position2 = piece2.getPosition() ?? -10 // Position à -10 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
 
-      let preTest3 = self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom1, position1)
-                  && self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom2, position2)
+        let preTest3 =  self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom1, position1) && self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom2, position2)
 
-      try (self.caseVide(position1) || try self.caseVide(position2)) { //une des 2 cases est vide
-        return false
-      } else try (self.caseEnnemi(position1) && try self.caseEnnemi(position2)) { //les 2 pieces appartiennent à l'adversaire
-        return false
-      } else if (preTest3) {
-        return false
-      } else {
-        return self.aPortee(piece1, position2)
-      }
+        if (self.caseVide(position1) || try self.caseVide(position2)) { // Une des 2 cases est vide
+            return false
+        } else if (self.caseEnnemi(position1) && self.caseEnnemi(position2)) { // Les 2 pieces appartiennent à l'adversaire
+            return false
+        } else if (preTest3) {
+            return false
+        } else {
+            return self.aPortee(piece1, position2)
+        }
     }
     //Done (throws/catch a reprendre)
     func envoyerReserve(_ piece: Piece, _ joueur: Joueur) throws {
-      let pos = piece.getPosition()
-      guard pos where pos==nil else{
-        print("position de piece non vide")
-        return
-      }
-      //try catch ?? A verifier
-      let name = piece.getNomPiece()
-      guard name where name!="kodama samurai" else{
-        print("la piece est un kodama samurai")
-        return
-      }
-      try joueur.getReserve().ajouterReserve(piece)
+        let pos = piece.getPosition()
+        guard pos =! nil else{
+            print("position de piece non vide")
+            return
+        }
+        //try catch ?? A verifier
+        let name = piece.getNomPiece()
+        guard name != "kodama samurai" else{
+            print("la piece est un kodama samurai")
+            return
+        }
+        try joueur.getReserve().ajouterReserve(piece)
     }
     //Fonction de capture d'une piece sur la case "position"
     func capturer(_ piece: Piece, _ position: Int) throws {
-      guard let positionValid = position //position valide, case appartient à l'ennemi
-      where positionValid>=0 && positionValid <=11 && self.caseEnnemi(position)
-      else {
-          print("position invalide")
-          return
-      }
-      guard let pieceValid = piece //piece est bien présente dans la collection du joueur courant
-      where pieceValid==self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(piece.getNomPiece(),piece.getPosition())
-      else {
-          print("mauvaise piece passee en parametre")
-          return
-      }
-
-      if self.captureAutorisee(pieceValid, positionValid) {
-        let pieceCapturee = self.pieceSurCase(positionValid)
-        switch pieceCapturee.getNomPiece() {
-        case "kodama samurai":
-          self.pieceSurCase(positionValid).transformerEnKodama()
-          self.pieceSurCase(positionValid).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
-          self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
-          self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
-          pieceValid.setPosition(pieceCapturee.getPosition())
-        case "koropokkuru":
-          print("le roi a ete capture !\nle joueur adverse a perdu !\n")
-          //On agit comme si on avait fait une capture simple
-          //On vérifiera dans la fin du jeu si le koropokkuru est dans la reserve
-          self.pieceSurCase(positionValid).setPosition(nil)
-          self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee)
-          self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee)
-          //Puis on fait rien d'autre, on fera les tests nécessaire dans la fin du jeu
-        default:
-          self.pieceSurCase(positionValid).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
-          self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
-          self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
-          piece.setPosition(pieceCapturee.getPosition())
+        guard let positionValid = position //position valide, case appartient à l'ennemi
+        where (positionValid >= 0 && positionValid <=11 && self.caseEnnemi(position))
+        else {
+            print("position invalide")
+            return
         }
-      } else {
-        print("capture impossible")
-      }
+        guard let pieceValid = piece //piece est bien présente dans la collection du joueur courant
+        where pieceValid==self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(piece.getNomPiece(),piece.getPosition())
+        else {
+            print("mauvaise piece passee en parametre")
+            return
+        }
+
+        if self.captureAutorisee(pieceValid, positionValid) {
+            let pieceCapturee = self.pieceSurCase(positionValid)
+            switch pieceCapturee.getNomPiece() {
+                case "kodama samurai":
+                    self.pieceSurCase(positionValid).transformerEnKodama()
+                    self.pieceSurCase(positionValid).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
+                    self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
+                    self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
+                    pieceValid.setPosition(pieceCapturee.getPosition())
+                case "koropokkuru":
+                    print("le roi a ete capture !\nle joueur adverse a perdu !\n")
+                    //On agit comme si on avait fait une capture simple
+                    //On vérifiera dans la fin du jeu si le koropokkuru est dans la reserve
+                    self.pieceSurCase(positionValid).setPosition(nil)
+                    self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee)
+                    self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee)
+                    //Puis on fait rien d'autre, on fera les tests nécessaire dans la fin du jeu
+                default:
+                    self.pieceSurCase(positionValid).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
+                    self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
+                    self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
+                    piece.setPosition(pieceCapturee.getPosition())
+                }
+            } else {
+            print("capture impossible")
+        }
     }
     //Fonction de parachutage d'une piece sur la case "position"
     func parachuter(_ piece: Piece, _ position : Int) throws {
-      guard let positionValid = position where self.caseVide(positionValid) && positionValid<=11 && positionValid >=0 else {
-        print("position non valide")
-        return
-      }
-      guard let pieceValid = piece where self.getJoueurCourant().getReserve().EstDansReserve(pieceValid.getNomPiece()) && pieceValid.getPosition()==nil else {
-        print("reserve ne contient pas cette piece")
-        return
-      }
-      self.getJoueurCourant().getReserve().enleverReserve(pieceValid)
-      pieceValid.setPosition(position) //attention, cette fonction n'existe pas.....
-      self.getJoueurCourant().getCollectionPieceJoueur().ajouterCollectionPiece(pieceValid)
-      //(On a pas besoin de traiter le cas du kodama, on le parachute normalement, sans appeler la fonction de promotion)
+        guard let positionValid = position where self.caseVide(positionValid) && positionValid<=11 && positionValid >=0 else {
+            print("position non valide")
+            return
+        }
+        guard let pieceValid = piece where self.getJoueurCourant().getReserve().EstDansReserve(pieceValid.getNomPiece()) && pieceValid.getPosition()==nil else {
+            print("reserve ne contient pas cette piece")
+            return
+        }
+        self.getJoueurCourant().getReserve().enleverReserve(pieceValid)
+        pieceValid.setPosition(position) //attention, cette fonction n'existe pas.....
+        self.getJoueurCourant().getCollectionPieceJoueur().ajouterCollectionPiece(pieceValid)
+        //(On a pas besoin de traiter le cas du kodama, on le parachute normalement, sans appeler la fonction de promotion)
     }
     //Fonction de déplacement d'une piece à une case "position"
     func deplacer(_ piece: Piece, _ position: Int) throws {
