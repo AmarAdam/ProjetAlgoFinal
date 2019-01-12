@@ -80,6 +80,11 @@ protocol ReserveProtocol : Sequence {
     - Precondition: le nom en parametre est soit "koropokkuru" ou "kitsune" ou "tanuki" ou
                     "kodama".
   */
+
+  func getPiecesReserve() -> [Piece]
+  
+  // renvoi le tableau de piece
+  
   func EstDansReserve(_ nom: String) throws -> Bool
 
   /**
@@ -93,14 +98,11 @@ protocol ReserveProtocol : Sequence {
     makeItReserve : Reserve -> ItReserve
  */
 
-  func getPiecesReserve() -> [Piece]
-  // renvoi le tableau de piece
-
   func makeIterator() -> ItReserve
   // renvoie l'iterateur
 
  /*
-  func reinitialiser()
+  // func reinitialiser()
   // remet le courant de l'iterateur à 0
   
   ajouté par notre groupe

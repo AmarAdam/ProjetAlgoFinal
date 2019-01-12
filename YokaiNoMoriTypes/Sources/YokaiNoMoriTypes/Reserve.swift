@@ -1,30 +1,31 @@
 import Foundation
 
-public class Reserve : ReserveProtocol{
+public class Reserve {
     var pieces : [Piece]
     var itReserve : ItReserve
 
-    init(){
-      self.pieces = []
+    init( Piece : [Piece]){
+      self.pieces = Piece  
     }
 
     func ajouterReserve(_ piece: Piece) throws -> Self {
         self.pieces.append(piece)
+        return self
     }
 
 
     func enleverReserve(toRem: Piece) throws -> Self {
         var i = 0
         var iRem = -1
-        for Piece in self {        // mauvaise utilisation du for 
-            if (piece.getNomPiece() == toRem.getNomPiece()) {
+        for Piece in self.pieces {        // mauvaise utilisation du for 
+            if (Piece.getNomPiece() == toRem.getNomPiece()) {
                 iRem = i
             }
-            i++
-        }
+            i = i + 1        }
         if (iRem != -1) {
             self.pieces.remove(at : i)
         }
+        return self
     }
 
     func reserveVide() -> Bool {
@@ -32,7 +33,7 @@ public class Reserve : ReserveProtocol{
     }
 
     func toStringReserve() -> String {
-        var toString : String
+        var toString : String = ""
         for piece in self.pieces {
             toString += piece.getNomPiece()
             toString += ", "
@@ -40,14 +41,17 @@ public class Reserve : ReserveProtocol{
         return toString
     }
 
-    func getPieceReserve(_ nom: String) throws -> Piece {
+    func getPieceReserve(_ nom: String) throws -> Piece? {
+        var pieceTrouve : Piece? 
         for piece in self.pieces {
             if piece.getNomPiece() == nom {
-                return piece
+                pieceTrouve = piece
             }
         }
+        return pieceTrouve
         // return nil ??
         // need -> Piece?
+
     }
 
 
