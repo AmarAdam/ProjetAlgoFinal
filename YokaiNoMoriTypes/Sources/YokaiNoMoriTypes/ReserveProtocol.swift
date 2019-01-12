@@ -6,7 +6,7 @@
 import Foundation
 
 protocol ReserveProtocol : Sequence {
-    
+
     associatedtype Piece : PieceProtocol
     associatedtype ItReserve : IteratorProtocol
 
@@ -89,21 +89,22 @@ protocol ReserveProtocol : Sequence {
   */
   func nbPieceReserve() -> Int
   /**
-    cree un iterateur sur les pieces de la reserve pour les parcourir 
+    cree un iterateur sur les pieces de la reserve pour les parcourir
     makeItReserve : Reserve -> ItReserve
  */
 
   func getPiecesReserve() -> [Piece]
-  // renvoi le tableau de piece 
+  // renvoi le tableau de piece
 
   func makeIterator() -> ItReserve
-  // renvoi l'iterateur
+  // renvoie l'iterateur
 
-  func reinitialiser() 
-  // remet le courant de l'iterateur à 0 
+ /*
+  func reinitialiser()
+  // remet le courant de l'iterateur à 0
   
-  /** 
-    ajouté par notre groupe
+  ajouté par notre groupe
+
   */
 
 }

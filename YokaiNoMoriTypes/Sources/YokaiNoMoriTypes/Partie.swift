@@ -563,10 +563,14 @@ public class Partie {
     }
     //Renvoie la piece presente sur la case en parametre
     func pieceSurCase(_ position: Int) throws -> Piece {
-      guard let positionValid=position
-      where self.caseVide(positionValid) && positionValid!=-10 else {
-          print("position invalide")
-          return
+      let positionValid = (position != -10)
+      guard self.caseVide(position) else {
+        print("position invalide")
+        return
+      }
+      guard positionValid else {
+        print("position invalide")
+        return
       }
       let collectionJoueur = self.getJoueurCourant().getCollectionPieceJoueur()
       let collectionAdverse = self.getJoueurAdverse().getCollectionPieceJoueur()
@@ -613,7 +617,8 @@ public class Partie {
     //  - Aucune piece alliée ou ennemi n'est positionné sur la case donnée en paramètre
     //  - La position est existante sur le plateau
     func parachutageAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
-      guard position where (position != -10) else {
+      let positionValid = (position != -10)
+      guard positionValid else {
         print("position invalide")
         return false
       }
@@ -627,7 +632,7 @@ public class Partie {
 
     // Fonction d'interface : permet d'afficher differents choix possibles
     private func getPieceNameFromString(_ num: Int, _ choix: String) -> String? {
-      let tabChoice = choix.components(separatedBy("\n"))
+      let tabChoice = choix.components(separatedBy: "\n")
       for choice in tabChoice {
         if choice.components(separatedBy:" - ")[0] == String(num) {
           return choice.components(separatedBy:" - ")[1]
