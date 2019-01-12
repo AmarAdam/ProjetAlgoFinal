@@ -155,7 +155,7 @@ public class Partie {
         toString += itLine+" - "+collectionPiece.getNomPiece()+" : "
           while it<=11 {
               if (self.caseEnnemi(it) && self.aPortee(it, collectionPiece)){
-                toString+= it+" ,"
+                toString = toString + it + " ,"
               }
               it+=1
           }
@@ -294,14 +294,13 @@ public class Partie {
 
       let pos = position
 
-      guard pos where (pos >= 0) && (pos <= 11) else { //On verifie que la case choisie est bien sur le plateau
+      guard (pos >= 0) && (pos <= 11) else { //On verifie que la case choisie est bien sur le plateau
           print("Hors de portee")
           return
       }
-      let pos = position
 
       let estJoueur1 : Bool = (self.getJoueurCourant().getNomJoueur() == self.getJoueur1().getNomJoueur())
-      if let piece.getPosition() && estJoueur1 { // Joueur 1
+      if let testPos = piece.getPosition() && estJoueur1 { // Joueur 1
         let gauche = posPiece==2 || posPiece==5 || posPiece==8 || posPiece==11
         let centre = posPiece==1 || posPiece==4 || posPiece==7 || posPiece==10
         let droite = posPiece==0 || posPiece==3 || posPiece==6 || posPiece==9
@@ -428,7 +427,7 @@ public class Partie {
     }
     //True si le roi peut se déplacer (et uniquement se déplacer)
     func possibiliteDeplacementRoi(_ piece: Piece) throws -> Bool {
-      guard piece where roi.estRoi() else {
+      guard piece.estRoi() else {
           print("la piece en paramètre n'est pas un roi")
           return
       }
