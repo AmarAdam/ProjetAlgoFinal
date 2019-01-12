@@ -17,8 +17,8 @@ public class Reserve {
     func enleverReserve(toRem: Piece) throws -> Self {
         var i = 0
         var iRem = -1
-        for Piece in self.pieces {        // mauvaise utilisation du for 
-            if (Piece.getNomPiece() == toRem.getNomPiece()) {
+        for piece in self.pieces {
+            if (piece.getNomPiece() == toRem.getNomPiece()) {
                 iRem = i
             }
             i = i + 1        }
