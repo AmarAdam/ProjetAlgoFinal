@@ -5,7 +5,7 @@ public class Piece : PieceProtocol {
     var nom : String
     var position : Int?
 
-    init(_ nom : String , _ position : Int ) {
+    required init(_ nom : String , _ position : Int ) {
         self.nom = nom
         self.position = position      // vide si dans la reserve
     } // End func init
@@ -47,13 +47,11 @@ public class Piece : PieceProtocol {
         self.setNomPiece("kodama samurai")
     } // End func transformerEnKodamaSamurai
 
-    func transformerEnKodama() throws -> Piece {
+    func transformerEnKodama() throws {
         guard self.estKodamaSamurai() else {
             print("piece non valide")
-            return
         }
         self.setNomPiece("kodama")
-        return self
     } // End func transformerEnKodama
 
 } // End Class

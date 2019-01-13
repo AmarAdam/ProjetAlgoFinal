@@ -11,7 +11,6 @@ public class Reserve : ReserveProtocol {
 
     func ajouterReserve(_ piece: Piece) throws {
         self.pieces.append(piece)
-        return self
     } // End func ajouterReserve
 
     func enleverReserve(toRem: Piece) throws {
@@ -25,7 +24,6 @@ public class Reserve : ReserveProtocol {
         if (iRem != -1) {
             self.pieces.remove(at : i)
         }
-        return self
     } // End func enleverReserve
 
     func reserveVide() -> Bool {

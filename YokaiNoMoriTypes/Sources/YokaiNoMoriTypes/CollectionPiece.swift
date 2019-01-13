@@ -37,6 +37,7 @@ public class CollectionPiece {
         - la position entree est une position du plateau de jeu.
     */
 
+    // NOTE : Pourquoi demander le nom de la piece si on a la position ?
     func getPieceCollectionPiece(_ nom: String,_ position: Int) throws -> Piece {
         for piece in self.collection {
             if (piece.getNomPiece() == nom) {

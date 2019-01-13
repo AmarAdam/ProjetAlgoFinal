@@ -22,7 +22,7 @@ public class Partie : PartieProtocol {
     }
 
     // Constructeur
-    init(_ nom1: String, _ nom2: String, _ largeur: Int, _ longueur: Int) {
+    required init(_ nom1: String, _ nom2: String, _ largeur: Int, _ longueur: Int) {
         self.xMax = largeur
         self.yMax = longueur
         self.idRand = Int.random(in : 1...2)
@@ -87,33 +87,30 @@ public class Partie : PartieProtocol {
 
     func setJoueurCourant(_ joueur : Joueur) {
         self.currentPlayer = joueur
-        return self
     } // End func setJoueurCourant
 
     func setJoueurAdverse(_ joueur : Joueur) {
         self.passivePlayer = joueur
-        return self
     } // End func setJoueurAdverse
 
     func changerJoueur() {
         let tempJoueur = self.getJoueurCourant()
-        self.setJoueurCourant(self.getJoueurAdverse)
+        self.setJoueurCourant(self.getJoueurAdverse())
         self.setJoueurAdverse(tempJoueur)
         self.nbTour = 0
-        return Self
     } // End func changerJoueur
 
     // Renvoie sous forme de string les choix possibles
     func toStringChoix() -> String {
         var availableChoice : String
         if self.toStringPiecesDispoDeplacement() != "" {
-            availableChoice += "1 : Déplacer \n"
+            availableChoice = availableChoice + "1 : Déplacer \n"
         }
         if self.toStringPiecesDispoCapture() != "" {
-            availableChoice += "2 : Capturer \n"
+            availableChoice = availableChoice + "2 : Capturer \n"
         }
-        if !self.getJoueurCourant().reserveVide() {
-            availableChoice += "3 : Parachuter\n"
+        if !self.getJoueurCourant().getReserve().reserveVide() {
+            availableChoice = availableChoice + "3 : Parachuter\n"
         }
         return availableChoice
     } // End func toStringChoix
@@ -122,79 +119,95 @@ public class Partie : PartieProtocol {
         var toString : String
         let piecesJ1 = getJoueur1().getCollectionPieceJoueur().toStringCollectionPiece()
         let piecesJ2 = getJoueur2().getCollectionPieceJoueur().toStringCollectionPiece()
-        toString +=  "Joueur 1 : "
-        toString += piecesJ1
-        toString += " Joueur 2 : "
-        toString += piecesJ2
+        toString = toString + "Joueur 1 : "
+        toString = toString + piecesJ1
+        toString = toString + " Joueur 2 : "
+        toString = toString + piecesJ2
         return toString
     } // End func toStringPlateau
 
     func toStringPiecesDispoDeplacement() -> String {
         let toString : String
-        let collection = self.getJoueurCourant().getCollectionPiece()
-        let it = 0
-        let itLine = 1
+        let collection = self.getJoueurCourant().getCollectionPieceJoueur().getCollectionPiece()
+        var it = 0
+        var  itLine = 1
         for collectionPiece in collection {
-            toString += itLine+" - "+collectionPiece.getNomPiece()+" : "
+            toString = String(itLine)
+            toString = toString + " - "
+            toString = toString + collectionPiece.getNomPiece()
+            toString = toString + " : "
             while it <= 11 {
-                if (self.caseVide(it) && self.aPortee(it, collectionPiece)){
-                    toString = toString + it
+                let aPortee = try self.aPortee(it, collectionPiece)
+                if (self.caseVide(it) && aPortee){
+                    toString = toString + String(it)
                     toString = toString + " ,"
                 }
-                it+=1
+                it = it + 1
             }
-            toString += "\n"
-            itLine+=1
+            toString = toString + "\n"
+            itLine = itLine + 1
         }
         return toString
     } // End func toStringPiecesDispoDeplacement
 
     func toStringPiecesDispoCapture() -> String {
-        let toString : String
-        let collection = self.getJoueurCourant().getCollectionPiece()
-        let it = 0
-        let itLine = 1
+        let collection = self.getJoueurCourant().getCollectionPieceJoueur().getCollectionPiece()
+        var toString : String
+        var it = 0
+        var itLine = 1
         for collectionPiece in collection {
-            toString += itLine+" - "+collectionPiece.getNomPiece()+" : "
+            toString = toString + String(itLine)
+            toString = toString + " - "
+            toString = toString + collectionPiece.getNomPiece()
+            toString = toString + " : "
             while it<=11 {
-                if (self.caseEnnemi(it) && self.aPortee(it, collectionPiece)){
-                    toString = toString + it + " ,"
+                let aPortee = try self.aPortee(it, collectionPiece)
+                if (self.caseEnnemi(it) && aPortee){
+                    toString = toString + String(it)
+                    toString = toString + " ,"
                 }
-                it+=1
+                it = it + 1
             }
-            toString += "\n"
-            itLine+=1
+            toString = toString + "\n"
+            itLine = itLine + 1
         }
         return toString
     } // End func toStringPiecesDispoCapture
 
     func toStringPiecesDispoParachutage() -> String {
-        let toString : String
         let reserve = self.getJoueurCourant().getReserve()
-        let itLine = 1
+        var toString : String
+        var itLine = 1
         for reservePiece in reserve {
-            toString += itLine+" - "+reservePiece.getNomPiece()+"\n"
-            itLine+=1
+            toString = toString + String(itLine)
+            toString = toString + " - "
+            toString = toString + reservePiece.getNomPiece()
+            toString = toString + "\n"
+            itLine = itLine + 1
         }
         return toString
     } // End func toStringPiecesDispoParachutage
 
     func selectionnerPiecePlateau(_ num: Int, _ choix: String) throws -> Piece {
         let name = getPieceNameFromString(num,choix)
-        return self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece(name)
+        return self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece(name) // Il faut la position en param ...
     } // End func selectionnerPiecePlateau
 
     func selectionnerPieceReserve(_ num: Int, _ choix: String) throws -> Piece {
-        let name = getPieceNameFromString(num, choix)
-        return self.getJoueurCourant().getReserve().getPieceReserve(name)
+        if let name = getPieceNameFromString(num, choix){
+            if let piece = try self.getJoueurCourant().getReserve().getPieceReserve(name) {
+                return piece
+            }
+        }
     } // End func selectionnerPieceReserve
 
     func toStringPossibiliteesDeplacement(_ piece: Piece)-> String {
         var stringPossible = ""
         for position in getAllPosition() {
-            try deplacementAutorise(piece, position) {
-                stringPossible += String(position)
-                stringPossible += " "
+            let deplacementAutorise = try deplacementAutorise(piece, position)
+            if deplacementAutorise {
+                stringPossible = stringPossible + String(position)
+                stringPossible = stringPossible + " "
             }
         }
         return stringPossible
@@ -204,8 +217,8 @@ public class Partie : PartieProtocol {
         var stringPossible = ""
         for position in getAllPosition() {
             try captureAutorisee(piece, position) {
-                stringPossible += String(position)
-                stringPossible += " "
+                stringPossible = stringPossible + String(position)
+                stringPossible = stringPossible + " "
             }
         }
         return stringPossible
@@ -215,16 +228,16 @@ public class Partie : PartieProtocol {
         var stringPossible = ""
         for position in getAllPosition() {
             try parachutageAutorise(piece, position) {
-                stringPossible += String(position)
-                stringPossible += " "
+                stringPossible = stringPossible + String(position)
+                stringPossible = stringPossible + " "
             }
         }
         return stringPossible
     } // End func toStringPossibiliteesParachuter
 
-    func verifierChoix(_ c1: int, _ c2: String) -> Bool {
+    func verifierChoix(_ c1: Int, _ c2: String) -> Bool {
         // Sépare tout les mots de la String et les stoque dans un tableau
-        tabWord = c2.components(separatedBy(" "))
+        tabWord = c2.components(separatedBy : " ")
         // Compare chaque mot du tableau tout juste créé avec le mot recherché
         for word in tabWord {
             if c1 == word {
@@ -246,7 +259,8 @@ public class Partie : PartieProtocol {
 
     func caseVide(_ position: Int) throws -> Bool {
         // Verification des pieces du joueur actif
-        for piece in try self.getJoueurCourant().getCollectionPieceJoueur().getCollectionPiece() {
+        let collectionPiece = self.getJoueurCourant().getCollectionPieceJoueur().getCollectionPiece()
+        for piece in  collectionPiece{
             if (piece.getPosition() == position) {
                 return false
             }
@@ -278,7 +292,8 @@ public class Partie : PartieProtocol {
 
     func caseEnnemi(_ position: Int) throws-> Bool {
         // Verification des pieces du joueur ennemi
-        for piece in try self.getJoueurAdverse().getCollectionPieceJoueur().getCollectionPiece() {
+        let collectionPiece = self.getJoueurAdverse().getCollectionPieceJoueur().getCollectionPiece()
+        for piece in collectionPiece {
             if piece.getPosition() == position {
                 return true
             }
@@ -437,13 +452,15 @@ public class Partie : PartieProtocol {
             return
         }
         let roi = piece
-        let res : Bool = false
-        let i = 0
+        var res : Bool = false
+        var i = 0
         while (i<=11 || res) {
-            try (self.aPortee(i, roi) && try self.caseVide(i)) {
+            let cond1 = try self.aPortee(i, roi)
+            let cond2 = try self.caseVide(i))
+            if (cond1 && cond2) {
                 res = true
             }
-            i += 1
+            i = i + 1
         }
         return res
     } // End func possibiliteDeplacementRoi
@@ -468,11 +485,15 @@ public class Partie : PartieProtocol {
         let nom2 = piece2.getNomPiece()
         let position2 = piece2.getPosition() ?? -10 // Position à -10 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
 
-        let preTest3 =  self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom1, position1) && self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom2, position2)
+        let preTest11 = try self.caseVide(position1)
+        let preTest12 = try self.caseVide(position2)
+        let preTest21 = try self.caseEnnemi(position1)
+        let preTest22 = try self.caseEnnemi(position2)
+        let preTest3 = self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom1, position1) && self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom2, position2)
 
-        if (self.caseVide(position1) || try self.caseVide(position2)) { // Une des 2 cases est vide // le compilateur demande un try "call can throw but is not marked with 'try'"
+        if (preTest11 || preTest12) { // Une des 2 cases est vide
             return false
-        } else if (self.caseEnnemi(position1) && self.caseEnnemi(position2)) { // Les 2 pieces appartiennent à l'adversaire // le compilateur demande un try "call can throw but is not marked with 'try'"
+        } else if (preTest21 && preTest22) { // Les 2 pieces appartiennent à l'adversaire
             return false
         } else if (preTest3) {
             return false
@@ -499,40 +520,40 @@ public class Partie : PartieProtocol {
 
     //Fonction de capture d'une piece sur la case "position"
     func capturer(_ piece: Piece, _ position: Int) throws {
-        let positionValid = position
-        let pieceValid = piece
-        guard ( positionValid >= 0 && positionValid <= 11 && self.caseEnnemi(position)) else { //position valide, case appartient à l'ennemi
+        let caseEnnemi = try self.caseEnnemi(position)
+        guard ( position >= 0 && position <= 11 && caseEnnemi) else { //position valide, case appartient à l'ennemi
             print("position invalide")
             return
         }
         //piece est bien présente dans la collection du joueur courant
-        guard pieceValid == self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(piece.getNomPiece(),piece.getPosition()) else {
+        guard piece == self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(piece.getNomPiece(),piece.getPosition()) else {
             print("mauvaise piece passee en parametre")
             return
         }
-
-        if self.captureAutorisee(pieceValid, positionValid) {
-            let pieceCapturee = self.pieceSurCase(positionValid)
+        let captureAutorise = try self.captureAutorisee(piece, position)
+        if  captureAutorise {
+            let pieceCapturee = try self.pieceSurCase(position)
             switch pieceCapturee.getNomPiece() {
                 case "kodama samurai":
-                    self.pieceSurCase(positionValid).transformerEnKodama()
-                    self.pieceSurCase(positionValid).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
-                    self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
-                    self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
-                    pieceValid.setPosition(pieceCapturee.getPosition())
+                    try self.pieceSurCase(position).transformerEnKodama()
+                    try self.pieceSurCase(position).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
+                    try self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
+                    try self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
+                    try piece.setPosition(pieceCapturee.getPosition())
                 case "koropokkuru":
                     print("le roi a ete capture !\nle joueur adverse a perdu !\n")
                     //On agit comme si on avait fait une capture simple
                     //On vérifiera dans la fin du jeu si le koropokkuru est dans la reserve
-                    self.pieceSurCase(positionValid).setPosition(nil)
-                    self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee)
-                    self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee)
+                    try self.pieceSurCase(position).setPosition(nil)
+                    try self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee)
+                    try self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee)
                     //Puis on fait rien d'autre, on fera les tests nécessaire dans la fin du jeu
                 default:
-                    self.pieceSurCase(positionValid).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
-                    self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
-                    self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
-                    piece.setPosition(pieceCapturee.getPosition())
+                    try self.pieceSurCase(position).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
+                    try self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
+                    try self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
+                    let positionCapture = pieceCapturee.getPosition()
+                    piece.setPosition(positionCapture)
                 }
             } else {
             print("capture impossible")
@@ -541,58 +562,56 @@ public class Partie : PartieProtocol {
 
     //Fonction de parachutage d'une piece sur la case "position"
     func parachuter(_ piece: Piece, _ position : Int) throws {
-        let positionValid = position
-        let pieceValid = piece
-        guard (self.caseVide(positionValid) && positionValid >= 0 && positionValid <= 11) else {
+        let caseVide = try self.caseVide(position)
+        let estDansReserve = try self.getJoueurCourant().getReserve().EstDansReserve(piece.getNomPiece())
+        guard ( caseVide && position >= 0 && position <= 11) else {
             print("position non valide")
             return
         }
-        guard (self.getJoueurCourant().getReserve().EstDansReserve(pieceValid.getNomPiece()) && pieceValid.getPosition()==nil) else {
+        guard ( estDansReserve && piece.getPosition() == nil) else {
             print("reserve ne contient pas cette piece")
             return
         }
-        self.getJoueurCourant().getReserve().enleverReserve(pieceValid)
-        pieceValid.setPosition(position) //attention, cette fonction n'existe pas.....
-        self.getJoueurCourant().getCollectionPieceJoueur().ajouterCollectionPiece(pieceValid)
+        self.getJoueurCourant().getReserve().enleverReserve(piece)
+        piece.setPosition(position) //attention, cette fonction n'existe pas.....
+        self.getJoueurCourant().getCollectionPieceJoueur().ajouterCollectionPiece(piece)
         //(On a pas besoin de traiter le cas du kodama, on le parachute normalement, sans appeler la fonction de promotion)
     } // End func parachuter
 
     //Fonction de déplacement d'une piece à une case "position"
     func deplacer(_ piece: Piece, _ position: Int) throws {
-        positionValid = position
-        guard (self.caseVide(positionValid) && positionValid >= 0 && positionValid <= 11) else {
+        let caseVide = try self.caseVide(position)
+        guard (caseVide && position >= 0 && position <= 11) else {
             print("position invalide")
             return
         }
-        if self.deplacementAutorise(piece, positionValid) {
-            piece.setPosition(positionValid)
-            if pieceValid.estKodama && casePromotion(positionValid) {
-                pieceValid.transformerEnKodamaSamurai()
+        let deplacementAutorise = try self.deplacementAutorise(piece, position)
+        if deplacementAutorise {
+            piece.setPosition(position)
+            let casePromotion = try casePromotion(position)
+            if piece.estKodama() && casePromotion {
+                try piece.transformerEnKodamaSamurai()
             }
         }
     } // End func deplacer
 
     //Renvoie la piece presente sur la case en parametre
     func pieceSurCase(_ position: Int) throws -> Piece {
-        let positionValid = (position != -10)
-        guard self.caseVide(position) else {              // le compilateur demande un try après le guard, mauvaise utilisation du guard "call can throw but is not marked with 'try'"
+        guard (try self.caseVide(position) && position != -10) else {
             print("position invalide")
-            return
+            // ERROR
         }
-        guard positionValid else {
-            print("position invalide")
-            return
-        }
-        let collectionJoueur = self.getJoueurCourant().getCollectionPieceJoueur()
-        let collectionAdverse = self.getJoueurAdverse().getCollectionPieceJoueur()
+
+        let collectionJoueur = self.getJoueurCourant().getCollectionPieceJoueur().getCollectionPiece()
+        let collectionAdverse = self.getJoueurAdverse().getCollectionPieceJoueur().getCollectionPiece()
         let res : Piece
         for collectionPieceJ in collectionJoueur {
-            if collectionPieceJ.getPosition() == positionValid {
+            if collectionPieceJ.getPosition() == position {
                 res = collectionPieceJ
             }
         }
         for collectionPieceA in collectionAdverse {
-            if collectionPieceA.getPosition() == positionValid {
+            if collectionPieceA.getPosition() == position {
                 res = collectionPieceA
             }
         }
@@ -602,21 +621,24 @@ public class Partie : PartieProtocol {
     //Verifie que la capture est possible
     //le roi peut etre capturé (c'est un choix, on verifiera s'il a été capturé dans une fonction testant la fin du jeu)
     func captureAutorisee(_ piece: Piece, _ position: Int) throws -> Bool {
-        let positionValid = position
-        guard (positionValid<=11 && positionValid>=0 && !self.caseVide(positionValid)) else {
+        let valid = try self.caseVide(position)
+        guard (position >= 0 && position <= 11 && !valid) else {
             print("position non valide")
             return false
         }
-        return self.aPortee(positionValid, piece)
+        let aPortee = try self.aPortee(position, piece)
+        return aPortee
     } // End func
+
     //Verifie que le deplacement de la piece est autorisee sur la case en parametre
     func deplacementAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
-        let positionValid = position
-        guard (positionValid<=11 && positionValid>=0 && self.caseVide(positionValid)) else {
+        let valid = try self.caseVide(position)
+        guard ( position >= 0 && position <= 11 && valid) else {
             print("position non valide")
             return false
         }
-        return self.aPortee(positionValid, piece)
+        let aPortee = try self.aPortee(position, piece)
+        return aPortee
     } // End func deplacementAutorise
 
 
@@ -630,27 +652,24 @@ public class Partie : PartieProtocol {
     // Le parachutage est autorisé si :
     //  - Aucune piece alliée ou ennemi n'est positionné sur la case donnée en paramètre
     //  - La position est existante sur le plateau
-    func parachutageAutorise(/*_ piece: Piece, */_ position: Int) throws -> Bool {  // pourquoi prendre une Piece en paramètre ?
-        let positionValid = (position != -10)
-        guard positionValid else {
+    func parachutageAutorise(_ position: Int) throws -> Bool {  // pourquoi prendre une Piece en paramètre ?
+        guard (position != -10) else {
             print("position invalide")
             return false
         }
         if position >= 0 && position < self.xMax*self.yMax {
-            let positionTeste : Int = position
-            try self.caseVide(positionTeste) {
-                return true
-            }
+            let caseVide = try self.caseVide(position)
+            return caseVide
         }
         return false
     } // End func parachutageAutorise
 
     // Fonction d'interface : permet d'afficher differents choix possibles
     private func getPieceNameFromString(_ num: Int, _ choix: String) -> String? {
-        let tabChoice = choix.components(separatedBy: "\n")
+        let tabChoice = choix.components(separatedBy : "\n")
         for choice in tabChoice {
-            if choice.components(separatedBy:" - ")[0] == String(num) {
-                return choice.components(separatedBy:" - ")[1]
+            if choice.components(separatedBy : " - ")[0] == String(num) {
+                return choice.components(separatedBy : " - ")[1]
             }
         }
         return ""
@@ -665,4 +684,13 @@ public class Partie : PartieProtocol {
         }
         return positions
     } // End func getAllPosition
+
+    // renvoie le deuxieme joueur de la partie
+    private func getJoueur2() -> Joueur {
+        if idRand == 1 {
+            return self.player2
+        } else {
+            return self.player1
+        }
+    } // End func getJoueur1
 }
