@@ -4,7 +4,7 @@ public class CollectionPiece {
 
     typealias ItCollectionPiece = IteratorProtocol
 
-    var collection = [Piece]
+    var collection : [Piece]
 
     init() {
         // No action
@@ -12,17 +12,18 @@ public class CollectionPiece {
 
     func ajouterCollectionPiece(_ piece: Piece) {
         self.collection.append(piece)
-        return self
     } // End func ajouterCollectionPiece
 
-    func retirerCollectionPiece(piece: Piece) throws {
+    func retirerCollectionPiece(toRem: Piece) throws {
+        var i = 0
         for piece in self.collection {
-            if piece.getNomPiece() == piece.getNomPiece() {
-                self.collection.remove(piece)
-                break
+            if toRem.getNomPiece() == piece.getNomPiece() {
+                self.collection.remove(at : i)
+                return
+            } else {
+                i += 1
             }
         }
-        return self
     } // End func retirerCollectionPiece
 
     /*
@@ -37,25 +38,12 @@ public class CollectionPiece {
     */
 
     func getPieceCollectionPiece(_ nom: String,_ position: Int) throws -> Piece {
-        /*
-        guard let nomValid = where else {
-            show("piece non presente dans collection")
-        }
-        guard let positionValid = where else {
-            show("mauvaise position")
-        }
-        */
         for piece in self.collection {
-            if piece.getNomPiece() == nom && piece.getPosition() {
+            if (piece.getNomPiece() == nom) {
                 return piece
             }
         }
     } // End func getPieceCollectionPiece
-
-    // ajout sinon impossible de travailler dessus
-    func getCollectionPiece() throws -> Piece {
-        return self.collection
-    } // End func getCollectionPiece
 
     func EstDansCollectionPiece(_ nom: String, _ position: Int) -> Bool {
         for piece in self.collection {
@@ -68,24 +56,37 @@ public class CollectionPiece {
         return false
     } // End func EstDansCollectionPiece
 
-     func toStringCollectionPiece() -> String {
-         var toString : String
-         for piece in self.collection {
-             toString += piece.getNomPiece()
-             toString += " en "
-             toString += piece.getPosition()
-             toString += ", "
-         }
-         return toString
-     } // End func toStringCollectionPiece
+    func toStringCollectionPiece() -> String {
+        var toString : String
+        for piece in self.collection {
+            toString += piece.getNomPiece()
+            toString += " en "
+            if let addPos = piece.getPosition() {
+                toString += String(addPos)
+            } else {
+                toString += "NO POSITION"
+            }
+            toString += ", "
+        }
+        return toString
+    } // End func toStringCollectionPiece
 
-     func nbPieceCollectionPiece() -> Int {
-         return self.collection.count
-     } // End func nbPieceCollectionPiece
+    func nbPieceCollectionPiece() -> Int {
+        return self.collection.count
+    } // End func nbPieceCollectionPiece
 
-     func makeItCollectionPiece() -> ItCollectionPiece {
-         return ItCollectionPiece(self)
-     } // End func makeItCollectionPiece
+    func makeItCollectionPiece() -> ItCollectionPiece {
+        return ItCollectionPiece(self)
+    } // End func makeItCollectionPiece
+
+    /////////////////////
+    // Ajout de notre groupe :
+    // Il manque la fonction getCollectionPiece
+    // Retourne la collection de piece
+    // func getCollectionPiece : CollectionPiece-> [Piece]
+    func getCollectionPiece() -> [Piece] {
+        return self.collection
+    } // End func getCollectionPiece
 }
 
 
@@ -98,14 +99,16 @@ public struct ItCollectionPiece : IteratorProtocol{
     private let pieces : [Piece]
 
     init(_ c : CollectionPiece){
-        self.CollectionPiece = c
-        self.pieces = self.CollectionPiece.collection
+        self.collection = c
+        self.pieces = self.collection.getCollectionPiece()
     } // End func init
 
-    public func next() -> Piece? {
-        guard self.courant < self.collection.count else { return nil }
+    mutating public func next() -> Piece? {
+        guard self.courant < self.pieces.count else {
+            return nil
+        }
         let val = self.courant
-        self.courant = self.courant + 1
-        return self.collection[val]
+        self.courant += 1
+        return self.pieces[val]
     } // End func next
 }

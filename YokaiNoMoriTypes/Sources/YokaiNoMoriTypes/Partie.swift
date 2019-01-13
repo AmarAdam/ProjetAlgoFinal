@@ -602,7 +602,8 @@ public class Partie : PartieProtocol {
     //Verifie que la capture est possible
     //le roi peut etre capturé (c'est un choix, on verifiera s'il a été capturé dans une fonction testant la fin du jeu)
     func captureAutorisee(_ piece: Piece, _ position: Int) throws -> Bool {
-        guard let positionValid = position where positionValid<=11 && positionValid>=0 && !self.caseVide(positionValid) else {
+        let positionValid = position
+        guard (positionValid<=11 && positionValid>=0 && !self.caseVide(positionValid)) else {
             print("position non valide")
             return false
         }
@@ -610,7 +611,8 @@ public class Partie : PartieProtocol {
     } // End func
     //Verifie que le deplacement de la piece est autorisee sur la case en parametre
     func deplacementAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
-        guard let positionValid = position where positionValid<=11 && positionValid>=0 && self.caseVide(positionValid) else {
+        let positionValid = position
+        guard (positionValid<=11 && positionValid>=0 && self.caseVide(positionValid)) else {
             print("position non valide")
             return false
         }
