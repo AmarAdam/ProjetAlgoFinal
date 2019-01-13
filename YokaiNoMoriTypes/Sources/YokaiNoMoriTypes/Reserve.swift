@@ -41,7 +41,7 @@ public class Reserve : ReserveProtocol {
 
     // La fonction devrait renvoyer Une piece ou null si elle n'existe pas
     //func getPieceReserve(_ nom: String) throws -> Piece? {
-    func getPieceReserve(_ nom : String) throws -> Piece {
+    func getPieceReserve(_ nom : String) throws -> Piece? {
         var pieceTrouve : Piece
         for piece in self.pieces {
             if piece.getNomPiece() == nom {

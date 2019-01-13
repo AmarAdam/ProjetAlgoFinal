@@ -17,8 +17,13 @@ public class Partie : PartieProtocol {
     var nbTour : Int
 
     enum GestionErrorPartie : Error {
-    case invalidNomPiece
-    case caseHorsPlateau
+    case invalidPiece //piece entrée invalide (kodama samurai / roi) => possibiliteDeplacementRoi, envoyerReserve
+    case invalidPlayer //piece n'appartenant pas au bon joueur
+    case caseHorsPlateau //mauvaise case => CaseVide, pieceSurCase
+    case invalidCase //case en parametre ne respecte pas les preconditions => pieceSurCase, caseEnnemi/Promotion
+    case notRightChoice //=> selectionnerPiecePlateau
+    case notInRightPlace //piece en parametre, pas au bon endroit
+    case positionNotNull //position non nulle => envoyerReserve
     }
 
     // Constructeur
@@ -190,15 +195,26 @@ public class Partie : PartieProtocol {
 
     func selectionnerPiecePlateau(_ num: Int, _ choix: String) throws -> Piece {
         let name = getPieceNameFromString(num,choix)
+
+        //Error Handling
+        if (name == "") {
+           throw GestionErrorPartie.notRightChoice
+        }
+
         return self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece(name) // Il faut la position en param ...
     } // End func selectionnerPiecePlateau
 
     func selectionnerPieceReserve(_ num: Int, _ choix: String) throws -> Piece {
-        if let name = getPieceNameFromString(num, choix){
-            if let piece = try self.getJoueurCourant().getReserve().getPieceReserve(name) {
-                return piece
-            }
+        //Error Handling
+        let name = getPieceNameFromString(num, choix)
+        let piece = try self.getJoueurCourant().getReserve().getPieceReserve(name)
+        if (name == "") {
+            throw GestionErrorPartie.notRightChoice
         }
+        if (piece == nil) {
+            throw GestionErrorPartie.notInRightPlace
+        }
+        return piece
     } // End func selectionnerPieceReserve
 
     func toStringPossibiliteesDeplacement(_ piece: Piece)-> String {
@@ -258,6 +274,14 @@ public class Partie : PartieProtocol {
     } // End func verifierCaseAutorisee
 
     func caseVide(_ position: Int) throws -> Bool {
+        //Error Handling
+        if (position == nil) {
+            throw GestionErrorPartie.caseHorsPlateau
+        }
+        if (position < 0) || (position > 11) {
+            throw GestionErrorPartie.caseHorsPlateau
+        }
+
         // Verification des pieces du joueur actif
         let collectionPiece = self.getJoueurCourant().getCollectionPieceJoueur().getCollectionPiece()
         for piece in  collectionPiece{
@@ -277,6 +301,11 @@ public class Partie : PartieProtocol {
 
     // J'ai préféré calculer celui ci même si le jeu n'est pas evolutif.
     func casePromotion(_ position : Int)  throws -> Bool {
+      //Error Handling
+      if (position < 0) || (position > 11) {
+          throw GestionErrorPartie.invalidCase
+      }
+
         // ligne J1
         let cond1 = (position >= 0)
         let cond2 = (position <= self.getLargeur(position) - 1)
@@ -291,6 +320,11 @@ public class Partie : PartieProtocol {
 
 
     func caseEnnemi(_ position: Int) throws-> Bool {
+        //Error Handling
+        if (position < 0) || (position > 11) {
+            throw GestionErrorPartie.invalidCase
+        }
+
         // Verification des pieces du joueur ennemi
         let collectionPiece = self.getJoueurAdverse().getCollectionPieceJoueur().getCollectionPiece()
         for piece in collectionPiece {
@@ -308,12 +342,10 @@ public class Partie : PartieProtocol {
     func aPortee(_ position: Int, _ piece : Piece) throws -> Bool {
         //Pour cette fonction, on fera une verification au cas par cas
         //Pre : La position entrée est contenue dans le plateau
-        var posPiece : Int = piece.getPosition() ?? -10
-        let pos = position
 
-        guard (pos >= 0) && (pos <= 11) else { //On verifie que la case choisie est bien sur le plateau
-            print("Hors de portee")
-            return
+        //Error Handling
+        if (position < 0) || (position > 11) {
+            throw GestionErrorPartie.invalidCase
         }
 
         let estJoueur1 : Bool = (self.getJoueurCourant().getNomJoueur() == self.getJoueur1().getNomJoueur())
@@ -447,10 +479,12 @@ public class Partie : PartieProtocol {
 
     //True si le roi peut se déplacer (et uniquement se déplacer)
     func possibiliteDeplacementRoi(_ piece: Piece) throws -> Bool {
-        guard piece.estRoi() else {
-            print("la piece en paramètre n'est pas un roi")
-            return
+
+        // Error Handling
+        if (!piece.estRoi()) {
+           throw GestionErrorPartie.invalidPiece
         }
+
         let roi = piece
         var res : Bool = false
         var i = 0
@@ -504,35 +538,36 @@ public class Partie : PartieProtocol {
 
     //Done (throws/catch a reprendre)
     func envoyerReserve(_ piece: Piece, _ joueur: Joueur) throws {
+
         let pos = piece.getPosition()
-        guard pos =! nil else {
-            print("position de piece non vide")
-            return
-        }
-        //try catch ?? A verifier
         let name = piece.getNomPiece()
-        guard name != "kodama samurai" else{
-            print("la piece est un kodama samurai")
-            return
+
+        //Error Handling
+        if (pos != nil) {
+            throw GestionErrorPartie.positionNotNull
         }
-        try joueur.getReserve().ajouterReserve(piece)
+        if (name == "kodama samurai") {
+            throw GestionErrorPartie.invalidPiece
+        }
+
+        joueur.getReserve().ajouterReserve(piece)
     } // End func envoyerReserve
 
     //Fonction de capture d'une piece sur la case "position"
     func capturer(_ piece: Piece, _ position: Int) throws {
-        let caseEnnemi = try self.caseEnnemi(position)
-        guard ( position >= 0 && position <= 11 && caseEnnemi) else { //position valide, case appartient à l'ennemi
-            print("position invalide")
-            return
-        }
-        //piece est bien présente dans la collection du joueur courant
-        guard piece == self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(piece.getNomPiece(),piece.getPosition()) else {
-            print("mauvaise piece passee en parametre")
-            return
-        }
-        let captureAutorise = try self.captureAutorisee(piece, position)
-        if  captureAutorise {
+
+        //Error Handling
+        do {
+            let caseEnnemi = try self.caseEnnemi(position)
+            let captureAutorise = try self.captureAutorisee(piece, position)
             let pieceCapturee = try self.pieceSurCase(position)
+        } catch GestionErrorPartie.invalidCase {
+            print("Vous ne pouvez pas capturer sur la case en parametre")
+        } catch GestionErrorPartie.caseHorsPlateau {
+            print("Case en dehors du plateau")
+        }
+
+        if  captureAutorise {
             switch pieceCapturee.getNomPiece() {
                 case "kodama samurai":
                     try self.pieceSurCase(position).transformerEnKodama()
@@ -562,15 +597,15 @@ public class Partie : PartieProtocol {
 
     //Fonction de parachutage d'une piece sur la case "position"
     func parachuter(_ piece: Piece, _ position : Int) throws {
-        let caseVide = try self.caseVide(position)
-        let estDansReserve = try self.getJoueurCourant().getReserve().EstDansReserve(piece.getNomPiece())
-        guard ( caseVide && position >= 0 && position <= 11) else {
+
+        //Error Handling
+        do {
+            let caseVide = try self.caseVide(position)
+            let estDansReserve = try self.getJoueurCourant().getReserve().EstDansReserve(piece.getNomPiece())
+        } catch GestionErrorPartie.caseHorsPlateau {
             print("position non valide")
-            return
-        }
-        guard ( estDansReserve && piece.getPosition() == nil) else {
+        } catch {
             print("reserve ne contient pas cette piece")
-            return
         }
         self.getJoueurCourant().getReserve().enleverReserve(piece)
         piece.setPosition(position) //attention, cette fonction n'existe pas.....
@@ -580,26 +615,36 @@ public class Partie : PartieProtocol {
 
     //Fonction de déplacement d'une piece à une case "position"
     func deplacer(_ piece: Piece, _ position: Int) throws {
-        let caseVide = try self.caseVide(position)
-        guard (caseVide && position >= 0 && position <= 11) else {
-            print("position invalide")
-            return
-        }
-        let deplacementAutorise = try self.deplacementAutorise(piece, position)
-        if deplacementAutorise {
-            piece.setPosition(position)
-            let casePromotion = try casePromotion(position)
-            if piece.estKodama() && casePromotion {
-                try piece.transformerEnKodamaSamurai()
+        do {
+            let caseVide = try self.caseVide(position)
+            let deplacementAutorise = try self.deplacementAutorise(piece, position)
+
+            if deplacementAutorise {
+                piece.setPosition(position)
+                let casePromotion = try casePromotion(position)
+                if piece.estKodama() && casePromotion {
+                    try piece.transformerEnKodamaSamurai()
+                }
             }
+        } catch GestionErrorPartie.caseHorsPlateau {
+            print("Case en dehors du plateau")
+        } catch GestionErrorPartie.invalidCase {
+            print("Case invalide")
+        } catch {
+            print("Promotion impossible")
         }
+
+
     } // End func deplacer
 
     //Renvoie la piece presente sur la case en parametre
     func pieceSurCase(_ position: Int) throws -> Piece {
-        guard (try self.caseVide(position) && position != -10) else {
-            print("position invalide")
-            // ERROR
+        //Error Handling
+        if self.caseVide(position) {
+            throw GestionErrorPartie.invalidCase
+        }
+        if (position == nil) {
+            throw GestionErrorPartie.caseHorsPlateau
         }
 
         let collectionJoueur = self.getJoueurCourant().getCollectionPieceJoueur().getCollectionPiece()
@@ -620,25 +665,39 @@ public class Partie : PartieProtocol {
 
     //Verifie que la capture est possible
     //le roi peut etre capturé (c'est un choix, on verifiera s'il a été capturé dans une fonction testant la fin du jeu)
-    func captureAutorisee(_ piece: Piece, _ position: Int) throws -> Bool {
-        let valid = try self.caseVide(position)
-        guard (position >= 0 && position <= 11 && !valid) else {
-            print("position non valide")
-            return false
+    func captureAutorisee(_ piece: Piece, _ position: Int?) throws -> Bool {
+
+        do {
+            let aPortee = try self.aPortee(position, piece)
+            let caseNotEmpty = try !self.caseVide(position)
+            return (aPortee && caseNotEmpty)
+
+        } catch GestionErrorPartie.invalidCase {
+            print("Case Invalide")
+
+        } catch GestionErrorPartie.caseHorsPlateau {
+            print("La case entree n'est pas contenue dans le plateau")
+
         }
-        let aPortee = try self.aPortee(position, piece)
-        return aPortee
+
     } // End func
 
     //Verifie que le deplacement de la piece est autorisee sur la case en parametre
     func deplacementAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
-        let valid = try self.caseVide(position)
-        guard ( position >= 0 && position <= 11 && valid) else {
-            print("position non valide")
-            return false
+
+        do {
+            let aPortee = try self.aPortee(position, piece)
+            let caseEmpty = try self.caseVide(position)
+            return (aPortee && caseEmpty)
+
+        } catch GestionErrorPartie.invalidCase {
+            print("Case Invalide")
+
+        } catch GestionErrorPartie.caseHorsPlateau {
+            print("La case entree n'est pas contenue dans le plateau")
+
         }
-        let aPortee = try self.aPortee(position, piece)
-        return aPortee
+
     } // End func deplacementAutorise
 
 

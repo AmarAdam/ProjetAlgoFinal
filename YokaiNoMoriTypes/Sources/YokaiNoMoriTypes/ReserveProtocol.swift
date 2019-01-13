@@ -69,7 +69,7 @@ protocol ReserveProtocol : Sequence {
       - La piece a retourner est dans la reserve.
       - le nom en parametre est soit "kitsune" ou "tanuki" ou "kodama".
 	*/
-	func getPieceReserve(_ nom : String) throws -> Piece
+	func getPieceReserve(_ nom : String) throws -> Piece?
 
   /**
     Retourne Vrai si au moin un piece du meme nom que le nom en parametre est dans
@@ -82,9 +82,9 @@ protocol ReserveProtocol : Sequence {
   */
 
   func getPiecesReserve() -> [Piece]
-  
+
   // renvoi le tableau de piece
-  
+
   func EstDansReserve(_ nom: String) throws -> Bool
 
   /**
@@ -104,7 +104,7 @@ protocol ReserveProtocol : Sequence {
  /*
   // func reinitialiser()
   // remet le courant de l'iterateur à 0
-  
+
   ajouté par notre groupe
 
   */
