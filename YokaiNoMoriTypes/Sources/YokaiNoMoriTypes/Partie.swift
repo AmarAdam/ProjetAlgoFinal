@@ -462,10 +462,10 @@ public class Partie {
         let position2 = piece2.getPosition() ?? -10 // Position à -10 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
 
         let preTest3 =  self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom1, position1) && self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom2, position2)
-
-        if (self.caseVide(position1) || try self.caseVide(position2)) { // Une des 2 cases est vide
+ 
+        if (self.caseVide(position1) || try self.caseVide(position2)) { // Une des 2 cases est vide // le compilateur demande un try "call can throw but is not marked with 'try'"
             return false
-        } else if (self.caseEnnemi(position1) && self.caseEnnemi(position2)) { // Les 2 pieces appartiennent à l'adversaire
+        } else if (self.caseEnnemi(position1) && self.caseEnnemi(position2)) { // Les 2 pieces appartiennent à l'adversaire // le compilateur demande un try "call can throw but is not marked with 'try'"
             return false
         } else if (preTest3) {
             return false
@@ -562,7 +562,7 @@ public class Partie {
     //Renvoie la piece presente sur la case en parametre
     func pieceSurCase(_ position: Int) throws -> Piece {
       let positionValid = (position != -10)
-      guard self.caseVide(position) else {
+      guard self.caseVide(position) else {              // le compilateur demande un try après le guard, mauvaise utilisation du guard "call can throw but is not marked with 'try'"
         print("position invalide")
         return
       }
@@ -614,14 +614,15 @@ public class Partie {
     // Le parachutage est autorisé si :
     //  - Aucune piece alliée ou ennemi n'est positionné sur la case donnée en paramètre
     //  - La position est existante sur le plateau
-    func parachutageAutorise(_ piece: Piece, _ position: Int) throws -> Bool {
+    func parachutageAutorise(/*_ piece: Piece, */_ position: Int) throws -> Bool {  // pourquoi prendre une Piece en paramètre ?
       let positionValid = (position != -10)
       guard positionValid else {
         print("position invalide")
         return false
       }
       if position >= 0 && position < self.xMax*self.yMax {
-        try caseVide(position) {
+        let positionTeste : Int = position
+        try self.caseVide(positionTeste) {
           return true
         }
       }

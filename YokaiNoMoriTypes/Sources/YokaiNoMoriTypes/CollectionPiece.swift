@@ -4,19 +4,26 @@ public class CollectionPiece {
 
     typealias ItCollectionPiece = IteratorProtocol
     
-    var collection = [](Piece)
-
+    var collection = [Piece]
+    
     init() {
         // No action
     }
 
 
     func ajouterCollectionPiece(_ piece: Piece) -> Self {
-         self.collection.append(piece)
+        self.collection.append(piece)
+        return self
      }
 
      func retirerCollectionPiece(piece: Piece) throws -> Self {
-         self.collection.remove(piece)
+        for piece in self.collection {
+            if piece.getNomPiece() == piece.getNomPiece() {
+                self.collection.remove(piece)
+                break
+            } 
+        }   
+        return self
      }
 
      /*
@@ -39,7 +46,7 @@ public class CollectionPiece {
            show("mauvaise position")
        }
        */
-       for piece in self {
+       for piece in self.collection {
              if piece.getNomPiece() == nom && piece.getPosition() {
                return piece
              }
@@ -80,8 +87,8 @@ public class CollectionPiece {
      func makeItCollectionPiece() -> ItCollectionPiece {
          return ItCollectionPiece(self)
      }
-
 }
+
 
 public struct ItCollectionPiece : IteratorProtocol{
 
