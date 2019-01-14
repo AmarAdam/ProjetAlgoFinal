@@ -46,13 +46,13 @@ protocol CollectionPieceProtocol : Sequence{
     Renvoie une erreur si la piece n'est pas dans la collection ou que la position
     entree n'est pas valide.
 
-    getPieceCollectionPiece: String x Int x CollectionPiece -> Piece
+    getPieceCollectionPiece: String x CollectionPiece -> Piece
 
     - Precondition:
       - La piece a retirer appartient a la collection de piece.
       - la position entree est une position du plateau de jeu.
  */
- func getPieceCollectionPiece(_ nom: String, _ position: Int) throws -> Piece
+ func getPieceCollectionPiece(_ nom: String) throws -> Piece
 
  /**
    Renvoie Vrai si la piece identifie par son nom et sa position sur le plateau de jeu

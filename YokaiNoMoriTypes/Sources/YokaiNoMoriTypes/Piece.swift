@@ -50,6 +50,7 @@ public class Piece : PieceProtocol {
     func transformerEnKodama() throws {
         guard self.estKodamaSamurai() else {
             print("piece non valide")
+            return                    // il manquait le return pour le guard, étant donné qu'on n'a pas d'erreur à throw
         }
         self.setNomPiece("kodama")
     } // End func transformerEnKodama

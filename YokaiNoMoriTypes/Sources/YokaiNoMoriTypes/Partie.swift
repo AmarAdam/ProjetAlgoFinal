@@ -2,6 +2,9 @@ import Foundation
 
 // Classe partie
 
+// tout les problèmes de try, du aux throws de func dans les protocol, ils donnent les pré cond, mais ne donnent pas d'infos
+// sur l'envoi d'erreur, en gros on ne sait pas quand envoyer l'erreur 
+
 public class Partie : PartieProtocol {
     var xMax : Int //largeur
     var yMax : Int //longueur
@@ -204,7 +207,7 @@ public class Partie : PartieProtocol {
     func toStringPossibiliteesDeplacement(_ piece: Piece)-> String {
         var stringPossible = ""
         for position in getAllPosition() {
-            let deplacementAutorise = try self.deplacementAutorise(piece, position)
+            let deplacementAutorise = try! self.deplacementAutorise(piece, position) //remplacement try -> try!, on crash, on ne catch pas
             if deplacementAutorise {
                 stringPossible = stringPossible + String(position)
                 stringPossible = stringPossible + " "
@@ -216,22 +219,25 @@ public class Partie : PartieProtocol {
     func toStringPossibiliteesCapture(_ piece: Piece)-> String {
         var stringPossible = ""
         for position in getAllPosition() {
-            try self.captureAutorisee(piece, position) {
-                stringPossible = stringPossible + String(position)
-                stringPossible = stringPossible + " "
+            let captureAutorise = try! self.captureAutorisee(piece, position) 
+            if captureAutorise {
+              stringPossible = stringPossible + String(position)
+              stringPossible = stringPossible + " "
+              }
             }
-        }
         return stringPossible
     } // End func toStringPossibiliteesCapture
 
     func toStringPossibiliteesParachuter(_ piece: Piece)-> String {
         var stringPossible = ""
         for position in getAllPosition() {
-            try self.parachutageAutorise(piece, position) {
-                stringPossible = stringPossible + String(position)
-                stringPossible = stringPossible + " "
+            let parachuteAutorise = try! self.parachutageAutorise(piece, position) 
+            if parachuteAutoise {
+              tringPossible = stringPossible + String(position)
+              stringPossible = stringPossible + " "
+              }
             }
-        }
+        
         return stringPossible
     } // End func toStringPossibiliteesParachuter
 
@@ -425,7 +431,7 @@ public class Partie : PartieProtocol {
     //True si l'un des deux joueurs a perdu
     func verifierFinDuJeu() -> Bool {
         //On récupère un booléen verifiant le cas ou le roi a passé la zone de promotion
-        let posKing = self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru")
+        let posKing = self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru")   // pas d'autres choix que de modifier leur p
         let checkKing = (self.possibiliteDeplacementRoi() && self.casePromotion(posKing))
         if self.echecEtMat() || checkKing {
             return true
@@ -498,7 +504,8 @@ public class Partie : PartieProtocol {
         } else if (preTest3) {
             return false
         } else {
-            return self.aPortee(position2, piece1)
+            let tPortee = try! self.aPortee(position2, piece1)        //remplacement try -> try!, on crash, on ne catch pas
+            return tPortee
         }
     } // End func piece1capturePiece2
 
@@ -526,10 +533,11 @@ public class Partie : PartieProtocol {
             return
         }
         //piece est bien présente dans la collection du joueur courant
-        guard piece == self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(piece.getNomPiece(),piece.getPosition()!) else {
+        //on veut vérifier ici si la piece appartient bien au joueur, or dans le main, on effectue cette vérif avant, donc inutile  
+        /* guard piece.getPosition() == self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(piece.getNomPiece(),piece.getPosition()!) else {
             print("mauvaise piece passee en parametre")
             return
-        }
+        } */
         let captureAutorise = try self.captureAutorisee(piece, position)
         if  captureAutorise {
             let pieceCapturee = try self.pieceSurCase(position)
@@ -665,7 +673,7 @@ public class Partie : PartieProtocol {
     } // End func parachutageAutorise
 
     // Fonction d'interface : permet d'afficher differents choix possibles
-    private func getPieceNameFromString(_ num: Int, _ choix: String) -> String? {
+    private func getPieceNameFromString(_ num: Int, _ choix: String) -> String { // ne peut pas renvoyer du vide, on a besoin d'un string, on ne gere pas le cas d'erreur dans les autres fonction
         let tabChoice = choix.components(separatedBy : "\n")
         for choice in tabChoice {
             if choice.components(separatedBy : " - ")[0] == String(num) {

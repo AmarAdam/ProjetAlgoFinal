@@ -2,7 +2,7 @@ import Foundation
 
 //Classe Joueur
 //Done
-class Joueur : JoueurProtocol {
+public class Joueur : JoueurProtocol {
     var namePlayer : String
     var collectionPiece : CollectionPiece
     var reserve : Reserve

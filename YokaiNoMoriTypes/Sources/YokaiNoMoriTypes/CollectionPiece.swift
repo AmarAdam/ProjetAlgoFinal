@@ -38,7 +38,7 @@ public class CollectionPiece {
     */
 
     // NOTE : Pourquoi demander le nom de la piece si on a la position ?
-    func getPieceCollectionPiece(_ nom: String,_ position: Int) throws -> Piece {
+    func getPieceCollectionPiece(_ nom: String ) throws -> Piece {
         for piece in self.collection {
             if (piece.getNomPiece() == nom) {
                 return piece
