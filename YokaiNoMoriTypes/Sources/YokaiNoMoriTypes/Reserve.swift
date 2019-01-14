@@ -5,7 +5,7 @@ public class Reserve : ReserveProtocol {
     var itReserve : ItReserve
 
     // Si l'init ne fait rien pourquoi le demander ?
-    init(){
+    required init(){
         // Do Nothing
     } // End func init
 
@@ -41,7 +41,7 @@ public class Reserve : ReserveProtocol {
 
     // La fonction devrait renvoyer Une piece ou null si elle n'existe pas
     //func getPieceReserve(_ nom: String) throws -> Piece? {
-    func getPieceReserve(_ nom : String) throws -> Piece {
+    func getPieceReserve(_ nom : String) throws -> Piece? {
         var pieceTrouve : Piece
         for piece in self.pieces {
             if piece.getNomPiece() == nom {

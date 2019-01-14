@@ -23,7 +23,7 @@ public class Piece : PieceProtocol {
     } // End func getPosition
 
     //ajout de cette fonction, sinon impossible de traiter le type Partie
-    func setPosition(_ position: Int) {
+    func setPosition(_ position: Int?) {
         self.position = position
     } // End func setPosition
 

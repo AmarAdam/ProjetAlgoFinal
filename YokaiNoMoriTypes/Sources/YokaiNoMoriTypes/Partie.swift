@@ -137,8 +137,8 @@ public class Partie : PartieProtocol {
             toString = toString + collectionPiece.getNomPiece()
             toString = toString + " : "
             while it <= 11 {
-                let aPortee = try self.aPortee(it, collectionPiece)
-                if (self.caseVide(it) && aPortee){
+                let aPortee = try! self.aPortee(it, collectionPiece)
+                if (try! self.caseVide(it) && aPortee){
                     toString = toString + String(it)
                     toString = toString + " ,"
                 }
@@ -161,8 +161,8 @@ public class Partie : PartieProtocol {
             toString = toString + collectionPiece.getNomPiece()
             toString = toString + " : "
             while it<=11 {
-                let aPortee = try self.aPortee(it, collectionPiece)
-                if (self.caseEnnemi(it) && aPortee){
+                let aPortee = try! self.aPortee(it, collectionPiece)
+                if (try! self.caseEnnemi(it) && aPortee){
                     toString = toString + String(it)
                     toString = toString + " ,"
                 }
@@ -204,7 +204,7 @@ public class Partie : PartieProtocol {
     func toStringPossibiliteesDeplacement(_ piece: Piece)-> String {
         var stringPossible = ""
         for position in getAllPosition() {
-            let deplacementAutorise = try deplacementAutorise(piece, position)
+            let deplacementAutorise = try self.deplacementAutorise(piece, position)
             if deplacementAutorise {
                 stringPossible = stringPossible + String(position)
                 stringPossible = stringPossible + " "
@@ -216,7 +216,7 @@ public class Partie : PartieProtocol {
     func toStringPossibiliteesCapture(_ piece: Piece)-> String {
         var stringPossible = ""
         for position in getAllPosition() {
-            try captureAutorisee(piece, position) {
+            try self.captureAutorisee(piece, position) {
                 stringPossible = stringPossible + String(position)
                 stringPossible = stringPossible + " "
             }
@@ -227,7 +227,7 @@ public class Partie : PartieProtocol {
     func toStringPossibiliteesParachuter(_ piece: Piece)-> String {
         var stringPossible = ""
         for position in getAllPosition() {
-            try parachutageAutorise(piece, position) {
+            try self.parachutageAutorise(piece, position) {
                 stringPossible = stringPossible + String(position)
                 stringPossible = stringPossible + " "
             }
@@ -252,7 +252,7 @@ public class Partie : PartieProtocol {
         // La position doit être supérieur ou égal à 0
         let cond1 : Bool = (position >= 0)
         // La position doit être inferieur à la position maximum possible
-        let cond2 : Bool = (position <= (self.getLongueur(position) * self.getLargeur(position) - 1))
+        let cond2 : Bool = (position <= (self.getLongueur() * self.getLargeur() - 1))
         // Resultat : True si les 2 conditions respectés
         return (cond1 && cond2)
     } // End func verifierCaseAutorisee
@@ -279,10 +279,10 @@ public class Partie : PartieProtocol {
     func casePromotion(_ position : Int)  throws -> Bool {
         // ligne J1
         let cond1 = (position >= 0)
-        let cond2 = (position <= self.getLargeur(position) - 1)
+        let cond2 = (position <= self.getLargeur() - 1)
         // Ligne J2
-        let cond3 = (position >= self.getLargeur(position)*(self.getLongueur(position) - 1))
-        let cond4 = (position <= self.getLargeur(position)*self.getLongueur(position))
+        let cond3 = (position >= self.getLargeur()*(self.getLongueur() - 1))
+        let cond4 = (position <= self.getLargeur()*self.getLongueur())
         // Resultat
         let cond5 : Bool = (cond1 && cond2)
         let cond6 : Bool = (cond3 && cond4)
@@ -317,7 +317,7 @@ public class Partie : PartieProtocol {
         }
 
         let estJoueur1 : Bool = (self.getJoueurCourant().getNomJoueur() == self.getJoueur1().getNomJoueur())
-        if let testPos = piece.getPosition() && estJoueur1 { // Joueur 1
+        if (piece.getPosition() != nil) && estJoueur1 { // Joueur 1
             let gauche = posPiece==2 || posPiece==5 || posPiece==8 || posPiece==11
             let centre = posPiece==1 || posPiece==4 || posPiece==7 || posPiece==10
             let droite = posPiece==0 || posPiece==3 || posPiece==6 || posPiece==9
@@ -436,7 +436,7 @@ public class Partie : PartieProtocol {
 
     //True si l'un des deux joueurs a été mis en échec et mat
     func echecEtMat() -> Bool {
-        let captureRoiAdverse = self.etrePieceCapturable(getJoueurAdverse().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru"))
+        let captureRoiAdverse = self.etrePieceCapturable(piece:getJoueurAdverse().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru"))
         let deplacementRoiAdverse = self.possibiliteDeplacementRoi(getJoueurAdverse().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru"))
         if !deplacementRoiAdverse && captureRoiAdverse { //voir si c'est suffisant ou non pour echec et mat
             return true
@@ -456,7 +456,7 @@ public class Partie : PartieProtocol {
         var i = 0
         while (i<=11 || res) {
             let cond1 = try self.aPortee(i, roi)
-            let cond2 = try self.caseVide(i))
+            let cond2 = try self.caseVide(i)
             if (cond1 && cond2) {
                 res = true
             }
@@ -470,7 +470,7 @@ public class Partie : PartieProtocol {
         let result = false
         let collectionAdverse = passivePlayer.getCollectionPieceJoueur()
         for collectionPiece in collectionAdverse {
-            if self.aPortee(piece.getPosition(),collectionPiece) {
+            if self.aPortee(piece.getPosition()!,collectionPiece) {
                 result = true
             }
         }
@@ -485,10 +485,10 @@ public class Partie : PartieProtocol {
         let nom2 = piece2.getNomPiece()
         let position2 = piece2.getPosition() ?? -10 // Position à -10 si elle est nulle (ca ne devrait pas arriver, cf. la spé)
 
-        let preTest11 = try self.caseVide(position1)
-        let preTest12 = try self.caseVide(position2)
-        let preTest21 = try self.caseEnnemi(position1)
-        let preTest22 = try self.caseEnnemi(position2)
+        let preTest11 = try! self.caseVide(position1)
+        let preTest12 = try! self.caseVide(position2)
+        let preTest21 = try! self.caseEnnemi(position1)
+        let preTest22 = try! self.caseEnnemi(position2)
         let preTest3 = self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom1, position1) && self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(nom2, position2)
 
         if (preTest11 || preTest12) { // Une des 2 cases est vide
@@ -498,14 +498,14 @@ public class Partie : PartieProtocol {
         } else if (preTest3) {
             return false
         } else {
-            return self.aPortee(piece1, position2)
+            return self.aPortee(position2, piece1)
         }
     } // End func piece1capturePiece2
 
     //Done (throws/catch a reprendre)
     func envoyerReserve(_ piece: Piece, _ joueur: Joueur) throws {
         let pos = piece.getPosition()
-        guard pos =! nil else {
+        guard pos != nil else {
             print("position de piece non vide")
             return
         }
@@ -526,7 +526,7 @@ public class Partie : PartieProtocol {
             return
         }
         //piece est bien présente dans la collection du joueur courant
-        guard piece == self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(piece.getNomPiece(),piece.getPosition()) else {
+        guard piece == self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(piece.getNomPiece(),piece.getPosition()!) else {
             print("mauvaise piece passee en parametre")
             return
         }
@@ -537,23 +537,23 @@ public class Partie : PartieProtocol {
                 case "kodama samurai":
                     try self.pieceSurCase(position).transformerEnKodama()
                     try self.pieceSurCase(position).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
-                    try self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
+                    try self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(toRem:pieceCapturee) //on retire la piece du plateau
                     try self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
-                    try piece.setPosition(pieceCapturee.getPosition())
+                    try piece.setPosition(pieceCapturee.getPosition()!)
                 case "koropokkuru":
                     print("le roi a ete capture !\nle joueur adverse a perdu !\n")
                     //On agit comme si on avait fait une capture simple
                     //On vérifiera dans la fin du jeu si le koropokkuru est dans la reserve
                     try self.pieceSurCase(position).setPosition(nil)
-                    try self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee)
+                    try self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(toRem:pieceCapturee)
                     try self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee)
                     //Puis on fait rien d'autre, on fera les tests nécessaire dans la fin du jeu
                 default:
                     try self.pieceSurCase(position).setPosition(nil) //ce setter n'existe pas, il n'a pas été spécifié dans le type Piece...
-                    try self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(pieceCapturee) //on retire la piece du plateau
+                    try self.getJoueurAdverse().getCollectionPieceJoueur().retirerCollectionPiece(toRem:pieceCapturee) //on retire la piece du plateau
                     try self.getJoueurCourant().getReserve().ajouterReserve(pieceCapturee) //on ajoute la piece a la reserve
-                    let positionCapture = pieceCapturee.getPosition()
-                    piece.setPosition(positionCapture)
+                    let positionCapture = pieceCapturee.getPosition()!
+                    piece.setPosition(positionCapture!)
                 }
             } else {
             print("capture impossible")
@@ -572,7 +572,7 @@ public class Partie : PartieProtocol {
             print("reserve ne contient pas cette piece")
             return
         }
-        self.getJoueurCourant().getReserve().enleverReserve(piece)
+        self.getJoueurCourant().getReserve().enleverReserve(toRem:Piece)
         piece.setPosition(position) //attention, cette fonction n'existe pas.....
         self.getJoueurCourant().getCollectionPieceJoueur().ajouterCollectionPiece(piece)
         //(On a pas besoin de traiter le cas du kodama, on le parachute normalement, sans appeler la fonction de promotion)
@@ -588,7 +588,7 @@ public class Partie : PartieProtocol {
         let deplacementAutorise = try self.deplacementAutorise(piece, position)
         if deplacementAutorise {
             piece.setPosition(position)
-            let casePromotion = try casePromotion(position)
+            let casePromotion = try self.casePromotion(position)
             if piece.estKodama() && casePromotion {
                 try piece.transformerEnKodamaSamurai()
             }
