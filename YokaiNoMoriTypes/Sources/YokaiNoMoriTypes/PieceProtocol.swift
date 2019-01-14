@@ -51,6 +51,11 @@ protocol PieceProtocol {
   */
   func getPosition()-> Int?
 
+  /*
+  Ajout de la fonction par le groupe Amjad/Etienne/Adam, nécessaire pour le bon fonctionnement du programme
+  */
+  mutating func setPosition(_ position : Int?)
+
   /**
    Renvoie Vrai si la piece en parametre est un koropokkuru. Faux sinon
 

@@ -31,7 +31,7 @@ protocol ReserveProtocol : Sequence {
       - un kodama samourai ne peut pas etre ajoute a la reserve.
       - la position de la piece ajoute est vide.
 	*/
-	mutating func ajouterReserve(_ piece : Piece) throws -> Self
+	mutating func ajouterReserve(_ piece : Piece) throws
 
 	/**
 	 Retire la piece donnee en parametre de la reserve. Renvoie une erreur si la
@@ -41,7 +41,7 @@ protocol ReserveProtocol : Sequence {
 
    - Precondition: la piece a retirer est dans la reserve.
 	*/
-	mutating func enleverReserve(_ piece : Piece) throws -> Self
+	mutating func enleverReserve(_ piece : Piece) throws
 
 	/**
 	 Renvoie Vrai si la reserve est vide. Faux sinon.
@@ -69,7 +69,7 @@ protocol ReserveProtocol : Sequence {
       - La piece a retourner est dans la reserve.
       - le nom en parametre est soit "kitsune" ou "tanuki" ou "kodama".
 	*/
-	func getPieceReserve(_ nom : String) throws -> Piece
+	func getPieceReserve(_ nom : String) throws -> Piece?
 
   /**
     Retourne Vrai si au moin un piece du meme nom que le nom en parametre est dans
@@ -82,9 +82,9 @@ protocol ReserveProtocol : Sequence {
   */
 
   func getPiecesReserve() -> [Piece]
-  
+
   // renvoi le tableau de piece
-  
+
   func EstDansReserve(_ nom: String) throws -> Bool
 
   /**
@@ -104,7 +104,7 @@ protocol ReserveProtocol : Sequence {
  /*
   // func reinitialiser()
   // remet le courant de l'iterateur à 0
-  
+
   ajouté par notre groupe
 
   */

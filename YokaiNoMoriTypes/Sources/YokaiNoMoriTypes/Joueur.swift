@@ -15,17 +15,17 @@ public class Joueur : JoueurProtocol {
     } // End func init
 
     // getter Reserve
-    public func getReserve() -> Reserve {
+    func getReserve() -> Reserve {
         return self.reserve
     } // End func getReserve
 
     // getter Nom Joueur
-    public func getNomJoueur() -> String {
+    func getNomJoueur() -> String {
         return self.namePlayer
     } // End func getNomJoueur
 
     // getter CollectionPiece
-    public func getCollectionPieceJoueur() -> CollectionPiece {
+    func getCollectionPieceJoueur() -> CollectionPiece {
         return self.collectionPiece
     } // End func getCollectionPieceJoueur
 }

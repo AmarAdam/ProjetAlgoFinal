@@ -3,7 +3,7 @@ import Foundation
 // Classe partie
 
 // tout les problèmes de try, du aux throws de func dans les protocol, ils donnent les pré cond, mais ne donnent pas d'infos
-// sur l'envoi d'erreur, en gros on ne sait pas quand envoyer l'erreur 
+// sur l'envoi d'erreur, en gros on ne sait pas quand envoyer l'erreur
 
 public class Partie : PartieProtocol {
     var xMax : Int //largeur
@@ -193,7 +193,7 @@ public class Partie : PartieProtocol {
 
     func selectionnerPiecePlateau(_ num: Int, _ choix: String) throws -> Piece {
         let name = getPieceNameFromString(num,choix)
-        return self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece(name) // Il faut la position en param ...
+        return try! self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece(name) // Il faut la position en param, on l'a retiré ...
     } // End func selectionnerPiecePlateau
 
     func selectionnerPieceReserve(_ num: Int, _ choix: String) throws -> Piece {
@@ -219,7 +219,7 @@ public class Partie : PartieProtocol {
     func toStringPossibiliteesCapture(_ piece: Piece)-> String {
         var stringPossible = ""
         for position in getAllPosition() {
-            let captureAutorise = try! self.captureAutorisee(piece, position) 
+            let captureAutorise = try! self.captureAutorisee(piece, position)
             if captureAutorise {
               stringPossible = stringPossible + String(position)
               stringPossible = stringPossible + " "
@@ -231,19 +231,19 @@ public class Partie : PartieProtocol {
     func toStringPossibiliteesParachuter(_ piece: Piece)-> String {
         var stringPossible = ""
         for position in getAllPosition() {
-            let parachuteAutorise = try! self.parachutageAutorise(piece, position) 
-            if parachuteAutoise {
-              tringPossible = stringPossible + String(position)
+            let parachuteAutorise = try! self.parachutageAutorise(position)
+            if parachuteAutorise {
+              stringPossible = stringPossible + String(position)
               stringPossible = stringPossible + " "
               }
             }
-        
+
         return stringPossible
     } // End func toStringPossibiliteesParachuter
 
     func verifierChoix(_ c1: Int, _ c2: String) -> Bool {
         // Sépare tout les mots de la String et les stoque dans un tableau
-        tabWord = c2.components(separatedBy : " ")
+        let tabWord = c2.components(separatedBy : " ")
         // Compare chaque mot du tableau tout juste créé avec le mot recherché
         for word in tabWord {
             if c1 == word {
@@ -314,7 +314,7 @@ public class Partie : PartieProtocol {
     func aPortee(_ position: Int, _ piece : Piece) throws -> Bool {
         //Pour cette fonction, on fera une verification au cas par cas
         //Pre : La position entrée est contenue dans le plateau
-        var posPiece : Int = piece.getPosition() ?? -10
+        let posPiece : Int = piece.getPosition() ?? -10
         let pos = position
 
         guard (pos >= 0) && (pos <= 11) else { //On verifie que la case choisie est bien sur le plateau
@@ -431,8 +431,8 @@ public class Partie : PartieProtocol {
     //True si l'un des deux joueurs a perdu
     func verifierFinDuJeu() -> Bool {
         //On récupère un booléen verifiant le cas ou le roi a passé la zone de promotion
-        let posKing = self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru")   // pas d'autres choix que de modifier leur p
-        let checkKing = (self.possibiliteDeplacementRoi() && self.casePromotion(posKing))
+        let posKing = try! self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru")   // pas d'autres choix que de modifier leur p
+        let checkKing = (self.possibiliteDeplacementRoi(self.getJoueurCourant().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru")) && self.casePromotion(posKing))
         if self.echecEtMat() || checkKing {
             return true
         } else {
@@ -442,8 +442,8 @@ public class Partie : PartieProtocol {
 
     //True si l'un des deux joueurs a été mis en échec et mat
     func echecEtMat() -> Bool {
-        let captureRoiAdverse = self.etrePieceCapturable(piece:getJoueurAdverse().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru"))
-        let deplacementRoiAdverse = self.possibiliteDeplacementRoi(getJoueurAdverse().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru"))
+        let captureRoiAdverse = self.etrePieceCapturable(piece: try! getJoueurAdverse().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru"))
+        let deplacementRoiAdverse = try! self.possibiliteDeplacementRoi(try! getJoueurAdverse().getCollectionPieceJoueur().getPieceCollectionPiece("koropokkuru"))
         if !deplacementRoiAdverse && captureRoiAdverse { //voir si c'est suffisant ou non pour echec et mat
             return true
         } else {
@@ -455,7 +455,7 @@ public class Partie : PartieProtocol {
     func possibiliteDeplacementRoi(_ piece: Piece) throws -> Bool {
         guard piece.estRoi() else {
             print("la piece en paramètre n'est pas un roi")
-            return
+            return false
         }
         let roi = piece
         var res : Bool = false
@@ -533,7 +533,7 @@ public class Partie : PartieProtocol {
             return
         }
         //piece est bien présente dans la collection du joueur courant
-        //on veut vérifier ici si la piece appartient bien au joueur, or dans le main, on effectue cette vérif avant, donc inutile  
+        //on veut vérifier ici si la piece appartient bien au joueur, or dans le main, on effectue cette vérif avant, donc inutile
         /* guard piece.getPosition() == self.getJoueurCourant().getCollectionPieceJoueur().EstDansCollectionPiece(piece.getNomPiece(),piece.getPosition()!) else {
             print("mauvaise piece passee en parametre")
             return
