@@ -2,7 +2,6 @@ import Foundation
 
 public class Reserve : ReserveProtocol {
     var pieces : [Piece]
-    var itReserve : ItReserve
 
     // Si l'init ne fait rien pourquoi le demander ?
     required init(){
@@ -16,8 +15,8 @@ public class Reserve : ReserveProtocol {
     func enleverReserve(_ piece: Piece) throws {
         var i = 0
         var iRem = -1
-        for itPiece in self.pieces {
-            if (itPiece.getNomPiece() == piece.getNomPiece()) {
+        for pieceTab in self.pieces {
+            if (pieceTab.getNomPiece() == piece.getNomPiece()) {
                 iRem = i
             }
             i = i + 1        }
@@ -42,9 +41,9 @@ public class Reserve : ReserveProtocol {
     // La fonction devrait renvoyer Une piece ou null si elle n'existe pas
     //func getPieceReserve(_ nom: String) throws -> Piece? {
     func getPieceReserve(_ nom : String) throws -> Piece? {
-        var pieceTrouve : Piece
+        var pieceTrouve : Piece?
         for piece in self.pieces {
-            if piece.getNomPiece() == nom {
+            if (piece.getNomPiece() == nom) {
                 pieceTrouve = piece
             }
         }
@@ -82,7 +81,7 @@ public struct ItReserve : IteratorProtocol{
     private var courant : Int = 0
     private let collection : [Piece]
 
-    fileprivate init(_ r : Reserve){
+    init(_ r : Reserve){
         self.reserve = r
         self.collection = self.reserve.getPiecesReserve()
     } // End func init
@@ -96,8 +95,4 @@ public struct ItReserve : IteratorProtocol{
 
         return self.collection[val]
     } // End func next
-
-    mutating public func reinitialiser() {
-        self.courant = 0
-    } // End func reinitialiser
 }

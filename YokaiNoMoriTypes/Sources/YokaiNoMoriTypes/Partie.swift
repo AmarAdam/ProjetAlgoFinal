@@ -489,21 +489,9 @@ public class Partie : PartieProtocol {
         var result = false
         let collectionAdverse = passivePlayer.getCollectionPieceJoueur()
         for collectionPiece in collectionAdverse {
-            if let position = piece.getPosition() {
-                do {
-                    if try self.aPortee(position ,collectionPiece){
-                        result = true
-                    } else {
-                        return false
-                    }
-                } catch {
-                    return false
-                }
-
-            } else {
-                return false
+            if self.aPortee(piece.getPosition()!,collectionPiece) {
+                result = true
             }
-
         }
         return result
     } // End func etrePieceCapturable
