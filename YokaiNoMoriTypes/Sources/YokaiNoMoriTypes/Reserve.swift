@@ -13,11 +13,11 @@ public class Reserve : ReserveProtocol {
         self.pieces.append(piece)
     } // End func ajouterReserve
 
-    func enleverReserve(toRem: Piece) throws {
+    func enleverReserve(_ piece: Piece) throws {
         var i = 0
         var iRem = -1
-        for piece in self.pieces {
-            if (piece.getNomPiece() == toRem.getNomPiece()) {
+        for itPiece in self.pieces {
+            if (itPiece.getNomPiece() == piece.getNomPiece()) {
                 iRem = i
             }
             i = i + 1        }

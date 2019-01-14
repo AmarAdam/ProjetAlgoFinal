@@ -489,9 +489,21 @@ public class Partie : PartieProtocol {
         var result = false
         let collectionAdverse = passivePlayer.getCollectionPieceJoueur()
         for collectionPiece in collectionAdverse {
-            if self.aPortee(piece.getPosition()!,collectionPiece) {
-                result = true
+            if let position = piece.getPosition() {
+                do {
+                    if try self.aPortee(position ,collectionPiece){
+                        result = true
+                    } else {
+                        return false
+                    }
+                } catch {
+                    return false
+                }
+
+            } else {
+                return false
             }
+
         }
         return result
     } // End func etrePieceCapturable
@@ -594,7 +606,7 @@ public class Partie : PartieProtocol {
             print("reserve ne contient pas cette piece")
             return
         }
-        try self.getJoueurCourant().getReserve().enleverReserve(toRem:piece)
+        try self.getJoueurCourant().getReserve().enleverReserve(piece)
         piece.setPosition(position) //attention, cette fonction n'existe pas.....
         self.getJoueurCourant().getCollectionPieceJoueur().ajouterCollectionPiece(piece)
         //(On a pas besoin de traiter le cas du kodama, on le parachute normalement, sans appeler la fonction de promotion)
