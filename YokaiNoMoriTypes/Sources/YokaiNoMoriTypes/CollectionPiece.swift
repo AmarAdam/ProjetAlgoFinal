@@ -1,8 +1,6 @@
 import Foundation
 
-public class CollectionPiece {
-
-    typealias ItCollectionPiece = IteratorProtocol
+public class CollectionPiece : CollectionPieceProtocol{
 
     var collection : [Piece]
 
@@ -76,8 +74,10 @@ public class CollectionPiece {
         return self.collection.count
     } // End func nbPieceCollectionPiece
 
-    func makeItCollectionPiece() -> ItCollectionPiece {
-        return ItCollectionPiece(self)
+    // La fonction doit s'appeler makeIterator strictement d'après le protocol
+    public func makeIterator() -> ItCollectionPiece {
+        let newIt = ItCollectionPiece(self)
+        return newIt
     } // End func makeItCollectionPiece
 
     /////////////////////
@@ -93,7 +93,6 @@ public class CollectionPiece {
 
 public struct ItCollectionPiece : IteratorProtocol{
 
-    typealias ItCollectionPiece = CollectionPieceProtocol
 
     private let collection : CollectionPiece
     private var courant : Int = 0
