@@ -2,10 +2,13 @@ import Foundation
 
 public class Reserve : ReserveProtocol {
     var pieces : [Piece]
+    //var itReserve : ItReserve
 
     // Si l'init ne fait rien pourquoi le demander ?
-    required init(){
-        // Do Nothing
+    required public init(){
+        self.pieces = []
+        //self.itReserve = ItReserve(self)
+      // Do Nothing
     } // End func init
 
     func ajouterReserve(_ piece: Piece) throws {
@@ -15,8 +18,8 @@ public class Reserve : ReserveProtocol {
     func enleverReserve(_ piece: Piece) throws {
         var i = 0
         var iRem = -1
-        for pieceTab in self.pieces {
-            if (pieceTab.getNomPiece() == piece.getNomPiece()) {
+        for itPiece in self.pieces {
+            if (itPiece.getNomPiece() == piece.getNomPiece()) {
                 iRem = i
             }
             i = i + 1        }
@@ -42,12 +45,20 @@ public class Reserve : ReserveProtocol {
     //func getPieceReserve(_ nom: String) throws -> Piece? {
     func getPieceReserve(_ nom : String) throws -> Piece? {
         var pieceTrouve : Piece?
+        var b : Bool = false
         for piece in self.pieces {
-            if (piece.getNomPiece() == nom) {
+            if piece.getNomPiece() == nom {
                 pieceTrouve = piece
+                b = true
             }
         }
-        return pieceTrouve
+        if b {
+            return pieceTrouve
+        }
+        else {
+            return nil
+        }
+        
     } // End func getPieceReserve
 
     // Ajouté par notre groupe
@@ -81,7 +92,7 @@ public struct ItReserve : IteratorProtocol{
     private var courant : Int = 0
     private let collection : [Piece]
 
-    init(_ r : Reserve){
+    fileprivate init(_ r : Reserve){
         self.reserve = r
         self.collection = self.reserve.getPiecesReserve()
     } // End func init
@@ -95,4 +106,8 @@ public struct ItReserve : IteratorProtocol{
 
         return self.collection[val]
     } // End func next
+
+    mutating public func reinitialiser() {
+        self.courant = 0
+    } // End func reinitialiser
 }

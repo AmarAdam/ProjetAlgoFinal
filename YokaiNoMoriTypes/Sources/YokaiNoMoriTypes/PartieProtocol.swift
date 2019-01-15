@@ -8,7 +8,6 @@
   De meme pour la zone de promotion du joueur 2 qui correspond a la derniere ligne du plateau de jeu.
   Ce protocol sera implemente par un type nomme Partie.
 */
-import Foundation
 
 protocol PartieProtocol {
   associatedtype Joueur: JoueurProtocol

@@ -3,7 +3,6 @@
   Ce protocol sera implemente par un type nomme Piece.
 
 */
-import Foundation
 
 protocol JoueurProtocol{
 

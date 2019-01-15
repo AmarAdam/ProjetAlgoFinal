@@ -1,9 +1,11 @@
 import Foundation
 
 public class CollectionPiece : CollectionPieceProtocol{
+
     var collection : [Piece]
 
-    init() {
+    required init() {
+        self.collection = []
         // No action
     } // End func init
 
@@ -91,6 +93,7 @@ public class CollectionPiece : CollectionPieceProtocol{
 
 
 public struct ItCollectionPiece : IteratorProtocol{
+
 
     private let collection : CollectionPiece
     private var courant : Int = 0
